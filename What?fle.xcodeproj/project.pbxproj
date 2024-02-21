@@ -16,6 +16,16 @@
 		39333CE82B86496C005F295A /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 39333CE72B86496C005F295A /* Moya */; };
 		39333CEB2B864979005F295A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 39333CEA2B864979005F295A /* SnapKit */; };
 		39333CEE2B864998005F295A /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 39333CED2B864998005F295A /* RIBs */; };
+		39333CFB2B864EF9005F295A /* SUIT-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CF22B864EF9005F295A /* SUIT-SemiBold.otf */; };
+		39333CFC2B864EF9005F295A /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CF32B864EF9005F295A /* SUIT-Medium.otf */; };
+		39333CFD2B864EF9005F295A /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CF42B864EF9005F295A /* SUIT-Bold.otf */; };
+		39333CFE2B864EF9005F295A /* SUIT-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CF52B864EF9005F295A /* SUIT-Thin.otf */; };
+		39333CFF2B864EF9005F295A /* SUIT-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CF62B864EF9005F295A /* SUIT-Light.otf */; };
+		39333D002B864EF9005F295A /* SUIT-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CF72B864EF9005F295A /* SUIT-Heavy.otf */; };
+		39333D012B864EF9005F295A /* SUIT-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CF82B864EF9005F295A /* SUIT-ExtraLight.otf */; };
+		39333D022B864EF9005F295A /* SUIT-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CF92B864EF9005F295A /* SUIT-Regular.otf */; };
+		39333D032B864EF9005F295A /* SUIT-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39333CFA2B864EF9005F295A /* SUIT-ExtraBold.otf */; };
+		39333D072B865132005F295A /* UIFont+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D062B865132005F295A /* UIFont+Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +36,16 @@
 		39333CD82B864787005F295A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39333CDB2B864787005F295A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39333CDD2B864787005F295A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39333CF22B864EF9005F295A /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
+		39333CF32B864EF9005F295A /* SUIT-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
+		39333CF42B864EF9005F295A /* SUIT-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
+		39333CF52B864EF9005F295A /* SUIT-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Thin.otf"; sourceTree = "<group>"; };
+		39333CF62B864EF9005F295A /* SUIT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.otf"; sourceTree = "<group>"; };
+		39333CF72B864EF9005F295A /* SUIT-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Heavy.otf"; sourceTree = "<group>"; };
+		39333CF82B864EF9005F295A /* SUIT-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraLight.otf"; sourceTree = "<group>"; };
+		39333CF92B864EF9005F295A /* SUIT-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
+		39333CFA2B864EF9005F295A /* SUIT-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraBold.otf"; sourceTree = "<group>"; };
+		39333D062B865132005F295A /* UIFont+Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Resources.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,11 +85,61 @@
 				39333CCF2B864786005F295A /* AppDelegate.swift */,
 				39333CD12B864786005F295A /* SceneDelegate.swift */,
 				39333CD32B864786005F295A /* ViewController.swift */,
-				39333CD82B864787005F295A /* Assets.xcassets */,
+				39333D042B865110005F295A /* Extension */,
+				39333CF02B864EE1005F295A /* Resources */,
 				39333CDA2B864787005F295A /* LaunchScreen.storyboard */,
 				39333CDD2B864787005F295A /* Info.plist */,
 			);
 			path = "What?fle";
+			sourceTree = "<group>";
+		};
+		39333CF02B864EE1005F295A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				39333CF12B864EEB005F295A /* Font */,
+				39333CD82B864787005F295A /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		39333CF12B864EEB005F295A /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				39333D082B86516F005F295A /* SUIT */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		39333D042B865110005F295A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				39333D052B865119005F295A /* Resources */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		39333D052B865119005F295A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				39333D062B865132005F295A /* UIFont+Resources.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		39333D082B86516F005F295A /* SUIT */ = {
+			isa = PBXGroup;
+			children = (
+				39333CF52B864EF9005F295A /* SUIT-Thin.otf */,
+				39333CF82B864EF9005F295A /* SUIT-ExtraLight.otf */,
+				39333CF62B864EF9005F295A /* SUIT-Light.otf */,
+				39333CF92B864EF9005F295A /* SUIT-Regular.otf */,
+				39333CF32B864EF9005F295A /* SUIT-Medium.otf */,
+				39333CF22B864EF9005F295A /* SUIT-SemiBold.otf */,
+				39333CF42B864EF9005F295A /* SUIT-Bold.otf */,
+				39333CFA2B864EF9005F295A /* SUIT-ExtraBold.otf */,
+				39333CF72B864EF9005F295A /* SUIT-Heavy.otf */,
+			);
+			path = SUIT;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,8 +213,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39333CFB2B864EF9005F295A /* SUIT-SemiBold.otf in Resources */,
+				39333D032B864EF9005F295A /* SUIT-ExtraBold.otf in Resources */,
+				39333D012B864EF9005F295A /* SUIT-ExtraLight.otf in Resources */,
+				39333CFC2B864EF9005F295A /* SUIT-Medium.otf in Resources */,
+				39333D022B864EF9005F295A /* SUIT-Regular.otf in Resources */,
+				39333CFD2B864EF9005F295A /* SUIT-Bold.otf in Resources */,
 				39333CDC2B864787005F295A /* LaunchScreen.storyboard in Resources */,
+				39333D002B864EF9005F295A /* SUIT-Heavy.otf in Resources */,
 				39333CD92B864787005F295A /* Assets.xcassets in Resources */,
+				39333CFE2B864EF9005F295A /* SUIT-Thin.otf in Resources */,
+				39333CFF2B864EF9005F295A /* SUIT-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39333D072B865132005F295A /* UIFont+Resources.swift in Sources */,
 				39333CD42B864786005F295A /* ViewController.swift in Sources */,
 				39333CD02B864786005F295A /* AppDelegate.swift in Sources */,
 				39333CD22B864786005F295A /* SceneDelegate.swift in Sources */,
