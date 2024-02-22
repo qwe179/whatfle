@@ -7,8 +7,6 @@
 
 import UIKit
 
-// MARK: - Pretendard Font
-
 extension UIFont {
     enum FontWeight: String {
         case heavy = "Heavy"
@@ -26,8 +24,6 @@ extension UIFont {
         return UIFont(name: "SUIT-\(weight.rawValue)", size: size)!
     }
 }
-
-// MARK: - Project Typo
 
 extension UIFont {
     static var title32HV: UIFont {
