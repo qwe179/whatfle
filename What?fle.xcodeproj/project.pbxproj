@@ -28,6 +28,14 @@
 		39333D072B865132005F295A /* UIFont+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D062B865132005F295A /* UIFont+Design.swift */; };
 		39333D0B2B8765A2005F295A /* UIColor+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D0A2B8765A2005F295A /* UIColor+Design.swift */; };
 		39333D0D2B87663D005F295A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D0C2B87663D005F295A /* UIColor+.swift */; };
+		39333D132B88AE19005F295A /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D0F2B88AE19005F295A /* RootRouter.swift */; };
+		39333D142B88AE19005F295A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D102B88AE19005F295A /* RootViewController.swift */; };
+		39333D152B88AE19005F295A /* RootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D112B88AE19005F295A /* RootBuilder.swift */; };
+		39333D162B88AE19005F295A /* RootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D122B88AE19005F295A /* RootInteractor.swift */; };
+		39333D252B88B3F4005F295A /* TabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D212B88B3F4005F295A /* TabBarRouter.swift */; };
+		39333D262B88B3F4005F295A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D222B88B3F4005F295A /* TabBarViewController.swift */; };
+		39333D272B88B3F4005F295A /* TabBarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D232B88B3F4005F295A /* TabBarBuilder.swift */; };
+		39333D282B88B3F4005F295A /* TabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D242B88B3F4005F295A /* TabBarInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +58,14 @@
 		39333D062B865132005F295A /* UIFont+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Design.swift"; sourceTree = "<group>"; };
 		39333D0A2B8765A2005F295A /* UIColor+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Design.swift"; sourceTree = "<group>"; };
 		39333D0C2B87663D005F295A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		39333D0F2B88AE19005F295A /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
+		39333D102B88AE19005F295A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		39333D112B88AE19005F295A /* RootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootBuilder.swift; sourceTree = "<group>"; };
+		39333D122B88AE19005F295A /* RootInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootInteractor.swift; sourceTree = "<group>"; };
+		39333D212B88B3F4005F295A /* TabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRouter.swift; sourceTree = "<group>"; };
+		39333D222B88B3F4005F295A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		39333D232B88B3F4005F295A /* TabBarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBuilder.swift; sourceTree = "<group>"; };
+		39333D242B88B3F4005F295A /* TabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +105,7 @@
 				39333CCF2B864786005F295A /* AppDelegate.swift */,
 				39333CD12B864786005F295A /* SceneDelegate.swift */,
 				39333CD32B864786005F295A /* ViewController.swift */,
+				39333D0E2B88AD81005F295A /* Root */,
 				39333D042B865110005F295A /* Extension */,
 				39333CF02B864EE1005F295A /* Resources */,
 				39333CDA2B864787005F295A /* LaunchScreen.storyboard */,
@@ -146,6 +163,29 @@
 				39333CF72B864EF9005F295A /* SUIT-Heavy.otf */,
 			);
 			path = SUIT;
+			sourceTree = "<group>";
+		};
+		39333D0E2B88AD81005F295A /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				39333D202B88B3DF005F295A /* TabBar */,
+				39333D0F2B88AE19005F295A /* RootRouter.swift */,
+				39333D102B88AE19005F295A /* RootViewController.swift */,
+				39333D112B88AE19005F295A /* RootBuilder.swift */,
+				39333D122B88AE19005F295A /* RootInteractor.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		39333D202B88B3DF005F295A /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				39333D212B88B3F4005F295A /* TabBarRouter.swift */,
+				39333D222B88B3F4005F295A /* TabBarViewController.swift */,
+				39333D232B88B3F4005F295A /* TabBarBuilder.swift */,
+				39333D242B88B3F4005F295A /* TabBarInteractor.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,11 +301,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39333D282B88B3F4005F295A /* TabBarInteractor.swift in Sources */,
 				39333D072B865132005F295A /* UIFont+Design.swift in Sources */,
 				39333CD42B864786005F295A /* ViewController.swift in Sources */,
 				39333CD02B864786005F295A /* AppDelegate.swift in Sources */,
 				39333D0B2B8765A2005F295A /* UIColor+Design.swift in Sources */,
+				39333D262B88B3F4005F295A /* TabBarViewController.swift in Sources */,
+				39333D162B88AE19005F295A /* RootInteractor.swift in Sources */,
+				39333D132B88AE19005F295A /* RootRouter.swift in Sources */,
+				39333D272B88B3F4005F295A /* TabBarBuilder.swift in Sources */,
+				39333D152B88AE19005F295A /* RootBuilder.swift in Sources */,
 				39333CD22B864786005F295A /* SceneDelegate.swift in Sources */,
+				39333D252B88B3F4005F295A /* TabBarRouter.swift in Sources */,
+				39333D142B88AE19005F295A /* RootViewController.swift in Sources */,
 				39333D0D2B87663D005F295A /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
