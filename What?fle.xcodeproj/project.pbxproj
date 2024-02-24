@@ -32,10 +32,22 @@
 		39333D142B88AE19005F295A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D102B88AE19005F295A /* RootViewController.swift */; };
 		39333D152B88AE19005F295A /* RootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D112B88AE19005F295A /* RootBuilder.swift */; };
 		39333D162B88AE19005F295A /* RootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D122B88AE19005F295A /* RootInteractor.swift */; };
-		39333D252B88B3F4005F295A /* TabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D212B88B3F4005F295A /* TabBarRouter.swift */; };
-		39333D262B88B3F4005F295A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D222B88B3F4005F295A /* TabBarViewController.swift */; };
-		39333D272B88B3F4005F295A /* TabBarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D232B88B3F4005F295A /* TabBarBuilder.swift */; };
-		39333D282B88B3F4005F295A /* TabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D242B88B3F4005F295A /* TabBarInteractor.swift */; };
+		39333D6E2B8993B1005F295A /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D6A2B8993B1005F295A /* HomeRouter.swift */; };
+		39333D6F2B8993B1005F295A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D6B2B8993B1005F295A /* HomeViewController.swift */; };
+		39333D702B8993B1005F295A /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D6C2B8993B1005F295A /* HomeBuilder.swift */; };
+		39333D712B8993B1005F295A /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D6D2B8993B1005F295A /* HomeInteractor.swift */; };
+		39333D732B89A3AA005F295A /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D722B89A3AA005F295A /* AppComponent.swift */; };
+		39333D752B89C1CC005F295A /* RootComponent+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39333D742B89C1CC005F295A /* RootComponent+Home.swift */; };
+		39EBCDF62B8A26B200599D58 /* AddRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDF22B8A26B200599D58 /* AddRouter.swift */; };
+		39EBCDF72B8A26B200599D58 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDF32B8A26B200599D58 /* AddViewController.swift */; };
+		39EBCDF82B8A26B200599D58 /* AddBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDF42B8A26B200599D58 /* AddBuilder.swift */; };
+		39EBCDF92B8A26B200599D58 /* AddInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDF52B8A26B200599D58 /* AddInteractor.swift */; };
+		39EBCDFE2B8A26BF00599D58 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDFA2B8A26BF00599D58 /* MapRouter.swift */; };
+		39EBCDFF2B8A26BF00599D58 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDFB2B8A26BF00599D58 /* MapViewController.swift */; };
+		39EBCE002B8A26BF00599D58 /* MapBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDFC2B8A26BF00599D58 /* MapBuilder.swift */; };
+		39EBCE012B8A26BF00599D58 /* MapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDFD2B8A26BF00599D58 /* MapInteractor.swift */; };
+		39EBCE032B8A3BFF00599D58 /* RootComponent+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCE022B8A3BFF00599D58 /* RootComponent+Add.swift */; };
+		39EBCE052B8A3C0A00599D58 /* RootComponent+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCE042B8A3C0A00599D58 /* RootComponent+Map.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,10 +74,22 @@
 		39333D102B88AE19005F295A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		39333D112B88AE19005F295A /* RootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootBuilder.swift; sourceTree = "<group>"; };
 		39333D122B88AE19005F295A /* RootInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootInteractor.swift; sourceTree = "<group>"; };
-		39333D212B88B3F4005F295A /* TabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRouter.swift; sourceTree = "<group>"; };
-		39333D222B88B3F4005F295A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		39333D232B88B3F4005F295A /* TabBarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBuilder.swift; sourceTree = "<group>"; };
-		39333D242B88B3F4005F295A /* TabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarInteractor.swift; sourceTree = "<group>"; };
+		39333D6A2B8993B1005F295A /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		39333D6B2B8993B1005F295A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		39333D6C2B8993B1005F295A /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
+		39333D6D2B8993B1005F295A /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		39333D722B89A3AA005F295A /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
+		39333D742B89C1CC005F295A /* RootComponent+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+Home.swift"; sourceTree = "<group>"; };
+		39EBCDF22B8A26B200599D58 /* AddRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouter.swift; sourceTree = "<group>"; };
+		39EBCDF32B8A26B200599D58 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		39EBCDF42B8A26B200599D58 /* AddBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuilder.swift; sourceTree = "<group>"; };
+		39EBCDF52B8A26B200599D58 /* AddInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInteractor.swift; sourceTree = "<group>"; };
+		39EBCDFA2B8A26BF00599D58 /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
+		39EBCDFB2B8A26BF00599D58 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		39EBCDFC2B8A26BF00599D58 /* MapBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBuilder.swift; sourceTree = "<group>"; };
+		39EBCDFD2B8A26BF00599D58 /* MapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteractor.swift; sourceTree = "<group>"; };
+		39EBCE022B8A3BFF00599D58 /* RootComponent+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+Add.swift"; sourceTree = "<group>"; };
+		39EBCE042B8A3C0A00599D58 /* RootComponent+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+Map.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +126,11 @@
 		39333CCE2B864786005F295A /* What?fle */ = {
 			isa = PBXGroup;
 			children = (
+				39333D722B89A3AA005F295A /* AppComponent.swift */,
 				39333CCF2B864786005F295A /* AppDelegate.swift */,
 				39333CD12B864786005F295A /* SceneDelegate.swift */,
 				39333CD32B864786005F295A /* ViewController.swift */,
-				39333D0E2B88AD81005F295A /* Root */,
+				39333D652B8905A3005F295A /* Module */,
 				39333D042B865110005F295A /* Extension */,
 				39333CF02B864EE1005F295A /* Resources */,
 				39333CDA2B864787005F295A /* LaunchScreen.storyboard */,
@@ -168,7 +193,7 @@
 		39333D0E2B88AD81005F295A /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				39333D202B88B3DF005F295A /* TabBar */,
+				39333D762B89C1D2005F295A /* Component */,
 				39333D0F2B88AE19005F295A /* RootRouter.swift */,
 				39333D102B88AE19005F295A /* RootViewController.swift */,
 				39333D112B88AE19005F295A /* RootBuilder.swift */,
@@ -177,15 +202,58 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
-		39333D202B88B3DF005F295A /* TabBar */ = {
+		39333D652B8905A3005F295A /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				39333D212B88B3F4005F295A /* TabBarRouter.swift */,
-				39333D222B88B3F4005F295A /* TabBarViewController.swift */,
-				39333D232B88B3F4005F295A /* TabBarBuilder.swift */,
-				39333D242B88B3F4005F295A /* TabBarInteractor.swift */,
+				39333D0E2B88AD81005F295A /* Root */,
+				39333D692B899395005F295A /* Home */,
+				39EBCDF12B8A268B00599D58 /* Add */,
+				39EBCDF02B8A268500599D58 /* Map */,
 			);
-			path = TabBar;
+			path = Module;
+			sourceTree = "<group>";
+		};
+		39333D692B899395005F295A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				39333D6A2B8993B1005F295A /* HomeRouter.swift */,
+				39333D6B2B8993B1005F295A /* HomeViewController.swift */,
+				39333D6C2B8993B1005F295A /* HomeBuilder.swift */,
+				39333D6D2B8993B1005F295A /* HomeInteractor.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		39333D762B89C1D2005F295A /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				39333D742B89C1CC005F295A /* RootComponent+Home.swift */,
+				39EBCE022B8A3BFF00599D58 /* RootComponent+Add.swift */,
+				39EBCE042B8A3C0A00599D58 /* RootComponent+Map.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		39EBCDF02B8A268500599D58 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				39EBCDFA2B8A26BF00599D58 /* MapRouter.swift */,
+				39EBCDFB2B8A26BF00599D58 /* MapViewController.swift */,
+				39EBCDFC2B8A26BF00599D58 /* MapBuilder.swift */,
+				39EBCDFD2B8A26BF00599D58 /* MapInteractor.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		39EBCDF12B8A268B00599D58 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				39EBCDF22B8A26B200599D58 /* AddRouter.swift */,
+				39EBCDF32B8A26B200599D58 /* AddViewController.swift */,
+				39EBCDF42B8A26B200599D58 /* AddBuilder.swift */,
+				39EBCDF52B8A26B200599D58 /* AddInteractor.swift */,
+			);
+			path = Add;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,20 +369,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39333D282B88B3F4005F295A /* TabBarInteractor.swift in Sources */,
 				39333D072B865132005F295A /* UIFont+Design.swift in Sources */,
 				39333CD42B864786005F295A /* ViewController.swift in Sources */,
+				39EBCDF72B8A26B200599D58 /* AddViewController.swift in Sources */,
+				39333D752B89C1CC005F295A /* RootComponent+Home.swift in Sources */,
 				39333CD02B864786005F295A /* AppDelegate.swift in Sources */,
+				39333D6E2B8993B1005F295A /* HomeRouter.swift in Sources */,
+				39EBCDF92B8A26B200599D58 /* AddInteractor.swift in Sources */,
 				39333D0B2B8765A2005F295A /* UIColor+Design.swift in Sources */,
-				39333D262B88B3F4005F295A /* TabBarViewController.swift in Sources */,
 				39333D162B88AE19005F295A /* RootInteractor.swift in Sources */,
 				39333D132B88AE19005F295A /* RootRouter.swift in Sources */,
-				39333D272B88B3F4005F295A /* TabBarBuilder.swift in Sources */,
+				39EBCE032B8A3BFF00599D58 /* RootComponent+Add.swift in Sources */,
+				39EBCE002B8A26BF00599D58 /* MapBuilder.swift in Sources */,
+				39EBCE052B8A3C0A00599D58 /* RootComponent+Map.swift in Sources */,
 				39333D152B88AE19005F295A /* RootBuilder.swift in Sources */,
+				39EBCDFF2B8A26BF00599D58 /* MapViewController.swift in Sources */,
+				39EBCDFE2B8A26BF00599D58 /* MapRouter.swift in Sources */,
+				39333D6F2B8993B1005F295A /* HomeViewController.swift in Sources */,
+				39EBCE012B8A26BF00599D58 /* MapInteractor.swift in Sources */,
 				39333CD22B864786005F295A /* SceneDelegate.swift in Sources */,
-				39333D252B88B3F4005F295A /* TabBarRouter.swift in Sources */,
+				39333D732B89A3AA005F295A /* AppComponent.swift in Sources */,
 				39333D142B88AE19005F295A /* RootViewController.swift in Sources */,
+				39333D712B8993B1005F295A /* HomeInteractor.swift in Sources */,
+				39EBCDF82B8A26B200599D58 /* AddBuilder.swift in Sources */,
+				39333D702B8993B1005F295A /* HomeBuilder.swift in Sources */,
 				39333D0D2B87663D005F295A /* UIColor+.swift in Sources */,
+				39EBCDF62B8A26B200599D58 /* AddRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

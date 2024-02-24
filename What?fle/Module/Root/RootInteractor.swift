@@ -8,7 +8,9 @@
 import RIBs
 import RxSwift
 
-protocol RootRouting: ViewableRouting {}
+protocol RootRouting: ViewableRouting {
+//    func attachChildRIBs()
+}
 
 protocol RootPresentable: Presentable {
     var listener: RootPresentableListener? { get set }
@@ -26,9 +28,11 @@ final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteract
         presenter.listener = self
     }
 
-//    override func didBecomeActive() {
-//        super.didBecomeActive()
-//    }
+    override func didBecomeActive() {
+        super.didBecomeActive()
+        print("여기는 호출?")
+//        router?.attachChildRIBs()
+    }
 
 //    override func willResignActive() {
 //        super.willResignActive()

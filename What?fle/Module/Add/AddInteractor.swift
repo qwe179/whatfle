@@ -1,34 +1,34 @@
 //
-//  TabBarInteractor.swift
+//  AddInteractor.swift
 //  What?fle
 //
-//  Created by 이정환 on 2/23/24.
+//  Created by 이정환 on 2/24/24.
 //
 
 import RIBs
 import RxSwift
 
-protocol TabBarRouting: ViewableRouting {
+protocol AddRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
-protocol TabBarPresentable: Presentable {
-    var listener: TabBarPresentableListener? { get set }
+protocol AddPresentable: Presentable {
+    var listener: AddPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
-protocol TabBarListener: AnyObject {
+protocol AddListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarInteractable, TabBarPresentableListener {
+final class AddInteractor: PresentableInteractor<AddPresentable>, AddInteractable, AddPresentableListener {
 
-    weak var router: TabBarRouting?
-    weak var listener: TabBarListener?
+    weak var router: AddRouting?
+    weak var listener: AddListener?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: TabBarPresentable) {
+    override init(presenter: AddPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
     }
