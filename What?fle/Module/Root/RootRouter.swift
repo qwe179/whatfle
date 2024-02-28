@@ -5,21 +5,21 @@
 //  Created by 이정환 on 2/23/24.
 //
 
+import RIBs
 import UIKit
 
-import RIBs
-
-protocol RootInteractable: Interactable, HomeListener, AddListener, MapListener {
+protocol RootInteractable: Interactable, HomeListener, MapListener, AddListener, RegistrationLocationListener, SelectLocationListener {
     var router: RootRouting? { get set }
     var listener: RootListener? { get set }
 }
 
 protocol RootViewControllable: ViewControllable {
-    func setTabBarViewController(_ viewControllers: [ViewControllable], animated: Bool)
+    func setTabBarViewController(_ viewControllers: [UINavigationController], animated: Bool)
 }
 
-final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
+final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable> {
     private let component: RootComponent
+    private weak var currentChild: ViewableRouting?
 
     init(
         interactor: RootInteractable,
@@ -37,18 +37,19 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
 
     func attachChildRIBs() {
         let homeRouter = component.homeBuilder.build(withListener: interactor)
-        homeRouter.viewControllable.uiviewController.tabBarItem = tabBarItem(type: .home)
+        let homeNavigation = UINavigationController(root: homeRouter.viewControllable)
+        homeNavigation.tabBarItem = tabBarItem(type: .home)
         attachChild(homeRouter)
 
-        let addRouter = component.addBuilder.build(withListener: interactor)
-        addRouter.viewControllable.uiviewController.tabBarItem = tabBarItem(type: .add)
-        attachChild(addRouter)
+        let addNavigation = UINavigationController()
+        addNavigation.tabBarItem = tabBarItem(type: .add)
 
         let mapRouter = component.mapBuilder.build(withListener: interactor)
-        mapRouter.viewControllable.uiviewController.tabBarItem = tabBarItem(type: .map)
+        let mapNavigation = UINavigationController(root: mapRouter.viewControllable)
+        mapNavigation.tabBarItem = tabBarItem(type: .map)
         attachChild(mapRouter)
 
-        let viewControllables = [homeRouter.viewControllable, addRouter.viewControllable, mapRouter.viewControllable]
+        let viewControllables = [homeNavigation, addNavigation, mapNavigation]
         viewController.setTabBarViewController(viewControllables, animated: false)
     }
 }
@@ -59,11 +60,55 @@ extension RootRouter {
     }
 }
 
+extension RootRouter: RootRouting {
+    func routeToAddList() {
+        detachCurrentView(animated: false) {
+            if self.currentChild == nil {
+                let router = self.component.addBuilder.build(withListener: self.interactor)
+                self.viewController.present(router.viewControllable, animated: false)
+                self.attachChild(router)
+                self.currentChild = router
+            }
+        }
+    }
+
+    func routeToSelectLocation() {
+        detachCurrentView(animated: false) {
+            if self.currentChild == nil {
+                let router = self.component.selectLocationBuilder.build(withListener: self.interactor)
+                self.viewController.present(router.viewControllable, animated: true)
+                self.attachChild(router)
+                self.currentChild = router
+            }
+        }
+    }
+
+    func routeToRegistLocation() {
+        self.viewController.uiviewController.dismiss(animated: true) {
+            if let child = self.currentChild {
+                self.detachChild(child)
+                self.currentChild = nil
+            }
+        }
+    }
+
+    func detachCurrentView(animated: Bool, completion: (() -> Void)? = nil) {
+        self.viewController.uiviewController.dismiss(animated: animated) { [weak self] in
+            guard let self = self else { return }
+            if let child = self.currentChild {
+                self.detachChild(child)
+                self.currentChild = nil
+            }
+            completion?()
+        }
+    }
+}
+
 // MARK: - enum ItemType
 extension RootRouter {
     private enum ItemType: CaseIterable {
         case home, add, map
-        
+
         var tatile: String {
             switch self {
             case .home:

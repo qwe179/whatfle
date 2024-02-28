@@ -106,30 +106,28 @@ extension UIColor {
 // MARK: - Text&Line Color
 
 extension UIColor {
-    enum TextAndLine {
-        static var textDefault: UIColor {
-            return .GrayScale.black
-        }
+    static var textDefault: UIColor {
+        return .GrayScale.black
+    }
 
-        static var textLight: UIColor {
-            return .GrayScale.g600
-        }
+    static var textLight: UIColor {
+        return .GrayScale.g600
+    }
 
-        static var textExtralight: UIColor {
-            return .GrayScale.g300
-        }
+    static var textExtralight: UIColor {
+        return .GrayScale.g300
+    }
 
-        static var lineDefault: UIColor {
-            return .GrayScale.g200
-        }
+    static var lineDefault: UIColor {
+        return .GrayScale.g200
+    }
 
-        static var lineLight: UIColor {
-            return .GrayScale.g100
-        }
+    static var lineLight: UIColor {
+        return .GrayScale.g100
+    }
 
-        static var lineExtralight: UIColor {
-            return .Core.background
-        }
+    static var lineExtralight: UIColor {
+        return .Core.background
     }
 }
 

@@ -9,9 +9,7 @@ import RIBs
 
 // MARK: - Component
 
-protocol RootDependency: Dependency {
-//    var tabBarBuilder: TabBarBuildable { get }
-}
+protocol RootDependency: Dependency {}
 
 final class RootComponent: Component<RootDependency> {}
 

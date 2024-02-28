@@ -12,14 +12,22 @@ protocol AddInteractable: Interactable {
     var listener: AddListener? { get set }
 }
 
-protocol AddViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-}
+protocol AddViewControllable: ViewControllable {}
 
 final class AddRouter: ViewableRouter<AddInteractable, AddViewControllable>, AddRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: AddInteractable, viewController: AddViewControllable) {
+    private let component: AddComponent
+
+    deinit {
+        print("\(Self.self) is being deinitialized")
+    }
+
+    init(
+        interactor: AddInteractable,
+        viewController: AddViewControllable,
+        component: AddComponent
+    ) {
+        self.component = component
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }

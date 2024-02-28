@@ -9,7 +9,10 @@ import RIBs
 import RxSwift
 
 protocol RootRouting: ViewableRouting {
-//    func attachChildRIBs()
+    func routeToAddList()
+    func routeToSelectLocation()
+    func routeToRegistLocation()
+    func detachCurrentView(animated: Bool, completion: (() -> Void)?)
 }
 
 protocol RootPresentable: Presentable {
@@ -28,13 +31,23 @@ final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteract
         presenter.listener = self
     }
 
-    override func didBecomeActive() {
-        super.didBecomeActive()
-        print("여기는 호출?")
-//        router?.attachChildRIBs()
+    func didSelectAddTab() {
+        router?.routeToAddList()
+    }
+}
+
+extension RootInteractor: AddListener {
+    func closeAddRIB() {
+        router?.detachCurrentView(animated: false, completion: nil)
     }
 
-//    override func willResignActive() {
-//        super.willResignActive()
-//    }
+    func showRegistrationLocationRIB() {
+        router?.routeToSelectLocation()
+    }
+}
+
+extension RootInteractor: SelectLocationListener {
+    func closeSelectLocationRIB() {
+        router?.detachCurrentView(animated: true, completion: nil)
+    }
 }

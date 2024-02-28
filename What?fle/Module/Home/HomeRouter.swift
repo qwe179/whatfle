@@ -13,7 +13,8 @@ protocol HomeInteractable: Interactable {
 }
 
 protocol HomeViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+//     TODO: Declare methods the router invokes to manipulate the view hierarchy.
+    
 }
 
 final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, HomeRouting {

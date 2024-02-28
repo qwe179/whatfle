@@ -13,3 +13,8 @@ extension RootComponent: AddDependency {
     }
 }
 
+extension RootComponent: RegistrationLocationDependency {
+    var registrationLocatiionBuilder: RegistrationLocationBuildable {
+        return RegistrationLocationBuilder(dependency: self)
+    }
+}

@@ -74,19 +74,19 @@ extension UIFont {
         return .suit(size: 14, weight: .regular)
     }
 
-    static var body13BD: UIFont {
+    static var caption13BD: UIFont {
         return .suit(size: 13, weight: .bold)
     }
 
-    static var body13MD: UIFont {
+    static var caption13MD: UIFont {
         return .suit(size: 13, weight: .medium)
     }
 
-    static var body12BD: UIFont {
+    static var caption2BD: UIFont {
         return .suit(size: 12, weight: .bold)
     }
 
-    static var body12RG: UIFont {
+    static var caption12RG: UIFont {
         return .suit(size: 12, weight: .regular)
     }
 }
