@@ -7,8 +7,13 @@
 
 import RIBs
 import RxSwift
+import UIKit
 
-protocol AddRouting: ViewableRouting {}
+protocol AddRouting: ViewableRouting {
+    var navigationController: UINavigationController { get }
+    func routeToRegistLocation()
+    func closeRegistLocation()
+}
 
 protocol AddPresentable: Presentable {
     var listener: AddPresentableListener? { get set }
@@ -16,10 +21,10 @@ protocol AddPresentable: Presentable {
 
 protocol AddListener: AnyObject {
     func closeAddRIB()
-    func showRegistrationLocationRIB()
+//    func showRegistLocationRIB()
 }
 
-final class AddInteractor: PresentableInteractor<AddPresentable>, AddInteractable, AddPresentableListener {
+final class AddInteractor: PresentableInteractor<AddPresentable>, AddInteractable {
     weak var router: AddRouting?
     weak var listener: AddListener?
 
@@ -32,11 +37,17 @@ final class AddInteractor: PresentableInteractor<AddPresentable>, AddInteractabl
         presenter.listener = self
     }
 
-    func showRegistrationLocation() {
-        listener?.showRegistrationLocationRIB()
-    }
-    
     func closeView() {
         listener?.closeAddRIB()
+    }
+}
+
+extension AddInteractor: AddPresentableListener {
+    func showRegistLocationRIB() {
+        router?.routeToRegistLocation()
+    }
+
+    func closeRegistLocationRIB() {
+        router?.closeRegistLocation()
     }
 }

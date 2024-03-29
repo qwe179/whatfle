@@ -33,6 +33,7 @@ final class SelectLocationViewController: UIViewController, SelectLocationPresen
 
     weak var listener: SelectLocationPresentableListener?
     private let disposeBag = DisposeBag()
+    
     private var searchState: SearchState = .beforeSearch {
         didSet {
             switch searchState {
@@ -167,6 +168,7 @@ final class SelectLocationViewController: UIViewController, SelectLocationPresen
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupUI()
         setupViewBinding()
         setupActionBinding()

@@ -13,7 +13,7 @@ import RxSwift
 import SnapKit
 
 protocol AddPresentableListener: AnyObject {
-    func showRegistrationLocation()
+    func showRegistLocationRIB()
     func closeView()
 }
 
@@ -37,7 +37,7 @@ final class AddViewController: UIViewController, AddPresentable, AddViewControll
         return view
     }()
 
-    private let registrationLocationControl: UIControl = {
+    private let registLocationControl: UIControl = {
         let control: UIControl = .init()
         let subView: UIView = {
             let view: UIView = .init()
@@ -137,8 +137,8 @@ extension AddViewController {
             $0.height.equalTo(256)
         }
 
-        self.contentView.addSubview(registrationLocationControl)
-        registrationLocationControl.snp.makeConstraints {
+        self.contentView.addSubview(registLocationControl)
+        registLocationControl.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(80)
@@ -146,16 +146,16 @@ extension AddViewController {
 
         self.contentView.addSubview(addCollectionControl)
         addCollectionControl.snp.makeConstraints {
-            $0.top.equalTo(registrationLocationControl.snp.bottom)
+            $0.top.equalTo(registLocationControl.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(80)
         }
     }
 
     private func setupBinding() {
-        registrationLocationControl.rx.controlEvent(.touchUpInside).bind { [weak self] in
+        registLocationControl.rx.controlEvent(.touchUpInside).bind { [weak self] in
             guard let self else { return }
-            listener?.showRegistrationLocation()
+            listener?.showRegistLocationRIB()
         }
         .disposed(by: disposeBag)
 

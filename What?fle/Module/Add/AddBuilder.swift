@@ -5,6 +5,7 @@
 //  Created by 이정환 on 2/24/24.
 //
 
+import UIKit
 import RIBs
 
 protocol AddDependency: Dependency {}
@@ -30,11 +31,14 @@ final class AddBuilder: Builder<AddDependency>, AddBuildable {
     func build(withListener listener: AddListener) -> AddRouting {
         let component = AddComponent(dependency: dependency)
         let viewController = AddViewController()
+        let navigationController = UINavigationController(root: viewController)
+        navigationController.modalPresentationStyle = .overFullScreen
         let interactor = AddInteractor(presenter: viewController)
         interactor.listener = listener
         return AddRouter(
             interactor: interactor,
             viewController: viewController,
+            navigationController: navigationController,
             component: component
         )
     }

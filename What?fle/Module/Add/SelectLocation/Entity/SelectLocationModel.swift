@@ -43,7 +43,7 @@ struct KakaoSearchSameNameModel: Decodable {
     }
 }
 
-struct KakaoSearchDocumentsModel: Decodable {
+struct KakaoSearchDocumentsModel: Decodable, Equatable {
     let placeName: String
     let distance: String
     let placeURL: String

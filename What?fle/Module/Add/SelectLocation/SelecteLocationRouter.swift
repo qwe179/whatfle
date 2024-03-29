@@ -14,8 +14,9 @@ protocol SelectLocationInteractable: Interactable {
 
 protocol SelectLocationViewControllable: ViewControllable {}
 
-final class SelectLocationRouter: ViewableRouter<SelectLocationInteractable, SelectLocationViewControllable>, SelectLocationRouting {
+final class SelectLocationRouter: ViewableRouter<SelectLocationInteractable, SelectLocationViewControllable> {
     private let component: SelectLocationComponent
+    private weak var currentChild: ViewableRouting?
 
     deinit {
         print("\(Self.self) is being deinitialized")
@@ -30,4 +31,8 @@ final class SelectLocationRouter: ViewableRouter<SelectLocationInteractable, Sel
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
+}
+
+extension SelectLocationRouter: SelectLocationRouting {
+    
 }

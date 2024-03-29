@@ -42,6 +42,10 @@ extension RootViewController: RootViewControllable {
         let viewControllers = viewControllers.map { $0 }
         self.setViewControllers(viewControllers, animated: animated)
     }
+    
+    func getAddNavigationController() -> UINavigationController? {
+        return self.viewControllers?[self.selectedIndex] as? UINavigationController
+    }
 }
 
 extension RootViewController: UITabBarControllerDelegate {

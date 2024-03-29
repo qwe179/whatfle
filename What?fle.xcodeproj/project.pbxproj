@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39195FFB2BA9E26A00CC7A2E /* RootComponent + Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39195FFA2BA9E26A00CC7A2E /* RootComponent + Search.swift */; };
+		39195FFB2BA9E26A00CC7A2E /* RootComponent + Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39195FFA2BA9E26A00CC7A2E /* RootComponent + Select.swift */; };
 		39195FFD2BAB40D900CC7A2E /* SelectLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39195FFC2BAB40D900CC7A2E /* SelectLocationCell.swift */; };
 		39195FFF2BAC51EA00CC7A2E /* RecentSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39195FFE2BAC51EA00CC7A2E /* RecentSearchCell.swift */; };
 		391960022BAC542B00CC7A2E /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391960012BAC542B00CC7A2E /* UserDefaultsManager.swift */; };
@@ -59,6 +59,7 @@
 		3939FFFE2B961BBA007E58F6 /* RegistrationLocationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939FFFA2B961BBA007E58F6 /* RegistrationLocationRouter.swift */; };
 		3939FFFF2B961BBA007E58F6 /* RegistrationLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939FFFB2B961BBA007E58F6 /* RegistrationLocationViewController.swift */; };
 		3961ADDC2BB05CF900977C4B /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3961ADDB2BB05CF900977C4B /* LoadingIndicator.swift */; };
+		39AD07CE2BB310AD0070C749 /* AddComponent + RegistLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD07CD2BB310AD0070C749 /* AddComponent + RegistLocation.swift */; };
 		39EBCDF62B8A26B200599D58 /* AddRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDF22B8A26B200599D58 /* AddRouter.swift */; };
 		39EBCDF72B8A26B200599D58 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDF32B8A26B200599D58 /* AddViewController.swift */; };
 		39EBCDF82B8A26B200599D58 /* AddBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDF42B8A26B200599D58 /* AddBuilder.swift */; };
@@ -73,10 +74,11 @@
 		39EBCE0D2B8A484000599D58 /* SelecteLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCE092B8A484000599D58 /* SelecteLocationViewController.swift */; };
 		39EBCE0E2B8A484000599D58 /* SelecteLocationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCE0A2B8A484000599D58 /* SelecteLocationBuilder.swift */; };
 		39EBCE0F2B8A484000599D58 /* SelecteLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCE0B2B8A484000599D58 /* SelecteLocationInteractor.swift */; };
+		39EF11B12BB6DE73000E1996 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EF11B02BB6DE73000E1996 /* String+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		39195FFA2BA9E26A00CC7A2E /* RootComponent + Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent + Search.swift"; sourceTree = "<group>"; };
+		39195FFA2BA9E26A00CC7A2E /* RootComponent + Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent + Select.swift"; sourceTree = "<group>"; };
 		39195FFC2BAB40D900CC7A2E /* SelectLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationCell.swift; sourceTree = "<group>"; };
 		39195FFE2BAC51EA00CC7A2E /* RecentSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCell.swift; sourceTree = "<group>"; };
 		391960012BAC542B00CC7A2E /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		3939FFFC2B961BBA007E58F6 /* RegistrationLocationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationLocationBuilder.swift; sourceTree = "<group>"; };
 		3939FFFD2B961BBA007E58F6 /* RegistrationLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationLocationInteractor.swift; sourceTree = "<group>"; };
 		3961ADDB2BB05CF900977C4B /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		39AD07CD2BB310AD0070C749 /* AddComponent + RegistLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddComponent + RegistLocation.swift"; sourceTree = "<group>"; };
 		39EBCDF22B8A26B200599D58 /* AddRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouter.swift; sourceTree = "<group>"; };
 		39EBCDF32B8A26B200599D58 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		39EBCDF42B8A26B200599D58 /* AddBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuilder.swift; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 		39EBCE092B8A484000599D58 /* SelecteLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteLocationViewController.swift; sourceTree = "<group>"; };
 		39EBCE0A2B8A484000599D58 /* SelecteLocationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteLocationBuilder.swift; sourceTree = "<group>"; };
 		39EBCE0B2B8A484000599D58 /* SelecteLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteLocationInteractor.swift; sourceTree = "<group>"; };
+		39EF11B02BB6DE73000E1996 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,7 @@
 		3919BA672B9A197F00E2A3CC /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				39195FFA2BA9E26A00CC7A2E /* RootComponent + Select.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				39333D052B865119005F295A /* DesignSystem */,
 				39333D0C2B87663D005F295A /* UIColor+.swift */,
 				3919BA642B988C0000E2A3CC /* UIView+.swift */,
+				39EF11B02BB6DE73000E1996 /* String+.swift */,
 				39333CF02B864EE1005F295A /* Resources */,
 				3939FFCF2B8E27BB007E58F6 /* RIBs+ */,
 			);
@@ -308,7 +314,6 @@
 				39333D742B89C1CC005F295A /* RootComponent+Home.swift */,
 				39EBCE022B8A3BFF00599D58 /* RootComponent+Add.swift */,
 				39EBCE042B8A3C0A00599D58 /* RootComponent+Map.swift */,
-				39195FFA2BA9E26A00CC7A2E /* RootComponent + Search.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 		3939FFC72B8CE036007E58F6 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				39AD07CD2BB310AD0070C749 /* AddComponent + RegistLocation.swift */,
 				3939FFC82B8CE057007E58F6 /* AddComponent+SelectLocation.swift */,
 			);
 			path = Component;
@@ -375,7 +381,7 @@
 			path = HelperModuld;
 			sourceTree = "<group>";
 		};
-		3939FFF92B961B52007E58F6 /* RegistrationLocation */ = {
+		3939FFF92B961B52007E58F6 /* RegistLocation */ = {
 			isa = PBXGroup;
 			children = (
 				3919BA672B9A197F00E2A3CC /* Component */,
@@ -384,7 +390,7 @@
 				3939FFFC2B961BBA007E58F6 /* RegistrationLocationBuilder.swift */,
 				3939FFFD2B961BBA007E58F6 /* RegistrationLocationInteractor.swift */,
 			);
-			path = RegistrationLocation;
+			path = RegistLocation;
 			sourceTree = "<group>";
 		};
 		3961ADDA2BB05CE200977C4B /* LoadingIndicator */ = {
@@ -418,7 +424,7 @@
 		39EBCDF12B8A268B00599D58 /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				3939FFF92B961B52007E58F6 /* RegistrationLocation */,
+				3939FFF92B961B52007E58F6 /* RegistLocation */,
 				39EBCE072B8A480300599D58 /* SelectLocation */,
 				39EBCE062B8A460C00599D58 /* AddCollection */,
 				3939FFC72B8CE036007E58F6 /* Component */,
@@ -588,7 +594,7 @@
 				3939FFDB2B90D063007E58F6 /* KakaoSearchAPI.swift in Sources */,
 				39333D152B88AE19005F295A /* RootBuilder.swift in Sources */,
 				39EBCE0D2B8A484000599D58 /* SelecteLocationViewController.swift in Sources */,
-				39195FFB2BA9E26A00CC7A2E /* RootComponent + Search.swift in Sources */,
+				39195FFB2BA9E26A00CC7A2E /* RootComponent + Select.swift in Sources */,
 				393900002B961BBA007E58F6 /* RegistrationLocationBuilder.swift in Sources */,
 				39EBCDFF2B8A26BF00599D58 /* MapViewController.swift in Sources */,
 				391960022BAC542B00CC7A2E /* UserDefaultsManager.swift in Sources */,
@@ -598,6 +604,7 @@
 				3939FFD62B8F6EF3007E58F6 /* AppConfigs.swift in Sources */,
 				3939FFC92B8CE057007E58F6 /* AddComponent+SelectLocation.swift in Sources */,
 				39333D6F2B8993B1005F295A /* HomeViewController.swift in Sources */,
+				39AD07CE2BB310AD0070C749 /* AddComponent + RegistLocation.swift in Sources */,
 				3939FFD22B8F6BED007E58F6 /* NaverSearchAPI.swift in Sources */,
 				39EBCE012B8A26BF00599D58 /* MapInteractor.swift in Sources */,
 				39333CD22B864786005F295A /* SceneDelegate.swift in Sources */,
@@ -610,6 +617,7 @@
 				39333D702B8993B1005F295A /* HomeBuilder.swift in Sources */,
 				39333D0D2B87663D005F295A /* UIColor+.swift in Sources */,
 				3939FFCB2B8DFD01007E58F6 /* SearchBar.swift in Sources */,
+				39EF11B12BB6DE73000E1996 /* String+.swift in Sources */,
 				3939FFCE2B8E2788007E58F6 /* UINavigationController+.swift in Sources */,
 				39195FFD2BAB40D900CC7A2E /* SelectLocationCell.swift in Sources */,
 				393900012B961BBA007E58F6 /* RegistrationLocationInteractor.swift in Sources */,

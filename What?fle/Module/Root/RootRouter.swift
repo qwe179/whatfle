@@ -8,7 +8,7 @@
 import RIBs
 import UIKit
 
-protocol RootInteractable: Interactable, HomeListener, MapListener, AddListener, RegistrationLocationListener, SelectLocationListener {
+protocol RootInteractable: Interactable, HomeListener, MapListener, AddListener {
     var router: RootRouting? { get set }
     var listener: RootListener? { get set }
 }
@@ -20,6 +20,7 @@ protocol RootViewControllable: ViewControllable {
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable> {
     private let component: RootComponent
     private weak var currentChild: ViewableRouting?
+    private var addNavigationController: UINavigationController?
 
     init(
         interactor: RootInteractable,
@@ -41,15 +42,15 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable> {
         homeNavigation.tabBarItem = tabBarItem(type: .home)
         attachChild(homeRouter)
 
-        let addNavigation = UINavigationController()
-        addNavigation.tabBarItem = tabBarItem(type: .add)
+        let dummyNavigation = UINavigationController()
+        dummyNavigation.tabBarItem = tabBarItem(type: .add)
 
         let mapRouter = component.mapBuilder.build(withListener: interactor)
         let mapNavigation = UINavigationController(root: mapRouter.viewControllable)
         mapNavigation.tabBarItem = tabBarItem(type: .map)
         attachChild(mapRouter)
 
-        let viewControllables = [homeNavigation, addNavigation, mapNavigation]
+        let viewControllables = [homeNavigation, dummyNavigation, mapNavigation]
         viewController.setTabBarViewController(viewControllables, animated: false)
     }
 }
@@ -62,33 +63,50 @@ extension RootRouter {
 
 extension RootRouter: RootRouting {
     func routeToAddList() {
-        detachCurrentView(animated: false) {
+//        detachCurrentView(animated: false) {
             if self.currentChild == nil {
                 let router = self.component.addBuilder.build(withListener: self.interactor)
-                self.viewController.present(router.viewControllable, animated: false)
+//                let navigation = UINavigationController(root: router.viewControllable)
+//                addNavigationController = navigation
+//                router.viewControllable.uiviewController.hidesBottomBarWhenPushed = true
+                self.viewController.present(router.navigationController, animated: false)
                 self.attachChild(router)
                 self.currentChild = router
             }
-        }
+//        }
     }
 
     func routeToSelectLocation() {
-        detachCurrentView(animated: false) {
-            if self.currentChild == nil {
-                let router = self.component.selectLocationBuilder.build(withListener: self.interactor)
-                self.viewController.present(router.viewControllable, animated: true)
-                self.attachChild(router)
-                self.currentChild = router
-            }
-        }
+//        detachCurrentView(animated: false) {
+//            if self.currentChild == nil {
+//                let router = self.component.selectLocationBuilder.build(withListener: self.interactor)
+//                let navigation = UINavigationController(root: router.viewControllable)
+//                self.viewController.present(navigation, animated: true)
+//                self.attachChild(router)
+//                self.currentChild = router
+//            }
+//        }
     }
 
+//    if self.currentChild == nil {
+//        let addRouter = self.component.addBuilder.build(withListener: self.interactor)
+//        let addNavigation = UINavigationController(root: addRouter.viewControllable)
+//        self.viewController.present(addNavigation, animated: false)
+//        self.attachChild(addRouter)
+//        self.currentChild = addRouter
+//    }
+
     func routeToRegistLocation() {
-        self.viewController.uiviewController.dismiss(animated: true) {
-            if let child = self.currentChild {
-                self.detachChild(child)
-                self.currentChild = nil
-            }
+        if let child = self.currentChild {
+            self.detachChild(child)
+            self.currentChild = nil
+        }
+
+        if self.currentChild == nil {
+//            let router = self.component.registLocatiionBuilder.build(withListener: self.interactor)
+//            self.addNavigationController?.pushViewController(router.viewControllable.uiviewController, animated: true)
+//            self.attachChild(router)
+//            self.currentChild = router
         }
     }
 

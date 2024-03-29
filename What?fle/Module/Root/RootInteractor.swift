@@ -10,7 +10,6 @@ import RxSwift
 
 protocol RootRouting: ViewableRouting {
     func routeToAddList()
-    func routeToSelectLocation()
     func routeToRegistLocation()
     func detachCurrentView(animated: Bool, completion: (() -> Void)?)
 }
@@ -40,14 +39,8 @@ extension RootInteractor: AddListener {
     func closeAddRIB() {
         router?.detachCurrentView(animated: false, completion: nil)
     }
-
-    func showRegistrationLocationRIB() {
-        router?.routeToSelectLocation()
-    }
-}
-
-extension RootInteractor: SelectLocationListener {
-    func closeSelectLocationRIB() {
-        router?.detachCurrentView(animated: true, completion: nil)
-    }
+//
+//    func showRegistLocationRIB() {
+//        router?.routeToRegistLocation()
+//    }
 }

@@ -32,6 +32,7 @@ final class SelectLocationBuilder: Builder<SelectLocationDependency>, SelectLoca
         let viewController = SelectLocationViewController()
         let interactor = SelectLocationInteractor(presenter: viewController)
         interactor.listener = listener
+        viewController.listener = interactor
         return SelectLocationRouter(
             interactor: interactor,
             viewController: viewController,
