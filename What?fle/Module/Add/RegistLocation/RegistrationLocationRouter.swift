@@ -38,4 +38,14 @@ extension RegistLocationRouter: RegistLocationRouting {
             self.currentChild = router
         }
     }
+
+    func closeSelectLocation() {
+        if let currentChild {
+            currentChild.viewControllable.uiviewController.dismiss(animated: true) { [weak self] in
+                guard let self else { return }
+                self.detachChild(currentChild)
+                self.currentChild = nil
+            }
+        }
+    }
 }

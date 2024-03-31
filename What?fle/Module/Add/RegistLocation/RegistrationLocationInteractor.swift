@@ -10,6 +10,7 @@ import RxSwift
 
 protocol RegistLocationRouting: ViewableRouting {
     func routeToSelectLocation()
+    func closeSelectLocation()
 }
 
 protocol RegistLocationPresentable: Presentable {
@@ -17,10 +18,12 @@ protocol RegistLocationPresentable: Presentable {
 }
 
 protocol RegistLocationListener: AnyObject {
-    func closeRegistLocationRIB()
+    func closeRegistLocation()
 }
 
-final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresentable>, RegistLocationInteractable, RegistLocationPresentableListener {
+final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresentable>,
+                                      RegistLocationInteractable,
+                                      RegistLocationPresentableListener {
 
     weak var router: RegistLocationRouting?
     weak var listener: RegistLocationListener?
@@ -34,13 +37,17 @@ final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresen
         presenter.listener = self
     }
 
-    func showSelectLocationRIB() {
+    func showSelectLocation() {
         router?.routeToSelectLocation()
+    }
+
+    func closeSelectLocation() {
+        router?.closeSelectLocation()
     }
 }
 
 extension RegistLocationInteractor: RegistLocationListener {
-    func closeRegistLocationRIB() {
-        listener?.closeRegistLocationRIB()
+    func closeRegistLocation() {
+        listener?.closeRegistLocation()
     }
 }

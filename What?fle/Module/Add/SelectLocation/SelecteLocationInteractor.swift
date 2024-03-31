@@ -17,7 +17,7 @@ protocol SelectLocationPresentable: Presentable {
 }
 
 protocol SelectLocationListener: AnyObject {
-//    func closeSelectLocationRIB()
+    func closeSelectLocation()
 }
 
 final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresentable>,
@@ -69,8 +69,7 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
     }
 
     func closeView() {
-//        print("listener", listener)
-//        self.listener?.closeSelectLocationRIB()
+        self.listener?.closeSelectLocation()
     }
 
     func deleteItem(at index: Int) {

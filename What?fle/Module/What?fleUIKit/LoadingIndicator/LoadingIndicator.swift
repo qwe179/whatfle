@@ -35,7 +35,7 @@ class LoadingIndicatorService {
             self.dimmedView = nil
         }
     }
-    
+
     func isLoading() -> Bool {
         return dimmedView == nil ? false : true
     }

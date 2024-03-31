@@ -13,7 +13,7 @@ import RxSwift
 import SnapKit
 
 protocol AddPresentableListener: AnyObject {
-    func showRegistLocationRIB()
+    func showRegistLocation()
     func closeView()
 }
 
@@ -155,7 +155,7 @@ extension AddViewController {
     private func setupBinding() {
         registLocationControl.rx.controlEvent(.touchUpInside).bind { [weak self] in
             guard let self else { return }
-            listener?.showRegistLocationRIB()
+            listener?.showRegistLocation()
         }
         .disposed(by: disposeBag)
 

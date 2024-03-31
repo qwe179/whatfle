@@ -12,24 +12,8 @@ extension NSAttributedString {
         text: String,
         font: UIFont,
         textColor: UIColor,
-        lineHeight: CGFloat
-    ) -> NSAttributedString {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineHeight - (font.lineHeight - font.pointSize)
-        let attributes: [NSAttributedString.Key: Any] = [
-            .paragraphStyle: paragraphStyle,
-            .font: font,
-            .foregroundColor: textColor
-        ]
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-    static func makeAttributedString(
-        text: String,
-        font: UIFont,
-        textColor: UIColor,
         lineHeight: CGFloat,
-        additionalAttributes: [(text: String, attribute: [NSAttributedString.Key: Any])]?
+        additionalAttributes: [(text: String, attribute: [NSAttributedString.Key: Any])]? = nil
     ) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineHeight - (font.lineHeight - font.pointSize)
@@ -38,7 +22,7 @@ extension NSAttributedString {
             .font: font,
             .foregroundColor: textColor
         ]
-        
+
         if let additionalAttributes {
             let attributedString = NSMutableAttributedString(string: text, attributes: baseAttributes)
             for additionalAttribute in additionalAttributes {
@@ -49,5 +33,4 @@ extension NSAttributedString {
         }
         return NSAttributedString(string: text, attributes: baseAttributes)
     }
-
 }

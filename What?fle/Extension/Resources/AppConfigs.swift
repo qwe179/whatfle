@@ -30,14 +30,14 @@ extension AppConfigs {
                     (secrets?.value(forKey: "Naver-Client-Secret") as? String) ?? ""
                 }
             }
-            
+
             enum Kakao {
                 static var kakaoRESTAPIKey: String {
                     (secrets?.value(forKey: "Kakao_REST_API_KEY") as? String) ?? ""
                 }
             }
         }
-        
+
         enum URL {
             enum Naver {
                 static var search: String {
@@ -49,7 +49,6 @@ extension AppConfigs {
                     "https://dapi.kakao.com/v2/local/"
                 }
             }
-            
         }
     }
 }
