@@ -9,9 +9,10 @@ import UIKit
 
 class TextViewWithTitle: UIView {
     private let titleLabel: UILabel = .init()
-    private let textView: UITextView = {
+    let textView: UITextView = {
         let textView: UITextView = .init()
         textView.textContainerInset = UIEdgeInsets(top: 14, left: 0, bottom: 14, right: 0)
+        textView.font = .body14MD
         textView.contentInset = .zero
         return textView
     }()
@@ -50,7 +51,7 @@ class TextViewWithTitle: UIView {
         textView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.lessThanOrEqualTo(48)
+            $0.height.equalTo(48)
         }
         placeholdLabel.snp.makeConstraints {
             $0.centerY.equalTo(textView)
@@ -74,8 +75,10 @@ class TextViewWithTitle: UIView {
             text: placehold,
             font: .body14MD,
             textColor: .textExtralight,
-            lineHeight: 20
+            lineHeight: 20,
+            lineSpacing: 5
         )
+        print("Line Height: \(UIFont.body14MD.lineHeight)")
     }
 }
 
@@ -88,5 +91,12 @@ extension TextViewWithTitle: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         underlineView.backgroundColor = .lineDefault
         placeholdLabel.isHidden = !textView.text.isEmpty
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        let numberOfLines = Int((textView.contentSize.height - 28) / 17)
+        textView.snp.updateConstraints {
+            $0.height.equalTo(20 * (numberOfLines >= 3 ? 3 : numberOfLines) + 28)
+        }
     }
 }

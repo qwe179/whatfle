@@ -5,14 +5,18 @@
 //  Created by 이정환 on 3/5/24.
 //
 
+import PhotosUI
 import RIBs
-import RxSwift
 import RxCocoa
+import RxSwift
 import UIKit
 
 protocol RegistLocationPresentableListener: AnyObject {
+    var imageArray: BehaviorRelay<[UIImage]> { get }
+    var isSelectLocation: BehaviorRelay<Bool> { get }
     func showSelectLocation()
     func closeRegistLocation()
+    func addImage(_ image: UIImage)
 }
 
 private enum ImageState {
@@ -20,8 +24,7 @@ private enum ImageState {
     case images
 }
 
-final class RegistLocationViewController: UIViewController, RegistLocationPresentable, RegistLocationViewControllable {
-
+final class RegistLocationViewController: UIViewController, RegistLocationViewControllable {
     weak var listener: RegistLocationPresentableListener?
     private let disposeBag = DisposeBag()
 
@@ -52,9 +55,14 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
         return label
     }()
 
-    private let scrollView: UIScrollView = .init()
+    private let scrollView: UIScrollView = {
+        let scrollView: UIScrollView = .init()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.keyboardDismissMode = .onDrag
+        return scrollView
+    }()
     private let subView: UIView = .init()
-    
+
     private let locationView: UIView = .init()
     private let locationLabel: UILabel = {
         let label: UILabel = .init()
@@ -67,30 +75,34 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
         )
         return label
     }()
-    private let addLocationView: UIControl = {
+    private let addLocationTextField: UITextField = {
+        let textField: UITextField = .init()
+        textField.isUserInteractionEnabled = false
+        return textField
+    }()
+    private let addLocationImageView: UIImageView = .init(image: UIImage(systemName: "plus"))
+    private lazy var addLocationView: UIControl = {
         let control: UIControl = .init()
-        let label: UILabel = .init()
-        label.attributedText = .makeAttributedString(
+        addLocationTextField.attributedPlaceholder = .makeAttributedString(
             text: "장소 추가하기",
             font: .title15RG,
             textColor: .textExtralight,
             lineHeight: 24
         )
-        let imageView: UIImageView = .init(image: UIImage(systemName: "plus"))
         let underlineView: UIView = {
             let view: UIView = .init()
             view.backgroundColor = .lineDefault
             return view
         }()
-        imageView.tintColor = .textExtralight
-        [label, imageView, underlineView].forEach {
+        addLocationImageView.tintColor = .textExtralight
+        [addLocationTextField, addLocationImageView, underlineView].forEach {
             control.addSubview($0)
         }
-        label.snp.makeConstraints {
+        addLocationTextField.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(12)
             $0.centerY.equalToSuperview()
         }
-        imageView.snp.makeConstraints {
+        addLocationImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(8)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(24)
@@ -102,7 +114,16 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
         return control
     }()
 
-    private let tempView: UIView = .init()
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 16
+        layout.itemSize = .init(width: 168, height: 224)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(LocationImageCell.self, forCellWithReuseIdentifier: LocationImageCell.reuseIdentifier)
+        return collectionView
+    }()
+
     private let addPhotoButton: AddPhotoControl = .init()
 
     private let visitView: UIView = .init()
@@ -121,6 +142,7 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
     private lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "ko_KR")
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
         return datePicker
@@ -144,6 +166,22 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
         return view
     }()
 
+    private let saveButton: UIButton = {
+        let button: UIButton = .init()
+        button.backgroundColor = .Core.primaryDisabled
+        button.layer.cornerRadius = 4
+        button.setAttributedTitle(
+            .makeAttributedString(
+                text: "저장",
+                font: .title16MD,
+                textColor: .white,
+                lineHeight: 24
+            ),
+            for: .normal
+        )
+        return button
+    }()
+
     deinit {
         print("\(self) is being deinit")
     }
@@ -152,10 +190,9 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
         super.viewDidLoad()
 
         setupUI()
+        setupViewBinding()
         setupActionBinding()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setupKeyboard()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -193,7 +230,7 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
         scrollView.snp.makeConstraints {
             $0.top.equalTo(customNavigationBar.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(28)
             $0.width.equalTo(UIApplication.shared.width - 48)
         }
 
@@ -203,10 +240,9 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
             $0.width.equalTo(UIApplication.shared.width - 48)
         }
 
-        scrollView.addSubview(locationView)
+        subView.addSubview(locationView)
         locationView.snp.makeConstraints {
-            $0.top.equalTo(customNavigationBar.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
         }
         [locationLabel, addLocationView].forEach {
             locationView.addSubview($0)
@@ -220,20 +256,20 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
             $0.height.equalTo(48)
         }
 
-        scrollView.addSubview(tempView)
-        tempView.snp.makeConstraints {
+        subView.addSubview(collectionView)
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(addLocationView.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(224)
         }
-        tempView.addSubview(addPhotoButton)
+        view.addSubview(addPhotoButton)
         addPhotoButton.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalTo(collectionView.snp.edges)
         }
 
-        scrollView.addSubview(visitView)
+        subView.addSubview(visitView)
         visitView.snp.makeConstraints {
-            $0.top.equalTo(tempView.snp.bottom).offset(24)
+            $0.top.equalTo(collectionView.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
         }
         [visitLabel, visitTextField].forEach {
@@ -245,14 +281,78 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
         visitTextField.snp.makeConstraints {
             $0.top.equalTo(visitLabel.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(112)
+            $0.height.equalTo(48)
         }
 
-        scrollView.addSubview(memoView)
+        subView.addSubview(memoView)
         memoView.snp.makeConstraints {
             $0.top.equalTo(visitView.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
         }
+
+        subView.addSubview(saveButton)
+        saveButton.snp.makeConstraints {
+            $0.top.equalTo(visitView.snp.bottom).offset(198)
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(56)
+        }
+    }
+
+    private func setupViewBinding() {
+        guard let listener else { return }
+        listener.imageArray
+            .filter { !$0.isEmpty }
+            .observe(on: MainScheduler.instance)
+            .do(onNext: { [weak self] _ in
+                guard let self else { return }
+                if self.addPhotoButton.buttonState == .noImage {
+                    self.addPhotoButton.snp.remakeConstraints {
+                        $0.size.equalTo(80)
+                        $0.trailing.equalTo(self.collectionView.snp.trailing).inset(-8)
+                        $0.bottom.equalTo(self.collectionView.snp.bottom).inset(16)
+                    }
+                    self.addPhotoButton.toggle()
+                }
+            })
+            .bind(
+                to: collectionView.rx.items(
+                    cellIdentifier: LocationImageCell.reuseIdentifier,
+                    cellType: LocationImageCell.self
+                )
+            ) { (_, element, cell) in
+                cell.drawCell(image: element)
+            }
+            .disposed(by: disposeBag)
+
+        let isEnabledObservable = Observable.combineLatest(
+            listener.isSelectLocation,
+            listener.imageArray.map { !$0.isEmpty },
+            memoView.textView.rx.text.orEmpty
+        )
+        .map { isSelectLocation, isImageArrayNotEmpty, memoText in
+            isSelectLocation && isImageArrayNotEmpty && !memoText.isEmpty
+        }.share()
+
+        isEnabledObservable
+            .bind(to: saveButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        isEnabledObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] bool in
+                guard let self else { return }
+                self.saveButton.backgroundColor = bool ? .Core.primary : .Core.primaryDisabled
+                saveButton.setAttributedTitle(
+                    .makeAttributedString(
+                        text: "저장",
+                        font: .title16MD,
+                        textColor: bool ? .black : .white,
+                        lineHeight: 24
+                    ),
+                    for: .normal
+                )
+            })
+            .disposed(by: disposeBag)
     }
 
     private func setupActionBinding() {
@@ -273,23 +373,55 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
             .disposed(by: disposeBag)
 
         self.addPhotoButton.rx.controlEvent(.touchUpInside)
+            .filter { [weak self] _ in (self?.listener?.imageArray.value.count ?? 10) < 10}
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                if self.addPhotoButton.buttonState == .noImage {
-                    self.addPhotoButton.snp.remakeConstraints {
-                        $0.size.equalTo(80)
-                        $0.trailing.equalToSuperview().inset(-8)
-                        $0.bottom.equalToSuperview().inset(16)
-                    }
-                } else {
-                    self.addPhotoButton.snp.remakeConstraints {
-                        $0.edges.equalToSuperview()
-                    }
-                }
-                self.addPhotoButton.toggle()
+                self.dismissKeyboard()
+                var configuration = PHPickerConfiguration()
+                configuration.selectionLimit = 10 - (self.listener?.imageArray.value.count ?? 0)
+                configuration.filter = .any(of: [.images])
+                let picker = PHPickerViewController(configuration: configuration)
+                picker.delegate = self
+                self.present(picker, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
+
+        self.saveButton.rx.controlEvent(.touchUpInside)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                // TODO: - 저장로직 추가해야함
+                print("저장~!")
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+extension RegistLocationViewController {
+    private func setupKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard)
+        )
+        tap.delegate = self
+        view.addGestureRecognizer(tap)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     @objc private func dateChange(_ sender: UIDatePicker) {
@@ -300,7 +432,7 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
             lineHeight: 20
         )
     }
-    
+
     @objc private func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
@@ -311,10 +443,15 @@ final class RegistLocationViewController: UIViewController, RegistLocationPresen
     @objc private func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
     }
-
 }
 
-class AddPhotoControl: UIControl {
+extension RegistLocationViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return !(touch.view is UIControl)
+    }
+}
+
+final class AddPhotoControl: UIControl {
     private let stackView: UIStackView = {
         let stackView: UIStackView = .init()
         stackView.isUserInteractionEnabled = false
@@ -397,6 +534,44 @@ class AddPhotoControl: UIControl {
 
             self.removeShadow()
             self.layer.cornerRadius = 0
+        }
+    }
+
+    fileprivate func updatePhoto(count: Int) {
+        countLabel.attributedText = .makeAttributedString(
+            text: "(\(count)/10)",
+            font: .caption13MD,
+            textColor: .Core.primary,
+            lineHeight: 20)
+    }
+}
+
+extension RegistLocationViewController: RegistLocationPresentable {
+    func updateView(with data: KakaoSearchDocumentsModel) {
+        addLocationTextField.attributedText = .makeAttributedString(
+            text: "장소 이름 / \(data.placeName)",
+            font: .title15RG,
+            textColor: .textDefault,
+            lineHeight: 24
+        )
+        addLocationImageView.image = .change
+        listener?.isSelectLocation.accept(true)
+    }
+}
+
+extension RegistLocationViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        guard !results.isEmpty else { return }
+
+        for itemProvider in results.map ({ $0.itemProvider }) where itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                guard let self, let image = image as? UIImage, let listener = self.listener else { return }
+                DispatchQueue.main.async {
+                    listener.addImage(image)
+                    self.addPhotoButton.updatePhoto(count: listener.imageArray.value.count)
+                }
+            }
         }
     }
 }

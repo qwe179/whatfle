@@ -19,6 +19,7 @@ protocol SelectLocationPresentableListener: AnyObject {
     func closeView()
     func deleteItem(at index: Int)
     func allDeleteItem()
+    func selectItem(at index: Int)
 }
 
 final class SelectLocationViewController: UIViewController, SelectLocationPresentable, SelectLocationViewControllable {
@@ -33,7 +34,7 @@ final class SelectLocationViewController: UIViewController, SelectLocationPresen
 
     weak var listener: SelectLocationPresentableListener?
     private let disposeBag = DisposeBag()
-    
+
     private var searchState: SearchState = .beforeSearch {
         didSet {
             switch searchState {
@@ -377,9 +378,7 @@ extension SelectLocationViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView === self.searchResultTableView {
-            if let model = listener?.searchResultArray.value[indexPath.row] {
-                print("검색 데이터 탭", model)
-            }
+            listener?.selectItem(at: indexPath.row)
         } else if tableView === self.recentTableView {
             if let searchKeyward = listener?.recentKeywordArray.value[indexPath.row] {
                 self.listener?.performSearch(with: searchKeyward, more: false)

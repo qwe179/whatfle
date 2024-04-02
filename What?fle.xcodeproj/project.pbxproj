@@ -57,6 +57,8 @@
 		3939FFF52B9451E3007E58F6 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939FFF42B9451E3007E58F6 /* UIApplication+.swift */; };
 		3939FFFE2B961BBA007E58F6 /* RegistrationLocationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939FFFA2B961BBA007E58F6 /* RegistrationLocationRouter.swift */; };
 		3939FFFF2B961BBA007E58F6 /* RegistrationLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939FFFB2B961BBA007E58F6 /* RegistrationLocationViewController.swift */; };
+		39411B322BBB0C0200A54EA7 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39411B312BBB0C0200A54EA7 /* UILabel+.swift */; };
+		39411B352BBC3AC200A54EA7 /* LocationImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39411B342BBC3AC200A54EA7 /* LocationImageCell.swift */; };
 		3961ADDC2BB05CF900977C4B /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3961ADDB2BB05CF900977C4B /* LoadingIndicator.swift */; };
 		39AD07CE2BB310AD0070C749 /* AddComponent + RegistLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD07CD2BB310AD0070C749 /* AddComponent + RegistLocation.swift */; };
 		39EBCDF62B8A26B200599D58 /* AddRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCDF22B8A26B200599D58 /* AddRouter.swift */; };
@@ -74,6 +76,8 @@
 		39EBCE0E2B8A484000599D58 /* SelecteLocationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCE0A2B8A484000599D58 /* SelecteLocationBuilder.swift */; };
 		39EBCE0F2B8A484000599D58 /* SelecteLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBCE0B2B8A484000599D58 /* SelecteLocationInteractor.swift */; };
 		39EF11B12BB6DE73000E1996 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EF11B02BB6DE73000E1996 /* String+.swift */; };
+		39EF11B62BBADCF0000E1996 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39EF11B52BBADCF0000E1996 /* Secrets.plist */; };
+		39EF11B82BBAE182000E1996 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EF11B72BBAE182000E1996 /* Array+.swift */; };
 		456B09CC2BB9520100920C54 /* TextFieldWithUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B09CB2BB9520100920C54 /* TextFieldWithUnderline.swift */; };
 		456B09CE2BB953B200920C54 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B09CD2BB953B200920C54 /* UITextField+.swift */; };
 		456B09D22BB954DA00920C54 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B09D12BB954DA00920C54 /* Date+.swift */; };
@@ -129,6 +133,8 @@
 		3939FFFB2B961BBA007E58F6 /* RegistrationLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationLocationViewController.swift; sourceTree = "<group>"; };
 		3939FFFC2B961BBA007E58F6 /* RegistrationLocationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationLocationBuilder.swift; sourceTree = "<group>"; };
 		3939FFFD2B961BBA007E58F6 /* RegistrationLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationLocationInteractor.swift; sourceTree = "<group>"; };
+		39411B312BBB0C0200A54EA7 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		39411B342BBC3AC200A54EA7 /* LocationImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationImageCell.swift; sourceTree = "<group>"; };
 		3961ADDB2BB05CF900977C4B /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		39AD07CD2BB310AD0070C749 /* AddComponent + RegistLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddComponent + RegistLocation.swift"; sourceTree = "<group>"; };
 		39EBCDF22B8A26B200599D58 /* AddRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouter.swift; sourceTree = "<group>"; };
@@ -146,6 +152,8 @@
 		39EBCE0A2B8A484000599D58 /* SelecteLocationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteLocationBuilder.swift; sourceTree = "<group>"; };
 		39EBCE0B2B8A484000599D58 /* SelecteLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteLocationInteractor.swift; sourceTree = "<group>"; };
 		39EF11B02BB6DE73000E1996 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		39EF11B52BBADCF0000E1996 /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		39EF11B72BBAE182000E1996 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		456B09CB2BB9520100920C54 /* TextFieldWithUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithUnderline.swift; sourceTree = "<group>"; };
 		456B09CD2BB953B200920C54 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		456B09D12BB954DA00920C54 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -227,6 +235,7 @@
 				3939FFD52B8F6EF3007E58F6 /* AppConfigs.swift */,
 				39333CF12B864EEB005F295A /* Font */,
 				39333CD82B864787005F295A /* Assets.xcassets */,
+				39EF11B52BBADCF0000E1996 /* Secrets.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -248,7 +257,9 @@
 				39EF11B02BB6DE73000E1996 /* String+.swift */,
 				456B09CD2BB953B200920C54 /* UITextField+.swift */,
 				456B09D12BB954DA00920C54 /* Date+.swift */,
+				39EF11B72BBAE182000E1996 /* Array+.swift */,
 				39333CF02B864EE1005F295A /* Resources */,
+				39411B302BBB0BF200A54EA7 /* Rx+ */,
 				3939FFCF2B8E27BB007E58F6 /* RIBs+ */,
 			);
 			path = Extension;
@@ -394,12 +405,29 @@
 			isa = PBXGroup;
 			children = (
 				3919BA672B9A197F00E2A3CC /* Component */,
+				39411B332BBC3AAE00A54EA7 /* Cell */,
 				3939FFFA2B961BBA007E58F6 /* RegistrationLocationRouter.swift */,
 				3939FFFB2B961BBA007E58F6 /* RegistrationLocationViewController.swift */,
 				3939FFFC2B961BBA007E58F6 /* RegistrationLocationBuilder.swift */,
 				3939FFFD2B961BBA007E58F6 /* RegistrationLocationInteractor.swift */,
 			);
 			path = RegistLocation;
+			sourceTree = "<group>";
+		};
+		39411B302BBB0BF200A54EA7 /* Rx+ */ = {
+			isa = PBXGroup;
+			children = (
+				39411B312BBB0C0200A54EA7 /* UILabel+.swift */,
+			);
+			path = "Rx+";
+			sourceTree = "<group>";
+		};
+		39411B332BBC3AAE00A54EA7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				39411B342BBC3AC200A54EA7 /* LocationImageCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		3961ADDA2BB05CE200977C4B /* LoadingIndicator */ = {
@@ -541,6 +569,7 @@
 				39333D032B864EF9005F295A /* SUIT-ExtraBold.otf in Resources */,
 				39333D012B864EF9005F295A /* SUIT-ExtraLight.otf in Resources */,
 				39333CFC2B864EF9005F295A /* SUIT-Medium.otf in Resources */,
+				39EF11B62BBADCF0000E1996 /* Secrets.plist in Resources */,
 				39333D022B864EF9005F295A /* SUIT-Regular.otf in Resources */,
 				39333CFD2B864EF9005F295A /* SUIT-Bold.otf in Resources */,
 				39333CDC2B864787005F295A /* LaunchScreen.storyboard in Resources */,
@@ -604,10 +633,12 @@
 				456B09D22BB954DA00920C54 /* Date+.swift in Sources */,
 				39333D152B88AE19005F295A /* RootBuilder.swift in Sources */,
 				39EBCE0D2B8A484000599D58 /* SelecteLocationViewController.swift in Sources */,
+				39EF11B82BBAE182000E1996 /* Array+.swift in Sources */,
 				456B09D42BB9566C00920C54 /* TextViewWithTitle.swift in Sources */,
 				39195FFB2BA9E26A00CC7A2E /* RootComponent + Select.swift in Sources */,
 				393900002B961BBA007E58F6 /* RegistrationLocationBuilder.swift in Sources */,
 				39EBCDFF2B8A26BF00599D58 /* MapViewController.swift in Sources */,
+				39411B322BBB0C0200A54EA7 /* UILabel+.swift in Sources */,
 				391960022BAC542B00CC7A2E /* UserDefaultsManager.swift in Sources */,
 				3919BA652B988C0000E2A3CC /* UIView+.swift in Sources */,
 				39EBCE0E2B8A484000599D58 /* SelecteLocationBuilder.swift in Sources */,
@@ -626,6 +657,7 @@
 				3939FFD82B8F750D007E58F6 /* NetworkManager.swift in Sources */,
 				39EBCDF82B8A26B200599D58 /* AddBuilder.swift in Sources */,
 				39333D702B8993B1005F295A /* HomeBuilder.swift in Sources */,
+				39411B352BBC3AC200A54EA7 /* LocationImageCell.swift in Sources */,
 				39333D0D2B87663D005F295A /* UIColor+.swift in Sources */,
 				3939FFCB2B8DFD01007E58F6 /* SearchBar.swift in Sources */,
 				39EF11B12BB6DE73000E1996 /* String+.swift in Sources */,

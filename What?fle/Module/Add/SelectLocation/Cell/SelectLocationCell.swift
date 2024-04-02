@@ -48,7 +48,8 @@ final class SelectLocationCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupLayout()
     }
 
     private func setupLayout() {
@@ -60,7 +61,6 @@ final class SelectLocationCell: UITableViewCell {
         }
         contentView.addSubview(self.titleView)
         self.titleView.snp.makeConstraints {
-//            $0.top.bottom.equalToSuperview().inset(16)
             $0.centerY.equalTo(self.placeImage.snp.centerY)
             $0.leading.equalTo(self.placeImage.snp.trailing).offset(16)
             $0.trailing.equalToSuperview()
