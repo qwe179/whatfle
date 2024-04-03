@@ -20,6 +20,7 @@ protocol SelectLocationPresentableListener: AnyObject {
     func deleteItem(at index: Int)
     func allDeleteItem()
     func selectItem(at index: Int)
+    func refreshRecentKeywordArray()
 }
 
 final class SelectLocationViewController: UIViewController, SelectLocationPresentable, SelectLocationViewControllable {
@@ -148,9 +149,9 @@ final class SelectLocationViewController: UIViewController, SelectLocationPresen
         let tableView: UITableView = .init()
         tableView.register(RecentSearchCell.self, forCellReuseIdentifier: RecentSearchCell.reuseIdentifier)
         tableView.showsVerticalScrollIndicator = false
+        tableView.keyboardDismissMode = .onDrag
         tableView.separatorStyle = .none
         tableView.isHidden = true
-        tableView.isScrollEnabled = false
         tableView.delegate = self
         return tableView
     }()
@@ -173,6 +174,7 @@ final class SelectLocationViewController: UIViewController, SelectLocationPresen
         setupUI()
         setupViewBinding()
         setupActionBinding()
+        setupKeyboard()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -288,6 +290,20 @@ extension SelectLocationViewController {
                 cell.drawCell(model: model)
             }
             .disposed(by: disposeBag)
+
+        self.searchBar.rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .filter { $0.isEmpty }
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                if self.searchState == .afterSearch,
+                   let keywordArray = self.listener?.recentKeywordArray.value {
+                    self.searchState = keywordArray.isEmpty ? .beforeSearch : .beforeSearchWithHistory
+                    self.listener?.refreshRecentKeywordArray()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     private func setupActionBinding() {
@@ -341,6 +357,36 @@ extension SelectLocationViewController {
         let height = searchResultTableView.frame.size.height
         return offsetY + height > contentHeight + 50.0
     }
+    
+    private func setupKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        self.recentTableView.snp.updateConstraints {
+            $0.bottom.equalToSuperview().inset(keyboardSize.height)
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        self.recentTableView.snp.updateConstraints {
+            $0.bottom.equalToSuperview()
+        }
+    }
 }
 
 extension SelectLocationViewController: UITextFieldDelegate {
@@ -360,7 +406,7 @@ extension SelectLocationViewController: UITextFieldDelegate {
 
 extension SelectLocationViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if decelerate, isTableViewScrolledToBottom() {
+        if scrollView === self.searchResultTableView, decelerate, isTableViewScrolledToBottom() {
             self.listener?.performSearch(with: UserDefaultsManager.latestSearchLoad(), more: true)
         }
     }
@@ -381,6 +427,8 @@ extension SelectLocationViewController: UITableViewDelegate {
             listener?.selectItem(at: indexPath.row)
         } else if tableView === self.recentTableView {
             if let searchKeyward = listener?.recentKeywordArray.value[indexPath.row] {
+                self.view.endEditing(true)
+                searchBar.text = searchKeyward
                 self.listener?.performSearch(with: searchKeyward, more: false)
                 if self.searchState != .afterSearch {
                     self.searchState = .afterSearch
