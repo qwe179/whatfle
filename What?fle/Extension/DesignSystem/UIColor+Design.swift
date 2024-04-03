@@ -20,7 +20,7 @@ extension UIColor {
         case background = "F6F8FB"
         case primary = "FFC93F"
         case primaryDisabled = "C4C4CD"
-        case p100 = "FFEEC3"
+        case p100 = "FFFBD3"
         case p400 = "FF9110"
         case secondary = "335384"
         case warning = "FC544E"

@@ -50,8 +50,11 @@ extension AddRouter: AddRouting {
 
     func closeRegistLocation() {
         if let currentChild {
-            detachChild(currentChild)
-            self.currentChild = nil
+            currentChild.viewControllable.uiviewController.dismiss(animated: true) { [weak self] in
+                guard let self else { return }
+                self.detachChild(currentChild)
+                self.currentChild = nil
+            }
         }
     }
 }

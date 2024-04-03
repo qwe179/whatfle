@@ -21,7 +21,6 @@ protocol AddPresentable: Presentable {
 
 protocol AddListener: AnyObject {
     func closeAddRIB()
-//    func showRegistLocationRIB()
 }
 
 final class AddInteractor: PresentableInteractor<AddPresentable>, AddInteractable {
@@ -43,11 +42,11 @@ final class AddInteractor: PresentableInteractor<AddPresentable>, AddInteractabl
 }
 
 extension AddInteractor: AddPresentableListener {
-    func showRegistLocationRIB() {
+    func showRegistLocation() {
         router?.routeToRegistLocation()
     }
 
-    func closeRegistLocationRIB() {
+    func closeRegistLocation() {
         router?.closeRegistLocation()
     }
 }

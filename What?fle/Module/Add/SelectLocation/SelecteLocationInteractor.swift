@@ -17,7 +17,8 @@ protocol SelectLocationPresentable: Presentable {
 }
 
 protocol SelectLocationListener: AnyObject {
-//    func closeSelectLocationRIB()
+    func didSelect(data: KakaoSearchDocumentsModel)
+    func closeSelectLocation()
 }
 
 final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresentable>,
@@ -54,7 +55,7 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
                 let searchResults = try JSONDecoder().decode(KakaoSearchModel.self, from: response.data)
                 return searchResults.documents
             }
-            .filter { [weak self] in self?.searchResultArray.value.last == $0.last }
+            .filter { [weak self] in self?.searchResultArray.value.last != $0.last }
             .subscribe(onNext: { [weak self] result in
                 guard let self else { return }
                 if more {
@@ -69,8 +70,7 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
     }
 
     func closeView() {
-//        print("listener", listener)
-//        self.listener?.closeSelectLocationRIB()
+        self.listener?.closeSelectLocation()
     }
 
     func deleteItem(at index: Int) {
@@ -81,6 +81,11 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
     func allDeleteItem() {
         UserDefaultsManager.recentSearchAllRemove()
         recentKeywordArray.accept([])
+    }
+
+    func selectItem(at index: Int) {
+        guard let data = searchResultArray.value[safe: index] else { return }
+        self.listener?.didSelect(data: data)
     }
 }
 

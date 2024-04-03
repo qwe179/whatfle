@@ -32,11 +32,11 @@ struct UserDefaultsManager {
         UserDefaults.standard.set(history, forKey: searchHistory)
         return history
     }
-    
+
     static func recentSearchAllRemove() {
         UserDefaults.standard.set([], forKey: searchHistory)
     }
-    
+
     static func latestSearchLoad() -> String {
         if let history = UserDefaults.standard.array(forKey: searchHistory) as? [String] {
             return history.first ?? ""
