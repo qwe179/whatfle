@@ -41,14 +41,11 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
     }
 
     func performSearch(with query: String, more: Bool) {
+        LoadingIndicatorService.shared.showLoading()
         NetworkManager.shared.request(.search(query, currentPage(more: more)))
             .filter { _ in LoadingIndicatorService.shared.isLoading() }
-            .do(onSubscribe: {
-                    LoadingIndicatorService.shared.showLoading()
-                }, onDispose: {
-                    LoadingIndicatorService.shared.hideLoading()
-                })
-            .do(onNext: { _ in
+            .do(onNext: { [weak self] _ in
+                guard let self else { return }
                 UserDefaultsManager.recentSearchSave(searchText: query)
             })
             .map { response -> [KakaoSearchDocumentsModel] in
@@ -63,6 +60,7 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
                 } else {
                     self.searchResultArray.accept(result)
                 }
+                LoadingIndicatorService.shared.hideLoading()
             }, onError: { error in
                 print("Error: \(error)")
             })
@@ -87,6 +85,10 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
         guard let data = searchResultArray.value[safe: index] else { return }
         self.listener?.didSelect(data: data)
     }
+
+    func refreshRecentKeywordArray() {
+        self.recentKeywordArray.accept(UserDefaultsManager.recentSearchLoad())
+    }    
 }
 
 extension SelectLocationInteractor {
