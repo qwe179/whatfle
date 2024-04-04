@@ -27,10 +27,9 @@ protocol RegistLocationListener: AnyObject {
 final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresentable>,
                                       RegistLocationInteractable,
                                       RegistLocationPresentableListener {
-
     weak var router: RegistLocationRouting?
     weak var listener: RegistLocationListener?
-    var imageArray = BehaviorRelay<[UIImage]>(value: [])
+    let imageArray = BehaviorRelay<[UIImage]>(value: [])
     let isSelectLocation = BehaviorRelay<Bool>(value: false)
 
     deinit {
