@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "x-line-lg.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

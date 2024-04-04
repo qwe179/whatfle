@@ -7,8 +7,12 @@
 
 import UIKit
 
+import RIBs
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+
+    private var launchRouter: LaunchRouting?
 
     func scene(
         _ scene: UIScene,
@@ -16,11 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-                window = UIWindow(windowScene: windowScene)
-                let viewController = ViewController()
-                viewController.view.backgroundColor = .white
-                window?.rootViewController = viewController
-                window?.makeKeyAndVisible()
+                let window = UIWindow(windowScene: windowScene)
+        self.window = window
+
+        let component = AppComponent()
+        let builder = RootBuilder(dependency: component)
+        let launchRouter = builder.build()
+        self.launchRouter = launchRouter
+        launchRouter.launch(from: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {}
