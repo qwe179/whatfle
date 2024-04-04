@@ -99,8 +99,7 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
             control.addSubview($0)
         }
         addLocationTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(12)
-            $0.centerY.equalToSuperview()
+            $0.leading.centerY.equalToSuperview()
         }
         addLocationImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(8)

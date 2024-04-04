@@ -44,8 +44,7 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
         LoadingIndicatorService.shared.showLoading()
         NetworkManager.shared.request(.search(query, currentPage(more: more)))
             .filter { _ in LoadingIndicatorService.shared.isLoading() }
-            .do(onNext: { [weak self] _ in
-                guard let self else { return }
+            .do(onNext: { _ in
                 UserDefaultsManager.recentSearchSave(searchText: query)
             })
             .map { response -> [KakaoSearchDocumentsModel] in
