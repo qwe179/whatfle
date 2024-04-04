@@ -11,6 +11,7 @@ class TextViewWithTitle: UIView {
     private let titleLabel: UILabel = .init()
     let textView: UITextView = {
         let textView: UITextView = .init()
+        textView.textContainer.lineFragmentPadding = 0
         textView.textContainerInset = UIEdgeInsets(top: 14, left: 0, bottom: 14, right: 0)
         textView.font = .body14MD
         textView.contentInset = .zero

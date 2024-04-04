@@ -19,11 +19,6 @@ protocol RegistLocationPresentableListener: AnyObject {
     func addImage(_ image: UIImage)
 }
 
-private enum ImageState {
-    case noImage
-    case images
-}
-
 final class RegistLocationViewController: UIViewController, RegistLocationViewControllable {
     weak var listener: RegistLocationPresentableListener?
     private let disposeBag = DisposeBag()
@@ -99,8 +94,7 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
             control.addSubview($0)
         }
         addLocationTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(12)
-            $0.centerY.equalToSuperview()
+            $0.leading.centerY.equalToSuperview()
         }
         addLocationImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(8)
@@ -301,27 +295,35 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
     private func setupViewBinding() {
         guard let listener else { return }
         listener.imageArray
-            .filter { !$0.isEmpty }
-            .observe(on: MainScheduler.instance)
-            .do(onNext: { [weak self] _ in
-                guard let self else { return }
-                if self.addPhotoButton.buttonState == .noImage {
-                    self.addPhotoButton.snp.remakeConstraints {
-                        $0.size.equalTo(80)
-                        $0.trailing.equalTo(self.collectionView.snp.trailing).inset(-8)
-                        $0.bottom.equalTo(self.collectionView.snp.bottom).inset(16)
-                    }
-                    self.addPhotoButton.toggle()
-                }
-            })
             .bind(
                 to: collectionView.rx.items(
                     cellIdentifier: LocationImageCell.reuseIdentifier,
                     cellType: LocationImageCell.self
                 )
-            ) { (_, element, cell) in
+            ) { [weak self] (_, element, cell) in
+                guard let self else { return }
+                cell.delegate = self
                 cell.drawCell(image: element)
             }
+            .disposed(by: disposeBag)
+
+        listener.imageArray
+            .map { $0.isEmpty }
+            .subscribe(onNext: { [weak self] bool in
+                guard let self else { return }
+                addPhotoButton.snp.remakeConstraints {
+                    if bool {
+                        $0.edges.equalTo(self.collectionView.snp.edges)
+                    } else {
+                        self.addPhotoButton.snp.remakeConstraints {
+                            $0.size.equalTo(80)
+                            $0.trailing.equalTo(self.collectionView.snp.trailing).inset(-8)
+                            $0.bottom.equalTo(self.collectionView.snp.bottom).inset(16)
+                        }
+                    }
+                }
+                addPhotoButton.updateButtonState(isImageEmpty: bool)
+            })
             .disposed(by: disposeBag)
 
         let isEnabledObservable = Observable.combineLatest(
@@ -434,7 +436,9 @@ extension RegistLocationViewController {
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let keyboardSize = (
+            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+        )?.cgRectValue else {
             return
         }
         self.view.frame.origin.y = -keyboardSize.height
@@ -442,6 +446,18 @@ extension RegistLocationViewController {
 
     @objc private func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
+    }
+}
+
+extension RegistLocationViewController: LocationImageCellDelegate {
+    func deleteButtonTapped(inCell cell: UICollectionViewCell) {
+        guard let indexPath = collectionView.indexPath(for: cell),
+              let listener = self.listener else { return }
+        let newData = listener.imageArray.value
+            .enumerated()
+            .filter { index, _ in index != indexPath.row }
+            .map { $0.1 }
+        self.listener?.imageArray.accept(newData)
     }
 }
 
@@ -488,8 +504,6 @@ final class AddPhotoControl: UIControl {
         return label
     }()
 
-    fileprivate var buttonState: ImageState = .noImage
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -517,23 +531,19 @@ final class AddPhotoControl: UIControl {
         }
     }
 
-    fileprivate func toggle() {
-        switch buttonState {
-        case .noImage:
-            buttonState = .images
+    fileprivate func updateButtonState(isImageEmpty: Bool) {
+        if isImageEmpty {
+            stackView.axis = .horizontal
+            stackView.spacing = 8
+            label.isHidden = false
+            self.layer.cornerRadius = 0
+            self.removeShadow()
+        } else {
             stackView.axis = .vertical
             stackView.spacing = 2
             label.isHidden = true
             self.layer.cornerRadius = 40
             self.addShadow(yPoint: 2, blur: 10, opacity: 0.1)
-        case .images:
-            buttonState = .noImage
-            stackView.axis = .horizontal
-            stackView.spacing = 8
-            label.isHidden = false
-
-            self.removeShadow()
-            self.layer.cornerRadius = 0
         }
     }
 
