@@ -17,7 +17,7 @@ protocol RegistLocationViewControllable: ViewControllable {}
 final class RegistLocationRouter: ViewableRouter<RegistLocationInteractable, RegistLocationViewControllable> {
     private let component: RegistLocationComponent
     private weak var currentChild: ViewableRouting?
-    
+
     init(
         interactor: RegistLocationInteractable,
         viewController: RegistLocationViewControllable,
@@ -33,12 +33,13 @@ extension RegistLocationRouter: RegistLocationRouting {
     func routeToSelectLocation() {
         if self.currentChild == nil {
             let router = self.component.selectLocationBuilder.build(withListener: self.interactor)
+            router.viewControllable.setPresentationStyle(style: .overFullScreen)
             self.viewController.present(router.viewControllable, animated: true)
             self.attachChild(router)
             self.currentChild = router
         }
     }
-    
+
     func closeSelectLocation() {
         if let currentChild {
             currentChild.viewControllable.uiviewController.dismiss(animated: true) { [weak self] in

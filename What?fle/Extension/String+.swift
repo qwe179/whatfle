@@ -14,12 +14,14 @@ extension NSAttributedString {
         textColor: UIColor,
         lineHeight: CGFloat,
         lineSpacing: CGFloat = 0.0,
+        alignment: NSTextAlignment = .left,
         additionalAttributes: [(text: String, attribute: [NSAttributedString.Key: Any])]? = nil
     ) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = lineHeight
         paragraphStyle.maximumLineHeight = lineHeight
         paragraphStyle.lineSpacing = lineSpacing
+        paragraphStyle.alignment = alignment
         let baseAttributes: [NSAttributedString.Key: Any] = [
             .paragraphStyle: paragraphStyle,
             .font: font,

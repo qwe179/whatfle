@@ -12,6 +12,18 @@ protocol AddDependency: Dependency {}
 
 final class AddComponent: Component<AddDependency> {}
 
+extension AddComponent: RegistLocationDependency {
+    var registLocatiionBuilder: RegistLocationBuildable {
+        return RegistLocationBuilder(dependency: self)
+    }
+}
+
+extension AddComponent: AddCollectionDependency {
+    var addCollectionBuilder: AddCollectionBuildable {
+        return AddCollectionBuilder(dependency: self)
+    }
+}
+
 // MARK: - Builder
 
 protocol AddBuildable: Buildable {

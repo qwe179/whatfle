@@ -79,7 +79,6 @@ class TextViewWithTitle: UIView {
             lineHeight: 20,
             lineSpacing: 5
         )
-        print("Line Height: \(UIFont.body14MD.lineHeight)")
     }
 }
 

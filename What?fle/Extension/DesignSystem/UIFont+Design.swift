@@ -82,7 +82,7 @@ extension UIFont {
         return .suit(size: 13, weight: .medium)
     }
 
-    static var caption2BD: UIFont {
+    static var caption12BD: UIFont {
         return .suit(size: 12, weight: .bold)
     }
 

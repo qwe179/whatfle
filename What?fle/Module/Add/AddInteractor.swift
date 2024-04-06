@@ -12,7 +12,8 @@ import UIKit
 protocol AddRouting: ViewableRouting {
     var navigationController: UINavigationController { get }
     func routeToRegistLocation()
-    func closeRegistLocation()
+    func routeToAddCollection()
+    func closeCurrentRIB()
 }
 
 protocol AddPresentable: Presentable {
@@ -46,7 +47,15 @@ extension AddInteractor: AddPresentableListener {
         router?.routeToRegistLocation()
     }
 
+    func showAddCollection() {
+        router?.routeToAddCollection()
+    }
+
     func closeRegistLocation() {
-        router?.closeRegistLocation()
+        router?.closeCurrentRIB()
+    }
+
+    func closeAddCollection() {
+        router?.closeCurrentRIB()
     }
 }

@@ -11,6 +11,12 @@ protocol RegistLocationDependency: Dependency {}
 
 final class RegistLocationComponent: Component<RegistLocationDependency> {}
 
+extension RegistLocationComponent: SelectLocationDependency {
+    var selectLocationBuilder: SelectLocationBuildable {
+        return SelectLocationBuilder(dependency: self)
+    }
+}
+
 // MARK: - Builder
 
 protocol RegistLocationBuildable: Buildable {

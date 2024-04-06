@@ -23,31 +23,11 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
     weak var listener: RegistLocationPresentableListener?
     private let disposeBag = DisposeBag()
 
-    private let customNavigationBar: UIView = {
-        let view: UIView = .init()
+    private lazy var customNavigationBar: CustomNavigationBar = {
+        let view: CustomNavigationBar = .init()
+        view.setNavigationTitle("장소 기록하기")
+        view.delegate = self
         return view
-    }()
-
-    private let backButton: UIControl = {
-        let control: UIControl = .init()
-        let image: UIImageView = .init(image: .arrowLeftLine)
-        control.addSubview(image)
-        image.snp.makeConstraints {
-            $0.size.equalTo(24)
-            $0.center.equalToSuperview()
-        }
-        return control
-    }()
-
-    private let navigationTitle: UILabel = {
-        let label: UILabel = .init()
-        label.attributedText = .makeAttributedString(
-            text: "장소 기록하기",
-            font: .title16XBD,
-            textColor: .GrayScale.g900,
-            lineHeight: 24
-        )
-        return label
     }()
 
     private let scrollView: UIScrollView = {
@@ -189,12 +169,6 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
         setupKeyboard()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        listener?.closeRegistLocation()
-    }
-
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -206,18 +180,6 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(54)
-        }
-        [backButton, navigationTitle].forEach {
-            customNavigationBar.addSubview($0)
-        }
-        backButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(16)
-            $0.centerY.equalToSuperview()
-            $0.size.equalTo(40)
-        }
-        navigationTitle.snp.makeConstraints {
-            $0.leading.equalTo(backButton.snp.trailing).offset(4)
-            $0.centerY.equalToSuperview()
         }
 
         view.addSubview(scrollView)
@@ -358,14 +320,6 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
     }
 
     private func setupActionBinding() {
-        self.backButton.rx.controlEvent(.touchUpInside)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                self.navigationController?.popViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
-
         self.addLocationView.rx.controlEvent(.touchUpInside)
             .observe(on: MainScheduler.instance)
             .bind { [weak self] in
@@ -447,6 +401,15 @@ extension RegistLocationViewController {
     @objc private func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
     }
+}
+
+extension RegistLocationViewController: CustomNavigationBarDelegate {
+    func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
+        listener?.closeRegistLocation()
+    }
+
+    func didTapRightButton() {}
 }
 
 extension RegistLocationViewController: LocationImageCellDelegate {

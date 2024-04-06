@@ -63,17 +63,12 @@ extension RootRouter {
 
 extension RootRouter: RootRouting {
     func routeToAddList() {
-//        detachCurrentView(animated: false) {
-            if self.currentChild == nil {
-                let router = self.component.addBuilder.build(withListener: self.interactor)
-//                let navigation = UINavigationController(root: router.viewControllable)
-//                addNavigationController = navigation
-//                router.viewControllable.uiviewController.hidesBottomBarWhenPushed = true
-                self.viewController.present(router.navigationController, animated: false)
-                self.attachChild(router)
-                self.currentChild = router
-            }
-//        }
+        if self.currentChild == nil {
+            let router = self.component.addBuilder.build(withListener: self.interactor)
+            self.viewController.present(router.navigationController, animated: false)
+            self.attachChild(router)
+            self.currentChild = router
+        }
     }
 
     func routeToSelectLocation() {

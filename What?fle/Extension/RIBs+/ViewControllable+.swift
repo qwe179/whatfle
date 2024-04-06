@@ -9,10 +9,18 @@ import RIBs
 import UIKit
 
 extension ViewControllable {
+    func setPresentationStyle(style: UIModalPresentationStyle) {
+        self.uiviewController.modalPresentationStyle = style
+    }
+
     func present(_ viewController: ViewControllable, animated: Bool) {
-        viewController.uiviewController.modalPresentationStyle = .overFullScreen
         self.uiviewController.present(viewController.uiviewController, animated: animated)
     }
+
+    func present(_ navigationController: UINavigationController, animated: Bool) {
+        self.uiviewController.present(navigationController, animated: animated)
+    }
+
 /*
     func push(_ navigationController: UINavigationController, animated: Bool) {
 //        if let navigationController = self.uiviewController.navigationController {

@@ -8,7 +8,7 @@
 import RIBs
 import UIKit
 
-protocol AddInteractable: Interactable, RegistLocationListener {
+protocol AddInteractable: Interactable, RegistLocationListener, AddCollectionListener {
     var router: AddRouting? { get set }
     var listener: AddListener? { get set }
 }
@@ -48,13 +48,21 @@ extension AddRouter: AddRouting {
         }
     }
 
-    func closeRegistLocation() {
+    func routeToAddCollection() {
+        if self.currentChild == nil {
+            // TODO: - 서버 추가되면 스크린타입 분기처리해야함.
+            let router = self.component.addCollectionBuilder.build(withListener: self.interactor, screenType: .limated(0))
+            self.navigationController.setNavigationBarHidden(true, animated: false)
+            self.navigationController.pushViewController(router.viewControllable.uiviewController, animated: true)
+            self.attachChild(router)
+            self.currentChild = router
+        }
+    }
+
+    func closeCurrentRIB() {
         if let currentChild {
-            currentChild.viewControllable.uiviewController.dismiss(animated: true) { [weak self] in
-                guard let self else { return }
-                self.detachChild(currentChild)
-                self.currentChild = nil
-            }
+            self.detachChild(currentChild)
+            self.currentChild = nil
         }
     }
 }

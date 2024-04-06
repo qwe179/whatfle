@@ -33,6 +33,4 @@ final class SelectLocationRouter: ViewableRouter<SelectLocationInteractable, Sel
     }
 }
 
-extension SelectLocationRouter: SelectLocationRouting {
-    
-}
+extension SelectLocationRouter: SelectLocationRouting {}

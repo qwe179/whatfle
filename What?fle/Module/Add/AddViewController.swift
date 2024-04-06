@@ -14,6 +14,7 @@ import SnapKit
 
 protocol AddPresentableListener: AnyObject {
     func showRegistLocation()
+    func showAddCollection()
     func closeView()
 }
 
@@ -161,7 +162,7 @@ extension AddViewController {
 
         addCollectionControl.rx.controlEvent(.touchUpInside).bind { [weak self] in
             guard let self else { return }
-            // TODO: - 구현예정
+            listener?.showAddCollection()
         }
         .disposed(by: disposeBag)
     }
