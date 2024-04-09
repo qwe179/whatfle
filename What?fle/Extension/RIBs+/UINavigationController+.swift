@@ -9,9 +9,7 @@ import RIBs
 
 import UIKit
 
-extension UINavigationController: ViewControllable {
-    public var uiviewController: UIViewController { return self }
-
+extension UINavigationController {
     public convenience init(root: ViewControllable) {
         self.init(rootViewController: root.uiviewController)
     }

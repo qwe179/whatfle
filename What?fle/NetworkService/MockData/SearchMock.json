@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "same_name": {
+      "region": ["Seoul", "Gangnam"],
+      "keyword": "coffee",
+      "selected_region": "Gangnam-gu Seoul"
+    },
+    "pageable_count": 1,
+    "total_count": 10,
+    "is_end": false
+  },
+  "documents": [
+    {
+      "place_name": "Cafe Kona Queens",
+      "distance": "14",
+      "place_url": "http://place.map.kakao.com/12345678",
+      "category_name": "Cafe",
+      "address_name": "Seoul, Gangnam-gu, Teheran-ro 123",
+      "road_address_name": "Seoul, Gangnam-gu, Teheran-ro 123",
+      "id": "12345678",
+      "phone": "02-123-4567",
+      "category_group_code": "CE7",
+      "category_group_name": "Cafe",
+      "x": "127.123456",
+      "y": "37.123456"
+    },
+    {
+      "place_name": "Starbucks Gangnam Station",
+      "distance": "100",
+      "place_url": "http://place.map.kakao.com/87654321",
+      "category_name": "Cafe",
+      "address_name": "Seoul, Gangnam-gu, Gangnam-daero 102",
+      "road_address_name": "Seoul, Gangnam-gu, Gangnam-daero 102",
+      "id": "87654321",
+      "phone": "02-987-6543",
+      "category_group_code": "CE7",
+      "category_group_name": "Cafe",
+      "x": "127.987654",
+      "y": "37.987654"
+    }
+  ]
+}
+

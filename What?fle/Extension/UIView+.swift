@@ -13,12 +13,14 @@ extension UIView {
         yPoint: CGFloat = 0,
         blur: CGFloat = 0,
         spread: CGFloat = 0,
-        opacity: Float = 0
+        color: UIColor = .black,
+        opacity: Float = 1
     ) {
         layer.masksToBounds = false
         layer.shadowOffset = CGSize(width: xPoint, height: yPoint)
         layer.shadowRadius = blur / 2.0
         layer.shadowOpacity = opacity
+        layer.shadowColor = color.cgColor
 
         if spread == 0 {
             layer.shadowPath = nil
