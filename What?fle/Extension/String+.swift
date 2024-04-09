@@ -14,6 +14,7 @@ extension NSAttributedString {
         textColor: UIColor,
         lineHeight: CGFloat,
         lineSpacing: CGFloat = 0.0,
+        lineBreakMode: NSLineBreakMode = .byTruncatingTail,
         alignment: NSTextAlignment = .left,
         additionalAttributes: [(text: String, attribute: [NSAttributedString.Key: Any])]? = nil
     ) -> NSAttributedString {
@@ -22,6 +23,7 @@ extension NSAttributedString {
         paragraphStyle.maximumLineHeight = lineHeight
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.alignment = alignment
+        paragraphStyle.lineBreakMode = lineBreakMode
         let baseAttributes: [NSAttributedString.Key: Any] = [
             .paragraphStyle: paragraphStyle,
             .font: font,

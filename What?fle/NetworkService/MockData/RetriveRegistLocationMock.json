@@ -1,0 +1,107 @@
+{
+    "totalCount": 4,
+    "registLocations" : [
+        {
+            "date": "24.04.03",
+            "memo": "오늘 다녀온 장소입니다.",
+            "locations": [
+                {
+                    "place_name": "Cafe1",
+                    "distance": "14",
+                    "place_url": "http://place.map.kakao.com/12345678",
+                    "category_name": "Cafe",
+                    "address_name": "Seoul, Gangnam-gu, Teheran-ro 123",
+                    "road_address_name": "Seoul, Gangnam-gu, Teheran-ro 123",
+                    "id": "12345678",
+                    "phone": "02-123-4567",
+                    "category_group_code": "CE7",
+                    "category_group_name": "Cafe",
+                    "x": "127.123456",
+                    "y": "37.123456"
+                },
+                {
+                    "place_name": "Starbucks2",
+                    "distance": "100",
+                    "place_url": "http://place.map.kakao.com/87654321",
+                    "category_name": "Cafe",
+                    "address_name": "Seoul, Gangnam-gu, Gangnam-daero 102",
+                    "road_address_name": "Seoul, Gangnam-gu, Gangnam-daero 102",
+                    "id": "87654321",
+                    "phone": "02-987-6543",
+                    "category_group_code": "CE7",
+                    "category_group_name": "Cafe",
+                    "x": "127.987654",
+                    "y": "37.987654"
+                }
+            ]
+        },
+        {
+            "date": "24.04.05",
+            "memo": "오늘 다녀온 장소입니다.",
+            "locations": [
+                {
+                    "place_name": "Cafe3",
+                    "distance": "14",
+                    "place_url": "http://place.map.kakao.com/12345678",
+                    "category_name": "Cafe",
+                    "address_name": "Seoul, Gangnam-gu, Teheran-ro 123",
+                    "road_address_name": "Seoul, Gangnam-gu, Teheran-ro 123",
+                    "id": "12345678",
+                    "phone": "02-123-4567",
+                    "category_group_code": "CE7",
+                    "category_group_name": "Cafe",
+                    "x": "127.123456",
+                    "y": "37.123456"
+                },
+                {
+                    "place_name": "Starbucks4",
+                    "distance": "100",
+                    "place_url": "http://place.map.kakao.com/87654321",
+                    "category_name": "Cafe",
+                    "address_name": "Seoul, Gangnam-gu, Gangnam-daero 102",
+                    "road_address_name": "Seoul, Gangnam-gu, Gangnam-daero 102",
+                    "id": "87654321",
+                    "phone": "02-987-6543",
+                    "category_group_code": "CE7",
+                    "category_group_name": "Cafe",
+                    "x": "127.987654",
+                    "y": "37.987654"
+                }
+            ]
+        },
+        {
+            "date": "24.04.06",
+            "memo": "오늘 다녀온 장소입니다.",
+            "locations": [
+                {
+                    "place_name": "Cafe5",
+                    "distance": "14",
+                    "place_url": "http://place.map.kakao.com/12345678",
+                    "category_name": "Cafe",
+                    "address_name": "Seoul, Gangnam-gu, Teheran-ro 123",
+                    "road_address_name": "Seoul, Gangnam-gu, Teheran-ro 123",
+                    "id": "12345678",
+                    "phone": "02-123-4567",
+                    "category_group_code": "CE7",
+                    "category_group_name": "Cafe",
+                    "x": "127.123456",
+                    "y": "37.123456"
+                },
+                {
+                    "place_name": "Starbucks6",
+                    "distance": "100",
+                    "place_url": "http://place.map.kakao.com/87654321",
+                    "category_name": "Cafe",
+                    "address_name": "Seoul, Gangnam-gu, Gangnam-daero 102",
+                    "road_address_name": "Seoul, Gangnam-gu, Gangnam-daero 102",
+                    "id": "87654321",
+                    "phone": "02-987-6543",
+                    "category_group_code": "CE7",
+                    "category_group_name": "Cafe",
+                    "x": "127.987654",
+                    "y": "37.987654"
+                }
+            ]
+        }
+    ]
+}
