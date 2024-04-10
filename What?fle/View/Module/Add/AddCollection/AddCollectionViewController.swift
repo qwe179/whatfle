@@ -178,7 +178,7 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
         setupUI()
         setupViewBinding()
         setupActionBinding()
-
+        
         self.listener?.retriveRegistLocation()
     }
 

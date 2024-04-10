@@ -165,7 +165,7 @@ final class SelectLocationViewController: UIViewController, SelectLocationPresen
     }()
 
     deinit {
-        print("\(Self.self) is being deinitialized")
+        print("\(self) is being deinit")
     }
 
     override func viewDidLoad() {

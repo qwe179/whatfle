@@ -33,6 +33,10 @@ final class AddCollectionInteractor: PresentableInteractor<AddCollectionPresenta
     var registeredLocations: BehaviorRelay<[RegisteredLocation]> = .init(value: [])
     var selectedLocations: BehaviorRelay<[(IndexPath, KakaoSearchDocumentsModel)]> = .init(value: [])
 
+    deinit {
+        print("\(self) is being deinit")
+    }
+
     init(presenter: AddCollectionPresentable, networkService: NetworkServiceDelegate) {
         self.networkService = networkService
         super.init(presenter: presenter)

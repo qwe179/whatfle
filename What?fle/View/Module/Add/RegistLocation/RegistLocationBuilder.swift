@@ -32,7 +32,7 @@ protocol RegistLocationBuildable: Buildable {
 final class RegistLocationBuilder: Builder<RegistLocationDependency>, RegistLocationBuildable {
 
     deinit {
-        print("\(Self.self) is being deinitialized")
+        print("\(self) is being deinit")
     }
 
     override init(dependency: RegistLocationDependency) {

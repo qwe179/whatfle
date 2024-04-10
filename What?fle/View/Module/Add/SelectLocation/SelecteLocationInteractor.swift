@@ -39,7 +39,7 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
     }
 
     deinit {
-        print("\(Self.self) is being deinitialized")
+        print("\(self) is being deinit")
     }
 
     func performSearch(with query: String, more: Bool) {

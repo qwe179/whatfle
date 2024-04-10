@@ -319,6 +319,14 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
     }
 
     private func setupActionBinding() {
+        self.customNavigationBar.backButton.rx.controlEvent(.touchUpInside)
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                self.navigationController?.popViewController(animated: true)
+                listener?.closeRegistLocation()
+            })
+            .disposed(by: disposeBag)
+
         self.addLocationView.rx.controlEvent(.touchUpInside)
             .observe(on: MainScheduler.instance)
             .bind { [weak self] in

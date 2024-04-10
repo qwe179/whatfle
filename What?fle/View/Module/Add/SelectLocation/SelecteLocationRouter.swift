@@ -19,7 +19,7 @@ final class SelectLocationRouter: ViewableRouter<SelectLocationInteractable, Sel
     private weak var currentChild: ViewableRouting?
 
     deinit {
-        print("\(Self.self) is being deinitialized")
+        print("\(self) is being deinit")
     }
 
     init(

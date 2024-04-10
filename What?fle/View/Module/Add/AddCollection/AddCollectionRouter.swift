@@ -18,6 +18,10 @@ final class AddCollectionRouter: ViewableRouter<AddCollectionInteractable, AddCo
     private let component: AddCollectionComponent
     private weak var currentChild: ViewableRouting?
 
+    deinit {
+        print("\(self) is being deinit")
+    }
+
     init(
         interactor: AddCollectionInteractable,
         viewController: AddCollectionViewControllable,
