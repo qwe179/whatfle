@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     private var launchRouter: LaunchRouting?
+    private var rootRouter: LaunchRouting?
 
     func scene(
         _ scene: UIScene,
@@ -20,12 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-                let window = UIWindow(windowScene: windowScene)
+        let window = UIWindow(windowScene: windowScene)
         self.window = window
 
-        let component = AppComponent()
-        let builder = RootBuilder(dependency: component)
-        let launchRouter = builder.build()
+        let splashBuilder = SplashBuilder(dependency: EmptyComponent())
+        let launchRouter = splashBuilder.build()
         self.launchRouter = launchRouter
         launchRouter.launch(from: window)
     }
@@ -39,4 +39,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {}
 
     func sceneDidEnterBackground(_ scene: UIScene) {}
+
+    func switchToRoot() {
+        let component = AppComponent()
+        let builder = RootBuilder(dependency: component)
+        let rootRouter = builder.build()
+        
+        if let window = self.window {
+            self.launchRouter = nil
+            self.launchRouter = rootRouter
+            rootRouter.launch(from: window)
+        }
+    }
 }

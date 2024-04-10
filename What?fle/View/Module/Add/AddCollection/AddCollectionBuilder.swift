@@ -30,6 +30,10 @@ protocol AddCollectionBuildable: Buildable {
 }
 
 final class AddCollectionBuilder: Builder<AddCollectionDependency>, AddCollectionBuildable {
+    
+    deinit {
+        print("\(self) is being deinit")
+    }
 
     override init(dependency: AddCollectionDependency) {
         super.init(dependency: dependency)

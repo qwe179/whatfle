@@ -61,6 +61,10 @@
 		398347862BC1862400C25F63 /* RetriveRegistLocationMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 398347852BC1862400C25F63 /* RetriveRegistLocationMock.json */; };
 		398347892BC1885400C25F63 /* RegisteredLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398347882BC1885400C25F63 /* RegisteredLocationModel.swift */; };
 		3983478B2BC1B56100C25F63 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3983478A2BC1B56100C25F63 /* UIViewController+.swift */; };
+		39CBE1162BC6289D003CB3F0 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBE1122BC6289D003CB3F0 /* SplashRouter.swift */; };
+		39CBE1172BC6289D003CB3F0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBE1132BC6289D003CB3F0 /* SplashViewController.swift */; };
+		39CBE1182BC6289D003CB3F0 /* SplashBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBE1142BC6289D003CB3F0 /* SplashBuilder.swift */; };
+		39CBE1192BC6289D003CB3F0 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBE1152BC6289D003CB3F0 /* SplashInteractor.swift */; };
 		39CF56A82BC0F0A300E718C8 /* AddCollectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF56A42BC0F0A300E718C8 /* AddCollectionRouter.swift */; };
 		39CF56A92BC0F0A300E718C8 /* AddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF56A52BC0F0A300E718C8 /* AddCollectionViewController.swift */; };
 		39CF56AA2BC0F0A300E718C8 /* AddCollectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CF56A62BC0F0A300E718C8 /* AddCollectionBuilder.swift */; };
@@ -141,6 +145,10 @@
 		398347852BC1862400C25F63 /* RetriveRegistLocationMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RetriveRegistLocationMock.json; sourceTree = "<group>"; };
 		398347882BC1885400C25F63 /* RegisteredLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredLocationModel.swift; sourceTree = "<group>"; };
 		3983478A2BC1B56100C25F63 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		39CBE1122BC6289D003CB3F0 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
+		39CBE1132BC6289D003CB3F0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		39CBE1142BC6289D003CB3F0 /* SplashBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashBuilder.swift; sourceTree = "<group>"; };
+		39CBE1152BC6289D003CB3F0 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
 		39CF56A42BC0F0A300E718C8 /* AddCollectionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionRouter.swift; sourceTree = "<group>"; };
 		39CF56A52BC0F0A300E718C8 /* AddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewController.swift; sourceTree = "<group>"; };
 		39CF56A62BC0F0A300E718C8 /* AddCollectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionBuilder.swift; sourceTree = "<group>"; };
@@ -214,8 +222,9 @@
 				39333CCF2B864786005F295A /* AppDelegate.swift */,
 				39333CD12B864786005F295A /* SceneDelegate.swift */,
 				39333CD32B864786005F295A /* ViewController.swift */,
-				3939FFD02B8F6B91007E58F6 /* NetworkService */,
+				39CBE1112BC62869003CB3F0 /* Splash */,
 				3983477D2BC17C4700C25F63 /* View */,
+				3939FFD02B8F6B91007E58F6 /* NetworkService */,
 				39333D042B865110005F295A /* Extension */,
 				39333CDA2B864787005F295A /* LaunchScreen.storyboard */,
 				39333CDD2B864787005F295A /* Info.plist */,
@@ -463,6 +472,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		39CBE1112BC62869003CB3F0 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				39CBE1122BC6289D003CB3F0 /* SplashRouter.swift */,
+				39CBE1132BC6289D003CB3F0 /* SplashViewController.swift */,
+				39CBE1142BC6289D003CB3F0 /* SplashBuilder.swift */,
+				39CBE1152BC6289D003CB3F0 /* SplashInteractor.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 		39EBCDF02B8A268500599D58 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,7 +670,9 @@
 				3939FFF52B9451E3007E58F6 /* UIApplication+.swift in Sources */,
 				39EBCDF92B8A26B200599D58 /* AddInteractor.swift in Sources */,
 				456B09CC2BB9520100920C54 /* TextFieldWithUnderline.swift in Sources */,
+				39CBE1172BC6289D003CB3F0 /* SplashViewController.swift in Sources */,
 				39333D0B2B8765A2005F295A /* UIColor+Design.swift in Sources */,
+				39CBE1162BC6289D003CB3F0 /* SplashRouter.swift in Sources */,
 				3961ADDC2BB05CF900977C4B /* LoadingIndicator.swift in Sources */,
 				39333D162B88AE19005F295A /* RootInteractor.swift in Sources */,
 				39333D132B88AE19005F295A /* RootRouter.swift in Sources */,
@@ -668,6 +690,7 @@
 				39EF11B82BBAE182000E1996 /* Array+.swift in Sources */,
 				456B09D42BB9566C00920C54 /* TextViewWithTitle.swift in Sources */,
 				393900002B961BBA007E58F6 /* RegistLocationBuilder.swift in Sources */,
+				39CBE1182BC6289D003CB3F0 /* SplashBuilder.swift in Sources */,
 				39EBCDFF2B8A26BF00599D58 /* MapViewController.swift in Sources */,
 				39411B322BBB0C0200A54EA7 /* UILabel+.swift in Sources */,
 				391960022BAC542B00CC7A2E /* UserDefaultsManager.swift in Sources */,
@@ -692,6 +715,7 @@
 				3939FFCB2B8DFD01007E58F6 /* SearchBar.swift in Sources */,
 				39EF11B12BB6DE73000E1996 /* String+.swift in Sources */,
 				3939FFCE2B8E2788007E58F6 /* UINavigationController+.swift in Sources */,
+				39CBE1192BC6289D003CB3F0 /* SplashInteractor.swift in Sources */,
 				39CF56AF2BC0FD8D00E718C8 /* CustomNavigationBar.swift in Sources */,
 				39195FFD2BAB40D900CC7A2E /* SelectLocationCell.swift in Sources */,
 				39EEFD7F2BC22D2300A39833 /* SelectLocationResultCell.swift in Sources */,

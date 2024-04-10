@@ -17,6 +17,10 @@ protocol RegistLocationViewControllable: ViewControllable {}
 final class RegistLocationRouter: ViewableRouter<RegistLocationInteractable, RegistLocationViewControllable> {
     private let component: RegistLocationComponent
     private weak var currentChild: ViewableRouting?
+    
+    deinit {
+        print("\(self) is being deinit")
+    }
 
     init(
         interactor: RegistLocationInteractable,

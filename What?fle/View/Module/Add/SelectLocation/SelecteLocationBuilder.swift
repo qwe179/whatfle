@@ -26,7 +26,7 @@ protocol SelectLocationBuildable: Buildable {
 final class SelectLocationBuilder: Builder<SelectLocationDependency>, SelectLocationBuildable {
 
     deinit {
-        print("\(Self.self) is being deinitialized")
+        print("\(self) is being deinit")
     }
 
     override init(dependency: SelectLocationDependency) {

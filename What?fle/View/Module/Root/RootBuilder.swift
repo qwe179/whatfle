@@ -46,8 +46,8 @@ final class RootBuilder: Builder<RootDependency>, RootBuildable {
     }
 
     func build() -> LaunchRouting {
-        let viewController = RootViewController()
         let component = RootComponent(dependency: dependency)
+        let viewController = RootViewController()
         let interactor = RootInteractor(presenter: viewController)
         return RootRouter(
             interactor: interactor,
