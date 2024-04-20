@@ -8,7 +8,7 @@
 import RIBs
 import UIKit
 
-protocol AddInteractable: Interactable, RegistLocationListener, AddCollectionListener {
+protocol AddInteractable: Interactable, RegistLocationListener, AddCollectionListener, RegistCollectionListener {
     var router: AddRouting? { get set }
     var listener: AddListener? { get set }
 }
@@ -57,6 +57,13 @@ extension AddRouter: AddRouting {
             self.attachChild(router)
             self.currentChild = router
         }
+    }
+
+    func routeToRegistCollection() {
+        let router = self.component.registCollectionBuilder.build(withListener: self.interactor)
+        self.navigationController.pushViewController(router.viewControllable.uiviewController, animated: true)
+        self.attachChild(router)
+//        self.currentChild = router
     }
 
     func closeCurrentRIB() {

@@ -12,13 +12,13 @@ protocol AddDependency: Dependency {
     var networkService: NetworkServiceDelegate { get }
 }
 
-final class AddComponent: Component<AddDependency> {}
-
-extension AddComponent: RegistLocationDependency {
+final class AddComponent: Component<AddDependency> {
     var networkService: NetworkServiceDelegate {
         return dependency.networkService
     }
+}
 
+extension AddComponent: RegistLocationDependency {
     var registLocatiionBuilder: RegistLocationBuildable {
         return RegistLocationBuilder(dependency: self)
     }
@@ -27,6 +27,12 @@ extension AddComponent: RegistLocationDependency {
 extension AddComponent: AddCollectionDependency {
     var addCollectionBuilder: AddCollectionBuildable {
         return AddCollectionBuilder(dependency: self)
+    }
+}
+
+extension AddComponent: RegistCollectionDependency {
+    var registCollectionBuilder: RegistCollectionBuildable {
+        return RegistCollectionBuilder(dependency: self)
     }
 }
 

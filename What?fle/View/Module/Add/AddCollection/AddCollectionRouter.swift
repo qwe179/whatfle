@@ -16,7 +16,6 @@ protocol AddCollectionViewControllable: ViewControllable {}
 
 final class AddCollectionRouter: ViewableRouter<AddCollectionInteractable, AddCollectionViewControllable> {
     private let component: AddCollectionComponent
-    private weak var currentChild: ViewableRouting?
 
     deinit {
         print("\(self) is being deinit")
