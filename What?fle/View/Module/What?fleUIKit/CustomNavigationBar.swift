@@ -9,13 +9,7 @@ import UIKit
 import RxSwift
 import SnapKit
 
-//protocol CustomNavigationBarDelegate: AnyObject {
-//    func didTapBackButton()
-//    func didTapRightButton()
-//}
-
-class CustomNavigationBar: UIView {
-//    weak var delegate: CustomNavigationBarDelegate?
+final class CustomNavigationBar: UIView {
     private let disposeBag = DisposeBag()
 
     let backButton: UIControl = {
@@ -38,13 +32,11 @@ class CustomNavigationBar: UIView {
     init() {
         super.init(frame: .zero)
         setupUI()
-//        setupAction()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
-//        setupAction()
     }
 
     func setNavigationTitle(_ title: String) {

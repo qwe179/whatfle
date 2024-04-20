@@ -133,8 +133,8 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
         return textField
     }()
 
-    private let memoView: TextViewWithTitle = {
-        let view: TextViewWithTitle = .init()
+    private let memoView: CustomTextView = {
+        let view: CustomTextView = .init()
         view.updateUI(title: "메모", placehold: "장소에 대한 기록 남기기")
         return view
     }()
@@ -425,95 +425,6 @@ extension RegistLocationViewController: LocationImageCellDelegate {
 extension RegistLocationViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return !(touch.view is UIControl)
-    }
-}
-
-final class AddPhotoControl: UIControl {
-    private let stackView: UIStackView = {
-        let stackView: UIStackView = .init()
-        stackView.isUserInteractionEnabled = false
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.spacing = 8
-        return stackView
-    }()
-
-    private let imageView: UIImageView = {
-        let imageView: UIImageView = .init(image: .camera)
-        imageView.tintColor = .Core.primary
-        return imageView
-    }()
-    private let label: UILabel = {
-        let label: UILabel = .init()
-        label.attributedText = .makeAttributedString(
-            text: "눌러서 사진 추가",
-            font: .title16MD,
-            textColor: .Core.primary,
-            lineHeight: 24
-        )
-        return label
-    }()
-    private let countLabel: UILabel = {
-        let label: UILabel = .init()
-        label.attributedText = .makeAttributedString(
-            text: "(0/10)",
-            font: .caption13MD,
-            textColor: .Core.primary,
-            lineHeight: 20
-        )
-        return label
-    }()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupUI()
-    }
-
-    func setupUI() {
-        backgroundColor = .Core.p100
-
-        addSubview(stackView)
-        stackView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.equalTo(183)
-        }
-
-        [imageView, label, countLabel].forEach {
-            stackView.addArrangedSubview($0)
-        }
-        imageView.snp.makeConstraints {
-            $0.size.equalTo(24)
-        }
-    }
-
-    fileprivate func updateButtonState(isImageEmpty: Bool) {
-        if isImageEmpty {
-            stackView.axis = .horizontal
-            stackView.spacing = 8
-            label.isHidden = false
-            self.layer.cornerRadius = 0
-            self.removeShadow()
-        } else {
-            stackView.axis = .vertical
-            stackView.spacing = 2
-            label.isHidden = true
-            self.layer.cornerRadius = 40
-            self.addShadow(yPoint: 2, blur: 10, opacity: 0.1)
-        }
-    }
-
-    fileprivate func updatePhoto(count: Int) {
-        countLabel.attributedText = .makeAttributedString(
-            text: "(\(count)/10)",
-            font: .caption13MD,
-            textColor: .Core.primary,
-            lineHeight: 20)
     }
 }
 

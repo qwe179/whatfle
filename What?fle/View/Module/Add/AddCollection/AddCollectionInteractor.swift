@@ -19,6 +19,7 @@ protocol AddCollectionPresentable: Presentable {
 protocol AddCollectionListener: AnyObject {
     func closeAddCollection()
     func showRegistLocation()
+    func showRegistCollection()
 }
 
 final class AddCollectionInteractor: PresentableInteractor<AddCollectionPresentable>,
@@ -77,9 +78,13 @@ extension AddCollectionInteractor: AddCollectionListener {
         guard let data = registeredLocations.value[safe: indexPath.section]?.locations[safe: indexPath.row] else { return }
         selectedLocations.accept(selectedLocations.value + [(indexPath, data)])
     }
-    
+
     func deselectItem(with indexPath: IndexPath) {
         guard let data = registeredLocations.value[safe: indexPath.section]?.locations[safe: indexPath.row] else { return }
-        selectedLocations.accept(selectedLocations.value.filter{$0.0 != indexPath})
+        selectedLocations.accept(selectedLocations.value.filter { $0.0 != indexPath })
+    }
+
+    func showRegistCollection() {
+        listener?.showRegistCollection()
     }
 }

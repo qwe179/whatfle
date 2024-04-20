@@ -13,6 +13,7 @@ protocol AddRouting: ViewableRouting {
     var navigationController: UINavigationController { get }
     func routeToRegistLocation()
     func routeToAddCollection()
+    func routeToRegistCollection()
     func closeCurrentRIB()
 }
 
@@ -57,5 +58,9 @@ extension AddInteractor: AddPresentableListener {
 
     func closeAddCollection() {
         router?.closeCurrentRIB()
+    }
+    
+    func showRegistCollection() {
+        router?.routeToRegistCollection()
     }
 }

@@ -19,6 +19,7 @@ protocol AddCollectionPresentableListener: AnyObject {
     func retriveRegistLocation()
     func selectItem(with: IndexPath)
     func deselectItem(with: IndexPath)
+    func showRegistCollection()
 }
 
 enum AddCollectionType {
@@ -178,7 +179,7 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
         setupUI()
         setupViewBinding()
         setupActionBinding()
-        
+
         self.listener?.retriveRegistLocation()
     }
 
@@ -249,7 +250,7 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self else { return }
                 self.listener?.deselectItem(with: indexPath)
-                updateSelectionOrder()
+                self.updateSelectionOrder()
                 guard let cell = self.registLocationTableView.cellForRow(at: indexPath) as? SelectLocationCell else { return }
                 cell.updateCheckBox(order: nil)
             })
@@ -272,17 +273,20 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
             .disposed(by: disposeBag)
 
         self.customNavigationBar.rightButton.rx.controlEvent(.touchUpInside)
+            .filter { [weak self] _ in
+                guard let self = self,
+                      let listener = self.listener else { return false }
+                return listener.selectedLocations.value.count >= 4
+            }
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                self.navigationController?.popViewController(animated: true)
-                listener?.closeAddCollection()
+                listener?.showRegistCollection()
             })
             .disposed(by: disposeBag)
     }
 
     private func updateSelectionOrder() {
         guard let indexPaths = listener?.selectedLocations.value.map({ $0.0 }) else { return }
-        print("indexPaths", indexPaths)
         for indexPath in indexPaths {
             guard let cell = self.registLocationTableView.cellForRow(at: indexPath) as? SelectLocationCell else { return }
             cell.updateCheckBox(order: retriveSelectionOrder(indexPath: indexPath))
