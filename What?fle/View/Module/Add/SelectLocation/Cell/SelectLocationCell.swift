@@ -25,7 +25,7 @@ final class SelectLocationCell: UITableViewCell {
     }()
 
     private let titleView: UIView = .init()
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label: UILabel = .init()
         label.numberOfLines = 2
         label.font = .body14SB
@@ -38,7 +38,7 @@ final class SelectLocationCell: UITableViewCell {
         return label
     }()
 
-    private let checkBox: UIImageView = {
+    private var checkBox: UIImageView = {
         let checkBox: UIImageView = .init(image: .selectOff)
         checkBox.isHidden = true
         return checkBox

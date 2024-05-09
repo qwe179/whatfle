@@ -153,6 +153,5 @@ extension CustomTextView: UITextViewDelegate {
                 $0.height.equalTo(Int(type.lineHeight) * (numberOfLines >= 2 ? 2 : numberOfLines) + 28)
             }
         }
-        
     }
 }

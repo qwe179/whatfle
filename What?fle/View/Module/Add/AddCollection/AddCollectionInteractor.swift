@@ -18,8 +18,8 @@ protocol AddCollectionPresentable: Presentable {
 
 protocol AddCollectionListener: AnyObject {
     func closeAddCollection()
-    func showRegistLocation()
-    func showRegistCollection()
+    func popCurrentRIB()
+    func sendDataToRegistCollection(data: EditSelectedCollectionData)
 }
 
 final class AddCollectionInteractor: PresentableInteractor<AddCollectionPresentable>,
@@ -33,26 +33,33 @@ final class AddCollectionInteractor: PresentableInteractor<AddCollectionPresenta
     var locationTotalCount: BehaviorRelay<Int> = .init(value: 0)
     var registeredLocations: BehaviorRelay<[RegisteredLocation]> = .init(value: [])
     var selectedLocations: BehaviorRelay<[(IndexPath, KakaoSearchDocumentsModel)]> = .init(value: [])
+    var editSelectedCollectionData: EditSelectedCollectionData?
 
     deinit {
         print("\(self) is being deinit")
     }
 
-    init(presenter: AddCollectionPresentable, networkService: NetworkServiceDelegate) {
+    init(presenter: AddCollectionPresentable, networkService: NetworkServiceDelegate, data: EditSelectedCollectionData?) {
         self.networkService = networkService
+        if let data {
+            registeredLocations.accept(data.registeredLocations)
+            selectedLocations.accept(data.selectedLocations)
+        }
+
         super.init(presenter: presenter)
         presenter.listener = self
     }
-}
 
-extension AddCollectionInteractor: AddCollectionListener {
     func closeAddCollection() {
         listener?.closeAddCollection()
     }
 
+    func popCurrentRIB() {
+        listener?.popCurrentRIB()
+    }
+
     func showRegistLocation() {
         listener?.closeAddCollection()
-        listener?.showRegistLocation()
     }
 
     func retriveRegistLocation() {
@@ -80,11 +87,17 @@ extension AddCollectionInteractor: AddCollectionListener {
     }
 
     func deselectItem(with indexPath: IndexPath) {
-        guard let data = registeredLocations.value[safe: indexPath.section]?.locations[safe: indexPath.row] else { return }
+        guard (registeredLocations.value[safe: indexPath.section]?.locations[safe: indexPath.row]) != nil else { return }
         selectedLocations.accept(selectedLocations.value.filter { $0.0 != indexPath })
     }
 
     func showRegistCollection() {
-        listener?.showRegistCollection()
+        let data: EditSelectedCollectionData = .init(
+            registeredLocations: registeredLocations.value,
+            selectedLocations: selectedLocations.value
+        )
+        self.listener?.sendDataToRegistCollection(data: data)
     }
+
+    func sendDataToAddCollection(data: [KakaoSearchDocumentsModel]) {}
 }

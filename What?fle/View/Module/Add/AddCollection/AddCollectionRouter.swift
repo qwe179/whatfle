@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol AddCollectionInteractable: Interactable {
+protocol AddCollectionInteractable: Interactable, RegistCollectionListener {
     var router: AddCollectionRouting? { get set }
     var listener: AddCollectionListener? { get set }
 }

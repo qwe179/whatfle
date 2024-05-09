@@ -19,10 +19,7 @@ protocol RegistLocationPresentableListener: AnyObject {
     func addImage(_ image: UIImage)
 }
 
-final class RegistLocationViewController: UIViewController, RegistLocationViewControllable {
-    weak var listener: RegistLocationPresentableListener?
-    private let disposeBag = DisposeBag()
-
+final class RegistLocationViewController: UIVCWithKeyboard, RegistLocationViewControllable {
     private lazy var customNavigationBar: CustomNavigationBar = {
         let view: CustomNavigationBar = .init()
         view.setNavigationTitle("장소 기록하기")
@@ -35,9 +32,10 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
         scrollView.keyboardDismissMode = .onDrag
         return scrollView
     }()
-    private let subView: UIView = .init()
 
+    private let subView: UIView = .init()
     private let locationView: UIView = .init()
+
     private let locationLabel: UILabel = {
         let label: UILabel = .init()
         label.attributedText = .makeAttributedString(
@@ -49,12 +47,15 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
         )
         return label
     }()
+
     private let addLocationTextField: UITextField = {
         let textField: UITextField = .init()
         textField.isUserInteractionEnabled = false
         return textField
     }()
+
     private let addLocationImageView: UIImageView = .init(image: UIImage(systemName: "plus"))
+
     private lazy var addLocationView: UIControl = {
         let control: UIControl = .init()
         addLocationTextField.attributedPlaceholder = .makeAttributedString(
@@ -98,8 +99,8 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
     }()
 
     private let addPhotoButton: AddPhotoControl = .init()
-
     private let visitView: UIView = .init()
+
     private let visitLabel: UILabel = {
         let label: UILabel = .init()
         label.attributedText = .makeAttributedString(
@@ -120,6 +121,7 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
         datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
         return datePicker
     }()
+
     private lazy var visitTextField: TextFieldWithUnderline = {
         let textField: TextFieldWithUnderline = .init()
         textField.attributedText = NSAttributedString.makeAttributedString(
@@ -155,6 +157,10 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
         return button
     }()
 
+    weak var listener: RegistLocationPresentableListener?
+
+    private let disposeBag = DisposeBag()
+
     deinit {
         print("\(self) is being deinit")
     }
@@ -165,11 +171,6 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
         setupUI()
         setupViewBinding()
         setupActionBinding()
-        setupKeyboard()
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
 
     private func setupUI() {
@@ -340,7 +341,7 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                self.dismissKeyboard()
+                self.view.endEditing(true)
                 var configuration = PHPickerConfiguration()
                 configuration.selectionLimit = 10 - (self.listener?.imageArray.value.count ?? 0)
                 configuration.filter = .any(of: [.images])
@@ -353,6 +354,7 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
         self.saveButton.rx.controlEvent(.touchUpInside)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
+                guard let self else { return }
                 // TODO: - 저장로직 추가해야함
                 print("저장~!")
             })
@@ -361,32 +363,6 @@ final class RegistLocationViewController: UIViewController, RegistLocationViewCo
 }
 
 extension RegistLocationViewController {
-    private func setupKeyboard() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(dismissKeyboard)
-        )
-        tap.delegate = self
-        view.addGestureRecognizer(tap)
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
-
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
-    }
-
     @objc private func dateChange(_ sender: UIDatePicker) {
         visitTextField.attributedText = NSAttributedString.makeAttributedString(
             text: sender.date.formattedYYMMDD,
@@ -394,19 +370,6 @@ extension RegistLocationViewController {
             textColor: .textDefault,
             lineHeight: 20
         )
-    }
-
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (
-            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
-        )?.cgRectValue else {
-            return
-        }
-        self.view.frame.origin.y = -keyboardSize.height
-    }
-
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
     }
 }
 
@@ -419,12 +382,6 @@ extension RegistLocationViewController: LocationImageCellDelegate {
             .filter { index, _ in index != indexPath.row }
             .map { $0.1 }
         self.listener?.imageArray.accept(newData)
-    }
-}
-
-extension RegistLocationViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        return !(touch.view is UIControl)
     }
 }
 
@@ -446,8 +403,8 @@ extension RegistLocationViewController: PHPickerViewControllerDelegate {
         picker.dismiss(animated: true)
         guard !results.isEmpty else { return }
 
-        for itemProvider in results.map ({ $0.itemProvider }) where itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+        for itemProvider in results.map({ $0.itemProvider }) where itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
                 guard let self, let image = image as? UIImage, let listener = self.listener else { return }
                 DispatchQueue.main.async {
                     listener.addImage(image)

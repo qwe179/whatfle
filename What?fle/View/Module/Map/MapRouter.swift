@@ -12,13 +12,10 @@ protocol MapInteractable: Interactable {
     var listener: MapListener? { get set }
 }
 
-protocol MapViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-}
+protocol MapViewControllable: ViewControllable {}
 
 final class MapRouter: ViewableRouter<MapInteractable, MapViewControllable>, MapRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
     override init(interactor: MapInteractable, viewController: MapViewControllable) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self

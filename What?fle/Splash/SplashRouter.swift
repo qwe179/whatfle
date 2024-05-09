@@ -13,9 +13,7 @@ protocol SplashInteractable: Interactable {
     var listener: SplashListener? { get set }
 }
 
-protocol SplashViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-}
+protocol SplashViewControllable: ViewControllable {}
 
 final class SplashRouter: LaunchRouter<SplashInteractable, SplashViewControllable>, SplashRouting {
     private let component: SplashComponent
@@ -29,7 +27,7 @@ final class SplashRouter: LaunchRouter<SplashInteractable, SplashViewControllabl
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
-    
+
     func routeToRoot() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.switchToRoot()

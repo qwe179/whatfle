@@ -17,10 +17,16 @@ final class RegistCollectionComponent: Component<RegistCollectionDependency> {
     }
 }
 
+extension RegistCollectionComponent: AddCollectionDependency {
+    var addCollectionBuilder: AddCollectionBuildable {
+        return AddCollectionBuilder(dependency: self)
+    }
+}
+
 // MARK: - Builder
 
 protocol RegistCollectionBuildable: Buildable {
-    func build(withListener listener: RegistCollectionListener) -> RegistCollectionRouting
+    func build(withListener listener: RegistCollectionListener, withData data: EditSelectedCollectionData) -> RegistCollectionRouting
 }
 
 final class RegistCollectionBuilder: Builder<RegistCollectionDependency>, RegistCollectionBuildable {
@@ -28,15 +34,19 @@ final class RegistCollectionBuilder: Builder<RegistCollectionDependency>, Regist
     deinit {
         print("\(self) is being deinit")
     }
-    
+
     override init(dependency: RegistCollectionDependency) {
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: RegistCollectionListener) -> RegistCollectionRouting {
+    func build(withListener listener: RegistCollectionListener, withData data: EditSelectedCollectionData) -> RegistCollectionRouting {
         let component = RegistCollectionComponent(dependency: dependency)
         let viewController = RegistCollectionViewController()
-        let interactor = RegistCollectionInteractor(presenter: viewController, networkService: component.networkService)
+        let interactor = RegistCollectionInteractor(
+            presenter: viewController,
+            networkService: component.networkService,
+            data: data
+        )
         interactor.listener = listener
         return RegistCollectionRouter(
             interactor: interactor,

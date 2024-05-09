@@ -12,8 +12,8 @@ import UIKit
 protocol AddRouting: ViewableRouting {
     var navigationController: UINavigationController { get }
     func routeToRegistLocation()
-    func routeToAddCollection()
-    func routeToRegistCollection()
+    func routeToRegistCollection(data: EditSelectedCollectionData)
+    func routeToAddCollection(data: EditSelectedCollectionData?)
     func closeCurrentRIB()
 }
 
@@ -25,7 +25,7 @@ protocol AddListener: AnyObject {
     func closeAddRIB()
 }
 
-final class AddInteractor: PresentableInteractor<AddPresentable>, AddInteractable {
+final class AddInteractor: PresentableInteractor<AddPresentable> {
     weak var router: AddRouting?
     weak var listener: AddListener?
 
@@ -37,19 +37,19 @@ final class AddInteractor: PresentableInteractor<AddPresentable>, AddInteractabl
         super.init(presenter: presenter)
         presenter.listener = self
     }
-
-    func closeView() {
-        listener?.closeAddRIB()
-    }
 }
 
-extension AddInteractor: AddPresentableListener {
-    func showRegistLocation() {
-        router?.routeToRegistLocation()
+extension AddInteractor: AddInteractable {
+    func popCurrentRIB() {
+        listener?.closeAddRIB()
     }
 
-    func showAddCollection() {
-        router?.routeToAddCollection()
+    func sendDataToRegistCollection(data: EditSelectedCollectionData) {
+        router?.routeToRegistCollection(data: data)
+    }
+
+    func sendDataToAddCollection(data: EditSelectedCollectionData) {
+        router?.routeToAddCollection(data: data)
     }
 
     func closeRegistLocation() {
@@ -59,8 +59,18 @@ extension AddInteractor: AddPresentableListener {
     func closeAddCollection() {
         router?.closeCurrentRIB()
     }
-    
-    func showRegistCollection() {
-        router?.routeToRegistCollection()
+}
+
+extension AddInteractor: AddPresentableListener {
+    func showRegistLocation() {
+        router?.routeToRegistLocation()
+    }
+
+    func showAddCollection() {
+        router?.routeToAddCollection(data: nil)
+    }
+
+    func closeView() {
+        listener?.closeAddRIB()
     }
 }

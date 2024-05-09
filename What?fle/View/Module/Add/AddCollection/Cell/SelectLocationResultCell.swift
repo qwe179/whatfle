@@ -55,7 +55,8 @@ final class SelectLocationResultCell: UICollectionViewCell {
             text: model.placeName,
             font: .caption12RG,
             textColor: .textLight,
-            lineHeight: 20
+            lineHeight: 20,
+            alignment: .center
         )
     }
 }
