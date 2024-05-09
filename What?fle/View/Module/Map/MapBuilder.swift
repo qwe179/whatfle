@@ -7,15 +7,9 @@
 
 import RIBs
 
-protocol MapDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
-}
+protocol MapDependency: Dependency {}
 
-final class MapComponent: Component<MapDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-}
+final class MapComponent: Component<MapDependency> {}
 
 // MARK: - Builder
 

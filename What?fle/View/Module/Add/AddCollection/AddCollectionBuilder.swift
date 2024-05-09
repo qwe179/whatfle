@@ -17,20 +17,22 @@ extension AddCollectionComponent: AddCollectionDependency {
     var networkService: NetworkServiceDelegate {
         return dependency.networkService
     }
+}
 
-    var selectLocationBuilder: AddCollectionBuildable {
-        return AddCollectionBuilder(dependency: self)
+extension AddCollectionComponent: RegistCollectionDependency {
+    var registCollectionBuilder: RegistCollectionBuildable {
+        return RegistCollectionBuilder(dependency: self)
     }
 }
 
 // MARK: - Builder
 
 protocol AddCollectionBuildable: Buildable {
-    func build(withListener listener: AddCollectionListener) -> AddCollectionRouting
+    func build(withListener listener: AddCollectionListener, withData data: EditSelectedCollectionData?) -> AddCollectionRouting
 }
 
 final class AddCollectionBuilder: Builder<AddCollectionDependency>, AddCollectionBuildable {
-    
+
     deinit {
         print("\(self) is being deinit")
     }
@@ -39,10 +41,14 @@ final class AddCollectionBuilder: Builder<AddCollectionDependency>, AddCollectio
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: AddCollectionListener) -> AddCollectionRouting {
+    func build(withListener listener: AddCollectionListener, withData data: EditSelectedCollectionData?) -> AddCollectionRouting {
         let component = AddCollectionComponent(dependency: dependency)
         let viewController = AddCollectionViewController()
-        let interactor = AddCollectionInteractor(presenter: viewController, networkService: component.networkService)
+        let interactor = AddCollectionInteractor(
+            presenter: viewController,
+            networkService: component.networkService,
+            data: data
+        )
         interactor.listener = listener
         return AddCollectionRouter(
             interactor: interactor,

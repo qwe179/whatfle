@@ -38,6 +38,14 @@ final class AddRouter: ViewableRouter<AddInteractable, AddViewControllable> {
 }
 
 extension AddRouter: AddRouting {
+    func routeToAddCollection(data: EditSelectedCollectionData?) {
+        let router = self.component.addCollectionBuilder.build(withListener: self.interactor, withData: data)
+        self.navigationController.setNavigationBarHidden(true, animated: false)
+        self.navigationController.pushViewController(router.viewControllable.uiviewController, animated: true)
+        self.attachChild(router)
+        self.currentChild = router
+    }
+
     func routeToRegistLocation() {
         if self.currentChild == nil {
             let router = self.component.registLocatiionBuilder.build(withListener: self.interactor)
@@ -48,22 +56,11 @@ extension AddRouter: AddRouting {
         }
     }
 
-    func routeToAddCollection() {
-        if self.currentChild == nil {
-            // TODO: - 서버 추가되면 스크린타입 분기처리해야함.
-            let router = self.component.addCollectionBuilder.build(withListener: self.interactor)
-            self.navigationController.setNavigationBarHidden(true, animated: false)
-            self.navigationController.pushViewController(router.viewControllable.uiviewController, animated: true)
-            self.attachChild(router)
-            self.currentChild = router
-        }
-    }
-
-    func routeToRegistCollection() {
-        let router = self.component.registCollectionBuilder.build(withListener: self.interactor)
+    func routeToRegistCollection(data: EditSelectedCollectionData) {
+        let router = self.component.registCollectionBuilder.build(withListener: self.interactor, withData: data)
+        self.navigationController.setNavigationBarHidden(true, animated: false)
         self.navigationController.pushViewController(router.viewControllable.uiviewController, animated: true)
         self.attachChild(router)
-//        self.currentChild = router
     }
 
     func closeCurrentRIB() {

@@ -21,7 +21,6 @@ final class SplashViewController: UIViewController, SplashPresentable, SplashVie
         let label: UILabel = .init()
         label.attributedText = .makeAttributedString(
             text: "WHATFLE",
-            // TODO: - 수정해야함.
             font: .title32HV,
             textColor: .textDefault,
             lineHeight: 40,
@@ -29,7 +28,7 @@ final class SplashViewController: UIViewController, SplashPresentable, SplashVie
         )
         return label
     }()
-    
+
     deinit {
         print("\(self) is being deinit")
     }
@@ -52,7 +51,6 @@ final class SplashViewController: UIViewController, SplashPresentable, SplashVie
         }
         imageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            // TODO: - 수정해야함.
             $0.bottom.equalTo(label.snp.top).offset(-33)
             $0.width.equalTo(186)
             $0.height.equalTo(145)

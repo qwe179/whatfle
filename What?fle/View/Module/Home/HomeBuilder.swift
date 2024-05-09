@@ -7,17 +7,9 @@
 
 import RIBs
 
-protocol HomeDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
-//    var navigationController: HomeViewControllable
-//    fileprivate var navigationController { get }
-}
+protocol HomeDependency: Dependency {}
 
-final class HomeComponent: Component<HomeDependency> {
-//    fileprivate var navigationController { get }
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-}
+final class HomeComponent: Component<HomeDependency> {}
 
 // MARK: - Builder
 

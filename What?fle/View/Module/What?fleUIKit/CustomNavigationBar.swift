@@ -12,17 +12,18 @@ import SnapKit
 final class CustomNavigationBar: UIView {
     private let disposeBag = DisposeBag()
 
-    let backButton: UIControl = {
-        let control: UIControl = .init()
-        let image: UIImageView = .init(image: .arrowLeftLine)
-        control.addSubview(image)
-        image.snp.makeConstraints {
-            $0.size.equalTo(24)
-            $0.center.equalToSuperview()
-        }
-        return control
+    let backButton: UIButton = {
+        let button: UIButton = .init()
+        var config = UIButton.Configuration.plain()
+        config.image = .arrowLeftLine
+        config.imagePlacement = .all
+        config.imagePadding = 8
+        button.configuration = config
+        return button
     }()
+
     private let navigationTitle: UILabel = .init()
+
     let rightButton: UIButton = {
         let button = UIButton()
         button.isHidden = true
@@ -37,6 +38,26 @@ final class CustomNavigationBar: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
+    }
+
+    private func setupUI() {
+        [backButton, navigationTitle, rightButton].forEach {
+            addSubview($0)
+        }
+        backButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(40)
+        }
+        navigationTitle.snp.makeConstraints {
+            $0.leading.equalTo(backButton.snp.trailing).offset(4)
+            $0.centerY.equalToSuperview()
+        }
+        rightButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(40)
+        }
     }
 
     func setNavigationTitle(_ title: String) {
@@ -59,25 +80,5 @@ final class CustomNavigationBar: UIView {
             ),
             for: .normal
         )
-    }
-
-    private func setupUI() {
-        [backButton, navigationTitle, rightButton].forEach {
-            addSubview($0)
-        }
-        backButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(16)
-            $0.centerY.equalToSuperview()
-            $0.size.equalTo(40)
-        }
-        navigationTitle.snp.makeConstraints {
-            $0.leading.equalTo(backButton.snp.trailing).offset(4)
-            $0.centerY.equalToSuperview()
-        }
-        rightButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(16)
-            $0.centerY.equalToSuperview()
-            $0.size.equalTo(40)
-        }
     }
 }

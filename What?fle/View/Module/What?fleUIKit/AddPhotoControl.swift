@@ -93,7 +93,7 @@ final class AddPhotoControl: UIControl {
             textColor: .Core.primary,
             lineHeight: 20)
     }
-    
+
     func hideCountLabel() {
         self.stackView.removeArrangedSubview(self.countLabel)
         self.countLabel.removeFromSuperview()

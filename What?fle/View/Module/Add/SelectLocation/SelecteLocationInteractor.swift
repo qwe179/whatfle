@@ -89,7 +89,7 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
 
     func refreshRecentKeywordArray() {
         self.recentKeywordArray.accept(UserDefaultsManager.recentSearchLoad())
-    }    
+    }
 }
 
 extension SelectLocationInteractor {

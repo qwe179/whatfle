@@ -16,7 +16,6 @@ protocol NetworkServiceDelegate: AnyObject {
 final class NetworkService: NetworkServiceDelegate {
     private let provider: MoyaProvider<MultiTarget>
 
-    // TODO: - 더미 네트워크
     init(isStubbing: Bool = true) {
         if isStubbing {
             self.provider = MoyaProvider<MultiTarget>(stubClosure: MoyaProvider.immediatelyStub)
