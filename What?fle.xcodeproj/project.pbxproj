@@ -67,6 +67,9 @@
 		399974172BCFFEDE009AF937 /* RegistCollectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399974132BCFFEDE009AF937 /* RegistCollectionBuilder.swift */; };
 		399974182BCFFEDE009AF937 /* RegistCollectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399974142BCFFEDE009AF937 /* RegistCollectionInteractor.swift */; };
 		3999741A2BD00CDE009AF937 /* AddPhotoControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399974192BD00CDE009AF937 /* AddPhotoControl.swift */; };
+		39A81E6E2BEE53870009C43F /* PlaceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A81E6D2BEE53870009C43F /* PlaceRegistration.swift */; };
+		39A81E702BF3A7550009C43F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A81E6F2BF3A7550009C43F /* UIImage+.swift */; };
+		39A81E732BF3BC460009C43F /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A81E722BF3BC460009C43F /* CustomError.swift */; };
 		39CBE1162BC6289D003CB3F0 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBE1122BC6289D003CB3F0 /* SplashRouter.swift */; };
 		39CBE1172BC6289D003CB3F0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBE1132BC6289D003CB3F0 /* SplashViewController.swift */; };
 		39CBE1182BC6289D003CB3F0 /* SplashBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39CBE1142BC6289D003CB3F0 /* SplashBuilder.swift */; };
@@ -159,6 +162,9 @@
 		399974132BCFFEDE009AF937 /* RegistCollectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistCollectionBuilder.swift; sourceTree = "<group>"; };
 		399974142BCFFEDE009AF937 /* RegistCollectionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistCollectionInteractor.swift; sourceTree = "<group>"; };
 		399974192BD00CDE009AF937 /* AddPhotoControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoControl.swift; sourceTree = "<group>"; };
+		39A81E6D2BEE53870009C43F /* PlaceRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRegistration.swift; sourceTree = "<group>"; };
+		39A81E6F2BF3A7550009C43F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		39A81E722BF3BC460009C43F /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		39CBE1122BC6289D003CB3F0 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		39CBE1132BC6289D003CB3F0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		39CBE1142BC6289D003CB3F0 /* SplashBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashBuilder.swift; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 				39333CCF2B864786005F295A /* AppDelegate.swift */,
 				39333CD12B864786005F295A /* SceneDelegate.swift */,
 				39333CD32B864786005F295A /* ViewController.swift */,
+				3939FFD52B8F6EF3007E58F6 /* AppConfigs.swift */,
 				39CBE1112BC62869003CB3F0 /* Splash */,
 				3983477D2BC17C4700C25F63 /* View */,
 				3939FFD02B8F6B91007E58F6 /* NetworkService */,
@@ -252,7 +259,6 @@
 		39333CF02B864EE1005F295A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3939FFD52B8F6EF3007E58F6 /* AppConfigs.swift */,
 				39333CF12B864EEB005F295A /* Font */,
 				39333CD82B864787005F295A /* Assets.xcassets */,
 				39EF11B52BBADCF0000E1996 /* Secrets.plist */,
@@ -281,6 +287,7 @@
 				456B09CD2BB953B200920C54 /* UITextField+.swift */,
 				456B09D12BB954DA00920C54 /* Date+.swift */,
 				39EF11B72BBAE182000E1996 /* Array+.swift */,
+				39A81E6F2BF3A7550009C43F /* UIImage+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -385,6 +392,7 @@
 			children = (
 				3983477F2BC17D2F00C25F63 /* Whatfle */,
 				3983477E2BC17D2500C25F63 /* Kakao */,
+				39A81E712BF3BC300009C43F /* Error */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -408,6 +416,7 @@
 		3939FFF92B961B52007E58F6 /* RegistLocation */ = {
 			isa = PBXGroup;
 			children = (
+				39A81E6C2BEE537B0009C43F /* Entity */,
 				39411B332BBC3AAE00A54EA7 /* Cell */,
 				3939FFFA2B961BBA007E58F6 /* RegistLocationRouter.swift */,
 				3939FFFB2B961BBA007E58F6 /* RegistLocationViewController.swift */,
@@ -492,6 +501,22 @@
 				399974142BCFFEDE009AF937 /* RegistCollectionInteractor.swift */,
 			);
 			path = RegistCollection;
+			sourceTree = "<group>";
+		};
+		39A81E6C2BEE537B0009C43F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				39A81E6D2BEE53870009C43F /* PlaceRegistration.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		39A81E712BF3BC300009C43F /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				39A81E722BF3BC460009C43F /* CustomError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		39AA54162BAF137A00C38324 /* Cell */ = {
@@ -712,6 +737,7 @@
 				3939FFF52B9451E3007E58F6 /* UIApplication+.swift in Sources */,
 				39EBCDF92B8A26B200599D58 /* AddInteractor.swift in Sources */,
 				456B09CC2BB9520100920C54 /* TextFieldWithUnderline.swift in Sources */,
+				39A81E702BF3A7550009C43F /* UIImage+.swift in Sources */,
 				39CBE1172BC6289D003CB3F0 /* SplashViewController.swift in Sources */,
 				39333D0B2B8765A2005F295A /* UIColor+Design.swift in Sources */,
 				39CBE1162BC6289D003CB3F0 /* SplashRouter.swift in Sources */,
@@ -738,6 +764,7 @@
 				39EBCDFF2B8A26BF00599D58 /* MapViewController.swift in Sources */,
 				391960022BAC542B00CC7A2E /* UserDefaultsManager.swift in Sources */,
 				3919BA652B988C0000E2A3CC /* UIView+.swift in Sources */,
+				39A81E6E2BEE53870009C43F /* PlaceRegistration.swift in Sources */,
 				39EBCE0E2B8A484000599D58 /* SelecteLocationBuilder.swift in Sources */,
 				39EBCDFE2B8A26BF00599D58 /* MapRouter.swift in Sources */,
 				398347822BC17F2100C25F63 /* WhatfleAPI.swift in Sources */,
@@ -747,6 +774,7 @@
 				39EBCE012B8A26BF00599D58 /* MapInteractor.swift in Sources */,
 				39333CD22B864786005F295A /* SceneDelegate.swift in Sources */,
 				3939FFFE2B961BBA007E58F6 /* RegistLocationRouter.swift in Sources */,
+				39A81E732BF3BC460009C43F /* CustomError.swift in Sources */,
 				39333D732B89A3AA005F295A /* AppComponent.swift in Sources */,
 				39333D142B88AE19005F295A /* RootViewController.swift in Sources */,
 				39333D712B8993B1005F295A /* HomeInteractor.swift in Sources */,

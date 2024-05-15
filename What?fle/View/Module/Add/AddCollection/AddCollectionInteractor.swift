@@ -63,22 +63,22 @@ final class AddCollectionInteractor: PresentableInteractor<AddCollectionPresenta
     }
 
     func retriveRegistLocation() {
-        LoadingIndicatorService.shared.showLoading()
-        networkService.request(WhatfleAPI.retriveRegistLocation)
-            .filter { _ in LoadingIndicatorService.shared.isLoading() }
-            .map { response -> RegisteredLocationModel in
-                let retriveResults = try JSONDecoder().decode(RegisteredLocationModel.self, from: response.data)
-                return retriveResults
-            }
-            .subscribe(onNext: { [weak self] result in
-                guard let self else { return }
-                self.registeredLocations.accept(result.registLocations)
-                self.locationTotalCount.accept(result.totalCount)
-                LoadingIndicatorService.shared.hideLoading()
-            }, onError: { error in
-                print("Error: \(error)")
-            })
-            .disposed(by: disposeBag)
+//        LoadingIndicatorService.shared.showLoading()
+//        networkService.request(WhatfleAPI.retriveRegistLocation)
+//            .filter { _ in LoadingIndicatorService.shared.isLoading() }
+//            .map { response -> RegisteredLocationModel in
+//                let retriveResults = try JSONDecoder().decode(RegisteredLocationModel.self, from: response.data)
+//                return retriveResults
+//            }
+//            .subscribe(onNext: { [weak self] result in
+//                guard let self else { return }
+//                self.registeredLocations.accept(result.registLocations)
+//                self.locationTotalCount.accept(result.totalCount)
+//                LoadingIndicatorService.shared.hideLoading()
+//            }, onError: { error in
+//                print("Error: \(error)")
+//            })
+//            .disposed(by: disposeBag)
     }
 
     func selectItem(with indexPath: IndexPath) {

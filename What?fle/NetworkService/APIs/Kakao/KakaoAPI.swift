@@ -38,7 +38,7 @@ extension KakaoAPI: TargetType {
     }
 
     var baseURL: URL {
-        return URL(string: AppConfigs.API.URL.Kakao.search)!
+        return URL(string: AppConfigs.API.BaseURL.Kakao.search)!
     }
 
     var path: String {

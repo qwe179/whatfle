@@ -14,7 +14,9 @@ import UIKit
 protocol RegistLocationPresentableListener: AnyObject {
     var imageArray: BehaviorRelay<[UIImage]> { get }
     var isSelectLocation: BehaviorRelay<Bool> { get }
+    var model: KakaoSearchDocumentsModel? { get }
     func showSelectLocation()
+    func registPlace(_ registration: PlaceRegistration)
     func closeRegistLocation()
     func addImage(_ image: UIImage)
 }
@@ -158,7 +160,6 @@ final class RegistLocationViewController: UIVCWithKeyboard, RegistLocationViewCo
     }()
 
     weak var listener: RegistLocationPresentableListener?
-
     private let disposeBag = DisposeBag()
 
     deinit {
@@ -290,11 +291,10 @@ final class RegistLocationViewController: UIVCWithKeyboard, RegistLocationViewCo
 
         let isEnabledObservable = Observable.combineLatest(
             listener.isSelectLocation,
-            listener.imageArray.map { !$0.isEmpty },
             memoView.textView.rx.text.orEmpty
         )
-        .map { isSelectLocation, isImageArrayNotEmpty, memoText in
-            isSelectLocation && isImageArrayNotEmpty && !memoText.isEmpty
+        .map { isSelectLocation, memoText in
+            isSelectLocation && !memoText.isEmpty
         }.share()
 
         isEnabledObservable
@@ -323,7 +323,6 @@ final class RegistLocationViewController: UIVCWithKeyboard, RegistLocationViewCo
         self.customNavigationBar.backButton.rx.controlEvent(.touchUpInside)
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                self.navigationController?.popViewController(animated: true)
                 listener?.closeRegistLocation()
             })
             .disposed(by: disposeBag)
@@ -354,9 +353,23 @@ final class RegistLocationViewController: UIVCWithKeyboard, RegistLocationViewCo
         self.saveButton.rx.controlEvent(.touchUpInside)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                // TODO: - 저장로직 추가해야함
-                print("저장~!")
+                guard let self,
+                      let listener,
+                      let model = listener.model else { return }
+                self.memoView.endEditing(true)
+                listener.registPlace(
+                    .init(
+                        accountID: AppConfigs.UserInfo.accountID,
+                        description: memoView.textView.text,
+                        visitDate: datePicker.date.formattedWithhyphen,
+                        placeName: model.placeName,
+                        address: model.addressName,
+                        roadAddress: model.roadAddressName,
+                        images: listener.imageArray.value,
+                        latitude: model.latitude,
+                        longitude: model.longitude
+                    )
+                )
             })
             .disposed(by: disposeBag)
     }
@@ -382,6 +395,7 @@ extension RegistLocationViewController: LocationImageCellDelegate {
             .filter { index, _ in index != indexPath.row }
             .map { $0.1 }
         self.listener?.imageArray.accept(newData)
+        addPhotoButton.updatePhoto(count: listener.imageArray.value.count)
     }
 }
 
