@@ -8,16 +8,16 @@
 import Foundation
 
 struct EditSelectedCollectionData {
-    let registeredLocations: [RegisteredLocation]
-    let selectedLocations: [(IndexPath, KakaoSearchDocumentsModel)]
+    let registeredLocations: [(String, [PlaceRegistration])]
+    let selectedLocations: [(IndexPath, PlaceRegistration)]
 
-    var allLocationsIndexPaths: [IndexPath] {
-        var indexPaths = [IndexPath]()
-        for (sectionIndex, registeredLocation) in registeredLocations.enumerated() {
-            for rowIndex in 0..<registeredLocation.locations.count {
-                indexPaths.append(IndexPath(row: rowIndex, section: sectionIndex))
-            }
-        }
-        return indexPaths
-    }
+//    var allLocationsIndexPaths: [IndexPath] {
+//        var indexPaths = [IndexPath]()
+//        for (sectionIndex, registeredLocation) in registeredLocations {
+//            for rowIndex in 0..<registeredLocation.count {
+//                indexPaths.append(IndexPath(row: rowIndex, section: sectionIndex))
+//            }
+//        }
+//        return indexPaths
+//    }
 }

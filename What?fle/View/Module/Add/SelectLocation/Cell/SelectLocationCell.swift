@@ -44,6 +44,13 @@ final class SelectLocationCell: UITableViewCell {
         return checkBox
     }()
 
+    private var opacityView: UIView = {
+        let view: UIView = .init()
+        view.backgroundColor = .init(white: 1, alpha: 0.4)
+        view.isHidden = true
+        return view
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -85,6 +92,11 @@ final class SelectLocationCell: UITableViewCell {
             $0.trailing.equalToSuperview()
             $0.size.equalTo(0)
         }
+
+        contentView.addSubview(self.opacityView)
+        self.opacityView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 
     func drawCell(model: KakaoSearchDocumentsModel) {
@@ -93,6 +105,21 @@ final class SelectLocationCell: UITableViewCell {
     }
 
     func drawCheckTypeCell(model: KakaoSearchDocumentsModel) {
+        drawCell(model: model)
+        self.checkBox.isHidden = false
+        self.checkBox.snp.updateConstraints {
+            $0.leading.equalTo(titleView.snp.trailing).offset(16)
+            $0.size.equalTo(24)
+        }
+    }
+
+    func drawCell(model: PlaceRegistration) {
+        titleLabel.text = model.placeName
+        subTitleLabel.text = model.roadAddress
+        opacityView.isHidden = !model.isEmptyImageURLs
+    }
+
+    func drawCheckTypeCell(model: PlaceRegistration) {
         drawCell(model: model)
         self.checkBox.isHidden = false
         self.checkBox.snp.updateConstraints {

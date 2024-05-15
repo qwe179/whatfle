@@ -50,7 +50,7 @@ final class SelectLocationResultCell: UICollectionViewCell {
         }
     }
 
-    func drawCell(model: KakaoSearchDocumentsModel) {
+    func drawCell(model: PlaceRegistration) {
         titleLabel.attributedText = .makeAttributedString(
             text: model.placeName,
             font: .caption12RG,

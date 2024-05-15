@@ -69,13 +69,13 @@ final class CustomNavigationBar: UIView {
         )
     }
 
-    func setRightButton(title: String) {
+    func setRightButton(title: String, isEnabled: Bool = false) {
         rightButton.isHidden = false
         rightButton.setAttributedTitle(
             .makeAttributedString(
                 text: title,
                 font: .title16XBD,
-                textColor: .Core.primary,
+                textColor: isEnabled ? .Core.primary : .Core.primaryDisabled,
                 lineHeight: 21
             ),
             for: .normal

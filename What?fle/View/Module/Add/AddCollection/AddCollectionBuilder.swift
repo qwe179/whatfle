@@ -47,7 +47,7 @@ final class AddCollectionBuilder: Builder<AddCollectionDependency>, AddCollectio
         let interactor = AddCollectionInteractor(
             presenter: viewController,
             networkService: component.networkService,
-            data: data
+            data: nil
         )
         interactor.listener = listener
         return AddCollectionRouter(

@@ -12,8 +12,8 @@ import UIKit
 
 protocol AddCollectionPresentableListener: AnyObject {
     var locationTotalCount: BehaviorRelay<Int> { get }
-    var registeredLocations: BehaviorRelay<[RegisteredLocation]> { get }
-    var selectedLocations: BehaviorRelay<[(IndexPath, KakaoSearchDocumentsModel)]> { get }
+    var registeredLocations: BehaviorRelay<[(String, [PlaceRegistration])]> { get }
+    var selectedLocations: BehaviorRelay<[(IndexPath, PlaceRegistration)]> { get }
     func closeAddCollection()
     func showRegistLocation()
     func retriveRegistLocation()
@@ -230,7 +230,8 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
     }
 
     private func setupViewBinding() {
-        self.listener?.selectedLocations
+        guard let listener else { return }
+        listener.selectedLocations
             .bind(to: selectLocationCollectionView.rx.items(
                 cellIdentifier: SelectLocationResultCell.reuseIdentifier,
                 cellType: SelectLocationResultCell.self)
@@ -239,13 +240,25 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
             }
             .disposed(by: disposeBag)
 
-        self.listener?.locationTotalCount
+        listener.locationTotalCount
             .subscribe(onNext: { [weak self] count in
                 guard let self else { return }
                 self.screenType = count >= 4 ? .available : .limated(count)
                 if count >= 4 {
                     self.customNavigationBar.setRightButton(title: "다음")
                 }
+            })
+            .disposed(by: disposeBag)
+
+        let isEnabledObservable = listener.selectedLocations.map { $0.count >= 4 }.share()
+        isEnabledObservable
+            .bind(to: customNavigationBar.rightButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        isEnabledObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isEnabled in
+                guard let self else { return }
+                self.customNavigationBar.setRightButton(title: "저장", isEnabled: isEnabled)
             })
             .disposed(by: disposeBag)
     }
@@ -287,11 +300,6 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
             .disposed(by: disposeBag)
 
         self.customNavigationBar.rightButton.rx.controlEvent(.touchUpInside)
-            .filter { [weak self] _ in
-                guard let self = self,
-                      let listener = self.listener else { return false }
-                return listener.selectedLocations.value.count >= 4
-            }
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 listener?.showRegistCollection()
@@ -305,6 +313,10 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
                 listener?.closeAddCollection()
             })
             .disposed(by: disposeBag)
+    }
+
+    func reloadData() {
+        self.registLocationTableView.reloadData()
     }
 
     private func updateSelectionOrder() {
@@ -346,12 +358,12 @@ extension AddCollectionViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listener?.registeredLocations.value[section].locations.count ?? 0
+        return listener?.registeredLocations.value[section].1.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SelectLocationCell.reuseIdentifier, for: indexPath) as? SelectLocationCell,
-              let model = listener?.registeredLocations.value[safe: indexPath.section]?.locations[safe: indexPath.row] else {
+              let model = listener?.registeredLocations.value[safe: indexPath.section]?.1[safe: indexPath.row] else {
             return UITableViewCell()
         }
         let isSelected = listener?.selectedLocations.value.contains { $0.0 == indexPath } ?? false
@@ -365,7 +377,7 @@ extension AddCollectionViewController: UITableViewDataSource {
             let view: UIView = .init()
             let label: UILabel = .init()
             label.attributedText = .makeAttributedString(
-                text: listener?.registeredLocations.value[section].date ?? "",
+                text: listener?.registeredLocations.value[section].0 ?? "",
                 font: .body14MD,
                 textColor: .textLight,
                 lineHeight: 20
@@ -394,7 +406,10 @@ extension AddCollectionViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("pane_itemSelected_indexPath", indexPath)
+        guard let model = listener?.registeredLocations.value[safe: indexPath.section]?.1[safe: indexPath.row],
+              !model.isEmptyImageURLs else {
+            return
+        }
         let order = retriveNextOrder(indexPath: indexPath)
         if order <= 4 {
             listener?.selectItem(with: indexPath)

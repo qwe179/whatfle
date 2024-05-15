@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    var formattedYYMMDD: String {
+    var formattedYYMMDDWithDot: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yy.MM.dd"
         return formatter.string(from: self)

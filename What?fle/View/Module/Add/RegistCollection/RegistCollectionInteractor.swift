@@ -27,7 +27,7 @@ final class RegistCollectionInteractor: PresentableInteractor<RegistCollectionPr
     weak var router: RegistCollectionRouting?
     weak var listener: RegistCollectionListener?
     var selectedImage: BehaviorRelay<UIImage?> = .init(value: nil)
-    let selectedLocations: BehaviorRelay<[KakaoSearchDocumentsModel]>
+    let selectedLocations: BehaviorRelay<[PlaceRegistration]>
     var editSelectedCollectionData: EditSelectedCollectionData
 
     private let networkService: NetworkServiceDelegate
@@ -51,11 +51,11 @@ final class RegistCollectionInteractor: PresentableInteractor<RegistCollectionPr
     }
 
     func addImage(_ image: UIImage) {
-//        self.selectedImage.accept(image)
+        self.selectedImage.accept(image)
     }
 
     func removeImage() {
-//        self.selectedImage.accept(nil)
+        self.selectedImage.accept(nil)
     }
 
     func showEditCollection() {

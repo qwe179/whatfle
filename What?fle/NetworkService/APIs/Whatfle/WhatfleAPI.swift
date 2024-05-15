@@ -12,12 +12,14 @@ enum WhatfleAPI {
     case uploadPlaceImage(images: [UIImage])
     case registerPlace(PlaceRegistration)
     case retriveRegistLocation
+    case getAllMyPlace
 }
 
 extension WhatfleAPI: TargetType {
     var method: Moya.Method {
         switch self {
-        case .registerPlace, .uploadPlaceImage:
+        case .registerPlace,
+             .uploadPlaceImage:
             return .post
         default:
             return .get
@@ -34,7 +36,7 @@ extension WhatfleAPI: TargetType {
                 "placeName": registration.placeName,
                 "address": registration.address,
                 "roadAddress": registration.roadAddress,
-                "imageUrls": registration.imageUrls ?? [],
+                "imageUrls": registration.imageURLs ?? [],
                 "latitude": registration.latitude,
                 "longitude": registration.longitude
             ]
@@ -58,6 +60,8 @@ extension WhatfleAPI: TargetType {
                 }
             }
             return .uploadMultipart(multipartData)
+        default:
+            return .requestPlain
         }
     }
 
@@ -72,7 +76,8 @@ extension WhatfleAPI: TargetType {
 
     var baseURL: URL {
         switch self {
-        case .registerPlace:
+        case .registerPlace,
+             .getAllMyPlace:
             return URL(string: AppConfigs.API.BaseURL.dev)!
         case .retriveRegistLocation:
             return URL(string: AppConfigs.API.BaseURL.Kakao.search)!
@@ -87,6 +92,8 @@ extension WhatfleAPI: TargetType {
             return "/place"
         case .uploadPlaceImage:
             return "/image/place"
+        case .getAllMyPlace:
+            return "/places"
         default:
             return ""
         }

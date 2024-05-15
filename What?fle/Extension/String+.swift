@@ -42,3 +42,9 @@ extension NSAttributedString {
         return NSAttributedString(string: text, attributes: baseAttributes)
     }
 }
+
+extension String {
+    func replaceHyphensWithDots() -> String {
+        return self.replacingOccurrences(of: "-", with: ".")
+    }
+}

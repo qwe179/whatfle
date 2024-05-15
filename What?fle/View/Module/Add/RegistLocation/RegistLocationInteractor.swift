@@ -62,14 +62,12 @@ final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresen
     }
 
     func registPlace(_ registration: PlaceRegistration) {
-        guard !LoadingIndicatorService.shared.isLoading() else {
-            return
-        }
+        guard !LoadingIndicatorService.shared.isLoading() else { return }
         LoadingIndicatorService.shared.showLoading()
         uploadPlaceImages(images: registration.images)
-            .flatMap { [weak self] imageUrls -> Single<Response> in
+            .flatMap { [weak self] imageURLs -> Single<Response> in
                 guard let self = self else { return .error(RxError.unknown) }
-                return self.networkService.request(WhatfleAPI.registerPlace(.init(imageUrls: imageUrls, registration: registration)))
+                return self.networkService.request(WhatfleAPI.registerPlace(.init(imageURLs: imageURLs, registration: registration)))
             }
             .subscribe(onSuccess: { [weak self] _ in
                 guard let self else { return }

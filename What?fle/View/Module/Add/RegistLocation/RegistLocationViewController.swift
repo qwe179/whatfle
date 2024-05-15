@@ -127,7 +127,7 @@ final class RegistLocationViewController: UIVCWithKeyboard, RegistLocationViewCo
     private lazy var visitTextField: TextFieldWithUnderline = {
         let textField: TextFieldWithUnderline = .init()
         textField.attributedText = NSAttributedString.makeAttributedString(
-            text: Date().formattedYYMMDD,
+            text: Date().formattedYYMMDDWithDot,
             font: .body14MD,
             textColor: .textDefault,
             lineHeight: 20
@@ -378,7 +378,7 @@ final class RegistLocationViewController: UIVCWithKeyboard, RegistLocationViewCo
 extension RegistLocationViewController {
     @objc private func dateChange(_ sender: UIDatePicker) {
         visitTextField.attributedText = NSAttributedString.makeAttributedString(
-            text: sender.date.formattedYYMMDD,
+            text: sender.date.formattedYYMMDDWithDot,
             font: .body14MD,
             textColor: .textDefault,
             lineHeight: 20
