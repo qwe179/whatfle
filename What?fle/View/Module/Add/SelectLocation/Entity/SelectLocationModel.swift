@@ -71,4 +71,12 @@ struct KakaoSearchDocumentsModel: Decodable, Equatable {
         case longitudeX = "x"
         case latitudeY = "y"
     }
+    
+    var longitude: Double {
+        Double(longitudeX) ?? 0.0
+    }
+    
+    var latitude: Double {
+        Double(latitudeY) ?? 0.0
+    }
 }

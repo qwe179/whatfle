@@ -53,6 +53,7 @@ extension AddInteractor: AddInteractable {
     }
 
     func closeRegistLocation() {
+        self.router?.navigationController.popViewController(animated: true)
         router?.closeCurrentRIB()
     }
 

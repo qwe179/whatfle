@@ -42,7 +42,10 @@ final class RegistLocationBuilder: Builder<RegistLocationDependency>, RegistLoca
     func build(withListener listener: RegistLocationListener) -> RegistLocationRouting {
         let component = RegistLocationComponent(dependency: dependency)
         let viewController = RegistLocationViewController()
-        let interactor = RegistLocationInteractor(presenter: viewController)
+        let interactor = RegistLocationInteractor(
+            presenter: viewController,
+            networkService: dependency.networkService
+        )
         interactor.listener = listener
         viewController.listener = interactor
         return RegistLocationRouter(

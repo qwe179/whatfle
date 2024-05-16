@@ -44,6 +44,13 @@ final class SelectLocationCell: UITableViewCell {
         return checkBox
     }()
 
+    private var opacityView: UIView = {
+        let view: UIView = .init()
+        view.backgroundColor = .init(white: 1, alpha: 0.4)
+        view.isHidden = true
+        return view
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -54,6 +61,11 @@ final class SelectLocationCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupLayout()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        checkBox.image = .selectOff
     }
 
     private func setupLayout() {
@@ -85,6 +97,11 @@ final class SelectLocationCell: UITableViewCell {
             $0.trailing.equalToSuperview()
             $0.size.equalTo(0)
         }
+
+        contentView.addSubview(self.opacityView)
+        self.opacityView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 
     func drawCell(model: KakaoSearchDocumentsModel) {
@@ -101,6 +118,22 @@ final class SelectLocationCell: UITableViewCell {
         }
     }
 
+    private func drawCell(model: PlaceRegistration) {
+        titleLabel.text = model.placeName
+        subTitleLabel.text = model.roadAddress
+        opacityView.isHidden = !model.isEmptyImageURLs
+    }
+
+    func drawCheckTypeCell(model: PlaceRegistration, order: Int) {
+        drawCell(model: model)
+        self.checkBox.isHidden = false
+        self.checkBox.snp.updateConstraints {
+            $0.leading.equalTo(titleView.snp.trailing).offset(16)
+            $0.size.equalTo(24)
+        }
+        updateCheckBox(order: order)
+    }
+
     func updateCheckBox(order: Int?) {
         switch order {
         case 1:
@@ -111,6 +144,14 @@ final class SelectLocationCell: UITableViewCell {
             checkBox.image = .select3
         case 4:
             checkBox.image = .select4
+        case 5:
+            checkBox.image = .select5
+        case 6:
+            checkBox.image = .select6
+        case 7:
+            checkBox.image = .select7
+        case 8:
+            checkBox.image = .select8
         default:
             checkBox.image = .selectOff
         }

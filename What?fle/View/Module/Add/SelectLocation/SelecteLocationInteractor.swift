@@ -43,27 +43,27 @@ final class SelectLocationInteractor: PresentableInteractor<SelectLocationPresen
     }
 
     func performSearch(with query: String, more: Bool) {
+        guard !LoadingIndicatorService.shared.isLoading() else {
+            return
+        }
         LoadingIndicatorService.shared.showLoading()
         networkService.request(KakaoAPI.search(query, currentPage(more: more)))
-            .filter { _ in LoadingIndicatorService.shared.isLoading() }
-            .do(onNext: { _ in
-                UserDefaultsManager.recentSearchSave(searchText: query)
-            })
             .map { response -> [KakaoSearchDocumentsModel] in
                 let searchResults = try JSONDecoder().decode(KakaoSearchModel.self, from: response.data)
                 return searchResults.documents
             }
-            .filter { [weak self] in self?.searchResultArray.value.last != $0.last }
-            .subscribe(onNext: { [weak self] result in
-                guard let self else { return }
+            .subscribe(onSuccess: { [weak self] result in
+                guard let self = self else { return }
+                UserDefaultsManager.recentSearchSave(searchText: query)
                 if more {
                     self.searchResultArray.accept(self.searchResultArray.value + result)
                 } else {
                     self.searchResultArray.accept(result)
                 }
                 LoadingIndicatorService.shared.hideLoading()
-            }, onError: { error in
+            }, onFailure: { error in
                 print("Error: \(error)")
+                LoadingIndicatorService.shared.hideLoading()
             })
             .disposed(by: disposeBag)
     }

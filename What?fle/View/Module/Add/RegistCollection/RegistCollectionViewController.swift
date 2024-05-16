@@ -14,7 +14,7 @@ import UIKit
 
 protocol RegistCollectionPresentableListener: AnyObject {
     var selectedImage: BehaviorRelay<UIImage?> { get }
-    var selectedLocations: BehaviorRelay<[KakaoSearchDocumentsModel]> { get }
+    var selectedLocations: BehaviorRelay<[PlaceRegistration]> { get }
     func addImage(_ image: UIImage)
     func removeImage()
     func showEditCollection()
@@ -198,7 +198,6 @@ final class RegistCollectionViewController: UIVCWithKeyboard, RegistCollectionPr
                 self.addPhotoButton.isHidden = true
             })
             .disposed(by: disposeBag)
-
         listener.selectedLocations
             .bind(to: selectedLocationCollectionView.rx.items(
                 cellIdentifier: SelectLocationResultCell.reuseIdentifier,

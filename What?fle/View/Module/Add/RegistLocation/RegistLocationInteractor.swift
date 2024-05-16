@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import Moya
 import RxSwift
 import RxCocoa
 import UIKit
@@ -29,6 +30,10 @@ final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresen
                                       RegistLocationPresentableListener {
     weak var router: RegistLocationRouting?
     weak var listener: RegistLocationListener?
+    private let networkService: NetworkServiceDelegate
+    private let disposeBag = DisposeBag()
+
+    var model: KakaoSearchDocumentsModel?
     let imageArray = BehaviorRelay<[UIImage]>(value: [])
     let isSelectLocation = BehaviorRelay<Bool>(value: false)
 
@@ -36,7 +41,8 @@ final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresen
         print("\(self) is being deinit")
     }
 
-    override init(presenter: RegistLocationPresentable) {
+    init(presenter: RegistLocationPresentable, networkService: NetworkServiceDelegate) {
+        self.networkService = networkService
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -54,6 +60,39 @@ final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresen
         currentImages.append(image)
         imageArray.accept(currentImages)
     }
+
+    func registPlace(_ registration: PlaceRegistration) {
+        guard !LoadingIndicatorService.shared.isLoading() else { return }
+        LoadingIndicatorService.shared.showLoading()
+        uploadPlaceImages(images: registration.images)
+            .flatMap { [weak self] imageURLs -> Single<Response> in
+                guard let self = self else { return .error(RxError.unknown) }
+                return self.networkService.request(WhatfleAPI.registerPlace(.init(imageURLs: imageURLs, registration: registration)))
+            }
+            .subscribe(onSuccess: { [weak self] _ in
+                guard let self else { return }
+                LoadingIndicatorService.shared.hideLoading()
+                self.closeRegistLocation()
+            }, onFailure: { error in
+                LoadingIndicatorService.shared.hideLoading()
+                if let error = error as? CustomError {
+                    print("Error in registration process: \(error.localizedDescription)")
+                } else {
+                    print("Unknown error occurred")
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func uploadPlaceImages(images: [UIImage]) -> Single<[String]> {
+        guard !images.isEmpty else {
+            return Single.just([])
+        }
+        return networkService.request(WhatfleAPI.uploadPlaceImage(images: images))
+            .map { response -> [String] in
+                return try JSONDecoder().decode([String].self, from: response.data)
+            }
+    }
 }
 
 extension RegistLocationInteractor: RegistLocationListener {
@@ -65,6 +104,7 @@ extension RegistLocationInteractor: RegistLocationListener {
 extension RegistLocationInteractor: SelectLocationListener {
     func didSelect(data: KakaoSearchDocumentsModel) {
         closeSelectLocation()
+        self.model = data
         presenter.updateView(with: data)
     }
 }

@@ -10,13 +10,13 @@ import Moya
 import RxSwift
 
 protocol NetworkServiceDelegate: AnyObject {
-    func request<T: TargetType>(_ target: T) -> Observable<Response>
+    func request<T: TargetType>(_ target: T) -> Single<Response>
 }
 
 final class NetworkService: NetworkServiceDelegate {
     private let provider: MoyaProvider<MultiTarget>
 
-    init(isStubbing: Bool = true) {
+    init(isStubbing: Bool = false) {
         if isStubbing {
             self.provider = MoyaProvider<MultiTarget>(stubClosure: MoyaProvider.immediatelyStub)
         } else {
@@ -24,16 +24,15 @@ final class NetworkService: NetworkServiceDelegate {
         }
     }
 
-    func request<T: TargetType>(_ target: T) -> Observable<Response> {
-        return Observable.create { [weak provider] observer in
+    func request<T: TargetType>(_ target: T) -> Single<Response> {
+        return Single<Response>.create { [weak provider] single in
             let requestTarget = MultiTarget(target)
             let cancellable = provider?.request(requestTarget) { result in
                 switch result {
                 case .success(let response):
-                    observer.onNext(response)
-                    observer.onCompleted()
+                    single(.success(response))
                 case .failure(let error):
-                    observer.onError(error)
+                    single(.failure(error))
                 }
             }
             return Disposables.create {
