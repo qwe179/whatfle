@@ -14,6 +14,7 @@ protocol AddCollectionRouting: ViewableRouting {}
 
 protocol AddCollectionPresentable: Presentable {
     var listener: AddCollectionPresentableListener? { get set }
+    var screenType: AddCollectionType { get set }
     func reloadData()
 }
 
@@ -22,6 +23,8 @@ protocol AddCollectionListener: AnyObject {
     func popCurrentRIB()
     func sendDataToRegistCollection(data: EditSelectedCollectionData)
 }
+
+typealias EditSelectedCollectionData = [(IndexPath, PlaceRegistration)]
 
 final class AddCollectionInteractor: PresentableInteractor<AddCollectionPresentable>,
                                      AddCollectionInteractable,
@@ -43,12 +46,12 @@ final class AddCollectionInteractor: PresentableInteractor<AddCollectionPresenta
     init(
         presenter: AddCollectionPresentable,
         networkService: NetworkServiceDelegate,
-        data: [(String, [PlaceRegistration])]?
+        data: EditSelectedCollectionData?
     ) {
         self.networkService = networkService
         if let data {
-//            registeredLocations.accept(data)
-//            selectedLocations.accept(data.count)
+            selectedLocations.accept(data)
+            locationTotalCount.accept(data.count)
         }
 
         super.init(presenter: presenter)
@@ -100,19 +103,9 @@ final class AddCollectionInteractor: PresentableInteractor<AddCollectionPresenta
     }
 
     func showRegistCollection() {
-        let data: EditSelectedCollectionData = .init(
-            registeredLocations: registeredLocations.value,
-            selectedLocations: selectedLocations.value
-        )
+        let data: EditSelectedCollectionData = selectedLocations.value
         self.listener?.sendDataToRegistCollection(data: data)
     }
-
-    func sendDataToAddCollection(data: [KakaoSearchDocumentsModel]) {}
-//    private func convertToRegisteredLocations(_ locations: [PlaceRegistration]) -> [(String, [PlaceRegistration])] {
-//        let groupedDictionary = Dictionary(grouping: self, by: { $0.visitDate })
-//                let sortedKeys = groupedDictionary.keys.sorted()
-//                return sortedKeys.map { (date: $0, places: groupedDictionary[$0]!) }
-//    }
 }
 
 extension Array where Element == PlaceRegistration {

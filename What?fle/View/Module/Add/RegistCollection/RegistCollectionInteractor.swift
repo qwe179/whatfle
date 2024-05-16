@@ -45,7 +45,7 @@ final class RegistCollectionInteractor: PresentableInteractor<RegistCollectionPr
     ) {
         self.networkService = networkService
         self.editSelectedCollectionData = data
-        self.selectedLocations = .init(value: data.selectedLocations.map { $0.1 })
+        self.selectedLocations = .init(value: data.map { $0.1 })
         super.init(presenter: presenter)
         presenter.listener = self
     }

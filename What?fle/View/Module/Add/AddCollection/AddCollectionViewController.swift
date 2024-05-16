@@ -30,6 +30,7 @@ enum AddCollectionType {
 final class AddCollectionViewController: UIViewController, AddCollectionPresentable, AddCollectionViewControllable {
     private enum Constants {
         static let bottomPadding: CGFloat = 8.0
+        static let maximumCount: Int = 8
     }
 
     weak var listener: AddCollectionPresentableListener?
@@ -153,7 +154,7 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
         return tableView
     }()
 
-    private var screenType: AddCollectionType = .limated(0) {
+    var screenType: AddCollectionType = .limated(0) {
         didSet {
             switch screenType {
             case .limated(let count):
@@ -244,13 +245,13 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
             .subscribe(onNext: { [weak self] count in
                 guard let self else { return }
                 self.screenType = count >= 4 ? .available : .limated(count)
-                if count >= 4 {
+                if count >= Constants.maximumCount {
                     self.customNavigationBar.setRightButton(title: "다음")
                 }
             })
             .disposed(by: disposeBag)
 
-        let isEnabledObservable = listener.selectedLocations.map { $0.count >= 4 }.share()
+        let isEnabledObservable = listener.selectedLocations.map { $0.count >= Constants.maximumCount }.share()
         isEnabledObservable
             .bind(to: customNavigationBar.rightButton.rx.isEnabled)
             .disposed(by: disposeBag)
@@ -264,25 +265,6 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
     }
 
     private func setupActionBinding() {
-//        self.registLocationTableView.rx.itemSelected
-//            .subscribe(onNext: { [weak self] indexPath in
-//                guard let self else { return }
-//                print("pane_itemSelected_indexPath", indexPath)
-//                self.handleSelection(at: indexPath)
-//            })
-//            .disposed(by: disposeBag)
-//
-//        self.registLocationTableView.rx.itemDeselected
-//            .subscribe(onNext: { [weak self] indexPath in
-//                guard let self else { return }
-//                print("pane_itemDeselected_indexPath", indexPath)
-//                self.listener?.deselectItem(with: indexPath)
-//                self.updateSelectionOrder()
-//                guard let cell = self.registLocationTableView.cellForRow(at: indexPath) as? SelectLocationCell else { return }
-//                cell.updateCheckBox(order: nil)
-//            })
-//            .disposed(by: disposeBag)
-
         self.limitedButton.rx.controlEvent(.touchUpInside)
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
@@ -322,8 +304,10 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
     private func updateSelectionOrder() {
         guard let indexPaths = listener?.selectedLocations.value.map({ $0.0 }) else { return }
         for indexPath in indexPaths {
-            guard let cell = self.registLocationTableView.cellForRow(at: indexPath) as? SelectLocationCell else { return }
-            cell.updateCheckBox(order: retriveSelectionOrder(indexPath: indexPath))
+            guard let cell = self.registLocationTableView.cellForRow(at: indexPath) as? SelectLocationCell else {
+                return
+            }
+            registLocationTableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }
 
@@ -339,16 +323,6 @@ final class AddCollectionViewController: UIViewController, AddCollectionPresenta
             return 0
         }
         return order + 1
-    }
-
-    private func restoreSelectedItems() {
-        guard let selectedLocations = listener?.selectedLocations.value else { return }
-        for (order, (indexPath, _)) in selectedLocations.enumerated() {
-            self.registLocationTableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-            if let cell = registLocationTableView.cellForRow(at: indexPath) as? SelectLocationCell {
-                cell.updateCheckBox(order: order)
-            }
-        }
     }
 }
 
@@ -366,9 +340,7 @@ extension AddCollectionViewController: UITableViewDataSource {
               let model = listener?.registeredLocations.value[safe: indexPath.section]?.1[safe: indexPath.row] else {
             return UITableViewCell()
         }
-        let isSelected = listener?.selectedLocations.value.contains { $0.0 == indexPath } ?? false
-        cell.drawCheckTypeCell(model: model)
-        cell.updateCheckBox(order: isSelected ? retriveSelectionOrder(indexPath: indexPath) : nil)
+        cell.drawCheckTypeCell(model: model, order: retriveSelectionOrder(indexPath: indexPath))
         return cell
     }
 
@@ -411,7 +383,7 @@ extension AddCollectionViewController: UITableViewDelegate {
             return
         }
         let order = retriveNextOrder(indexPath: indexPath)
-        if order <= 4 {
+        if order <= Constants.maximumCount {
             listener?.selectItem(with: indexPath)
             if let cell = registLocationTableView.cellForRow(at: indexPath) as? SelectLocationCell {
                 cell.updateCheckBox(order: order)
@@ -421,9 +393,7 @@ extension AddCollectionViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         listener?.deselectItem(with: indexPath)
+        tableView.reloadData()
         updateSelectionOrder()
-        if let cell = tableView.cellForRow(at: indexPath) as? SelectLocationCell {
-            cell.updateCheckBox(order: nil)
-        }
     }
 }

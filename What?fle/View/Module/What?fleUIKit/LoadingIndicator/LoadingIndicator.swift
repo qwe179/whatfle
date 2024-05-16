@@ -22,9 +22,11 @@ class LoadingIndicatorService {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.center = self.dimmedView!.center
         activityIndicator.startAnimating()
-
-        self.dimmedView?.addSubview(activityIndicator)
-        window.addSubview(self.dimmedView!)
+        
+        DispatchQueue.main.async {
+            self.dimmedView?.addSubview(activityIndicator)
+            window.addSubview(self.dimmedView!)
+        }
     }
 
     func hideLoading() {

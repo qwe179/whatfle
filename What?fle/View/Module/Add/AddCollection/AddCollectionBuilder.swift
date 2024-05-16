@@ -5,6 +5,7 @@
 //  Created by 이정환 on 4/6/24.
 //
 
+import Foundation
 import RIBs
 
 protocol AddCollectionDependency: Dependency {
@@ -28,7 +29,7 @@ extension AddCollectionComponent: RegistCollectionDependency {
 // MARK: - Builder
 
 protocol AddCollectionBuildable: Buildable {
-    func build(withListener listener: AddCollectionListener, withData data: EditSelectedCollectionData?) -> AddCollectionRouting
+    func build(withListener listener: AddCollectionListener, withData data: [(IndexPath, PlaceRegistration)]?) -> AddCollectionRouting
 }
 
 final class AddCollectionBuilder: Builder<AddCollectionDependency>, AddCollectionBuildable {
@@ -41,13 +42,13 @@ final class AddCollectionBuilder: Builder<AddCollectionDependency>, AddCollectio
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: AddCollectionListener, withData data: EditSelectedCollectionData?) -> AddCollectionRouting {
+    func build(withListener listener: AddCollectionListener, withData data: [(IndexPath, PlaceRegistration)]?) -> AddCollectionRouting {
         let component = AddCollectionComponent(dependency: dependency)
         let viewController = AddCollectionViewController()
         let interactor = AddCollectionInteractor(
             presenter: viewController,
             networkService: component.networkService,
-            data: nil
+            data: data
         )
         interactor.listener = listener
         return AddCollectionRouter(

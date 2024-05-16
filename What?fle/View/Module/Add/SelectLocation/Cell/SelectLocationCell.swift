@@ -62,6 +62,11 @@ final class SelectLocationCell: UITableViewCell {
         super.init(coder: coder)
         setupLayout()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        checkBox.image = .selectOff
+    }
 
     private func setupLayout() {
         contentView.addSubview(self.placeImage)
@@ -113,19 +118,20 @@ final class SelectLocationCell: UITableViewCell {
         }
     }
 
-    func drawCell(model: PlaceRegistration) {
+    private func drawCell(model: PlaceRegistration) {
         titleLabel.text = model.placeName
         subTitleLabel.text = model.roadAddress
         opacityView.isHidden = !model.isEmptyImageURLs
     }
 
-    func drawCheckTypeCell(model: PlaceRegistration) {
+    func drawCheckTypeCell(model: PlaceRegistration, order: Int) {
         drawCell(model: model)
         self.checkBox.isHidden = false
         self.checkBox.snp.updateConstraints {
             $0.leading.equalTo(titleView.snp.trailing).offset(16)
             $0.size.equalTo(24)
         }
+        updateCheckBox(order: order)
     }
 
     func updateCheckBox(order: Int?) {
@@ -138,6 +144,14 @@ final class SelectLocationCell: UITableViewCell {
             checkBox.image = .select3
         case 4:
             checkBox.image = .select4
+        case 5:
+            checkBox.image = .select5
+        case 6:
+            checkBox.image = .select6
+        case 7:
+            checkBox.image = .select7
+        case 8:
+            checkBox.image = .select8
         default:
             checkBox.image = .selectOff
         }
