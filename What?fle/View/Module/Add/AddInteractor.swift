@@ -57,6 +57,11 @@ extension AddInteractor: AddInteractable {
         router?.closeCurrentRIB()
     }
 
+    func completeRegistLocation() {
+        closeRegistLocation()
+        popCurrentRIB()
+    }
+
     func closeAddCollection() {
         router?.closeCurrentRIB()
     }
