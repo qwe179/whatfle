@@ -23,6 +23,7 @@ protocol RegistLocationPresentable: Presentable {
 
 protocol RegistLocationListener: AnyObject {
     func closeRegistLocation()
+    func completeRegistLocation()
 }
 
 final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresentable>,
@@ -72,7 +73,7 @@ final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresen
             .subscribe(onSuccess: { [weak self] _ in
                 guard let self else { return }
                 LoadingIndicatorService.shared.hideLoading()
-                self.closeRegistLocation()
+                self.completeRegistLocation()
             }, onFailure: { error in
                 LoadingIndicatorService.shared.hideLoading()
                 if let error = error as? CustomError {
@@ -98,6 +99,10 @@ final class RegistLocationInteractor: PresentableInteractor<RegistLocationPresen
 extension RegistLocationInteractor: RegistLocationListener {
     func closeRegistLocation() {
         listener?.closeRegistLocation()
+    }
+
+    func completeRegistLocation() {
+        listener?.completeRegistLocation()
     }
 }
 
