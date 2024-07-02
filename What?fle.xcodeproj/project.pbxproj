@@ -100,6 +100,10 @@
 		456B09CE2BB953B200920C54 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B09CD2BB953B200920C54 /* UITextField+.swift */; };
 		456B09D22BB954DA00920C54 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B09D12BB954DA00920C54 /* Date+.swift */; };
 		456B09D42BB9566C00920C54 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B09D32BB9566C00920C54 /* CustomTextView.swift */; };
+		6C7859022C33E29700C352CF /* MyPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7858FE2C33E29700C352CF /* MyPageRouter.swift */; };
+		6C7859032C33E29700C352CF /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7858FF2C33E29700C352CF /* MyPageViewController.swift */; };
+		6C7859042C33E29700C352CF /* MyPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7859002C33E29700C352CF /* MyPageBuilder.swift */; };
+		6C7859052C33E29700C352CF /* MyPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7859012C33E29700C352CF /* MyPageInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -194,6 +198,10 @@
 		456B09CD2BB953B200920C54 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		456B09D12BB954DA00920C54 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		456B09D32BB9566C00920C54 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		6C7858FE2C33E29700C352CF /* MyPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRouter.swift; sourceTree = "<group>"; };
+		6C7858FF2C33E29700C352CF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		6C7859002C33E29700C352CF /* MyPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageBuilder.swift; sourceTree = "<group>"; };
+		6C7859012C33E29700C352CF /* MyPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +343,7 @@
 				39333D692B899395005F295A /* Home */,
 				39EBCDF12B8A268B00599D58 /* Add */,
 				39EBCDF02B8A268500599D58 /* Map */,
+				6C7858FD2C33E21D00C352CF /* MyPage */,
 				3939FFCC2B8DFD0E007E58F6 /* What?fleUIKit */,
 			);
 			path = Module;
@@ -604,6 +613,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		6C7858FD2C33E21D00C352CF /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				6C7858FE2C33E29700C352CF /* MyPageRouter.swift */,
+				6C7858FF2C33E29700C352CF /* MyPageViewController.swift */,
+				6C7859002C33E29700C352CF /* MyPageBuilder.swift */,
+				6C7859012C33E29700C352CF /* MyPageInteractor.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -748,6 +768,10 @@
 				39CF56AA2BC0F0A300E718C8 /* AddCollectionBuilder.swift in Sources */,
 				39EBCE002B8A26BF00599D58 /* MapBuilder.swift in Sources */,
 				39CF56AB2BC0F0A300E718C8 /* AddCollectionInteractor.swift in Sources */,
+				6C7859022C33E29700C352CF /* MyPageRouter.swift in Sources */,
+				6C7859032C33E29700C352CF /* MyPageViewController.swift in Sources */,
+				6C7859042C33E29700C352CF /* MyPageBuilder.swift in Sources */,
+				6C7859052C33E29700C352CF /* MyPageInteractor.swift in Sources */,
 				398347892BC1885400C25F63 /* RegisteredLocationModel.swift in Sources */,
 				3939FFDB2B90D063007E58F6 /* KakaoAPI.swift in Sources */,
 				456B09D22BB954DA00920C54 /* Date+.swift in Sources */,
