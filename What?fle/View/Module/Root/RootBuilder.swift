@@ -15,7 +15,7 @@ protocol RootDependency: Dependency {
 
 final class RootComponent: Component<RootDependency> {}
 
-extension RootComponent: HomeDependency, AddDependency, MapDependency {
+extension RootComponent: HomeDependency, AddDependency, MyPageDependency {
     var networkService: NetworkServiceDelegate {
         return dependency.networkService
     }
@@ -28,8 +28,8 @@ extension RootComponent: HomeDependency, AddDependency, MapDependency {
         return AddBuilder(dependency: self)
     }
 
-    var mapBuilder: MapBuildable {
-        return MapBuilder(dependency: self)
+    var myPageBuilder: MyPageBuildable {
+        return MyPageBuilder(dependency: self)
     }
 }
 

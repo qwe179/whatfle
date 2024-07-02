@@ -12,9 +12,7 @@ protocol MyPageInteractable: Interactable {
     var listener: MyPageListener? { get set }
 }
 
-protocol MyPageViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-}
+protocol MyPageViewControllable: ViewControllable {}
 
 final class MyPageRouter: ViewableRouter<MyPageInteractable, MyPageViewControllable>, MyPageRouting {
 
