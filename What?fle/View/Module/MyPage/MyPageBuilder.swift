@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import UIKit
 
 protocol MyPageDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
@@ -32,8 +33,15 @@ final class MyPageBuilder: Builder<MyPageDependency>, MyPageBuildable {
     func build(withListener listener: MyPageListener) -> MyPageRouting {
         let component = MyPageComponent(dependency: dependency)
         let viewController = MyPageViewController()
+        let navigationController = UINavigationController(root: viewController)
+        navigationController.modalPresentationStyle = .overFullScreen
         let interactor = MyPageInteractor(presenter: viewController)
         interactor.listener = listener
-        return MyPageRouter(interactor: interactor, viewController: viewController)
+        return MyPageRouter(
+            interactor: interactor,
+            viewController: viewController,
+            navigationController: navigationController,
+            component: component
+        )
     }
 }

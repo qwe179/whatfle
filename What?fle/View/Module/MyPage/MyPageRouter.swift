@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import UIKit
 
 protocol MyPageInteractable: Interactable {
     var router: MyPageRouting? { get set }
@@ -15,9 +16,22 @@ protocol MyPageInteractable: Interactable {
 protocol MyPageViewControllable: ViewControllable {}
 
 final class MyPageRouter: ViewableRouter<MyPageInteractable, MyPageViewControllable>, MyPageRouting {
+    private let component: MyPageComponent
+    let navigationController: UINavigationController
+    private weak var currentChild: ViewableRouting?
 
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: MyPageInteractable, viewController: MyPageViewControllable) {
+    deinit {
+        print("\(self) is being deinit")
+    }
+
+    init(
+        interactor: MyPageInteractable,
+        viewController: MyPageViewControllable,
+        navigationController: UINavigationController,
+        component: MyPageComponent
+    ) {
+        self.component = component
+        self.navigationController = navigationController
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }

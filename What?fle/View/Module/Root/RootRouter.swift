@@ -47,6 +47,7 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable> {
 
         let myPageRouter = component.myPageBuilder.build(withListener: interactor)
         let myPageNavigation = UINavigationController(root: myPageRouter.viewControllable)
+        myPageNavigation.setNavigationBarHidden(true, animated: false)
         myPageNavigation.tabBarItem = tabBarItem(type: .mypage)
         attachChild(myPageRouter)
 
