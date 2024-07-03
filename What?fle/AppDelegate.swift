@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        KakaoSDK.initSDK(appKey: "9403f17ccf7e45e8840cd27a19dff040")
         return true
     }
 

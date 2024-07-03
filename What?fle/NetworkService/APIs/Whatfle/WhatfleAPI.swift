@@ -7,19 +7,22 @@
 
 import UIKit
 import Moya
-
+import KakaoSDKUser
+import KakaoSDKAuth
 enum WhatfleAPI {
     case uploadPlaceImage(images: [UIImage])
     case registerPlace(PlaceRegistration)
     case retriveRegistLocation
     case getAllMyPlace
+    case kakaoLogin(User)
 }
 
 extension WhatfleAPI: TargetType {
     var method: Moya.Method {
         switch self {
         case .registerPlace,
-             .uploadPlaceImage:
+             .uploadPlaceImage,
+             .kakaoLogin:
             return .post
         default:
             return .get
@@ -60,6 +63,13 @@ extension WhatfleAPI: TargetType {
                 }
             }
             return .uploadMultipart(multipartData)
+        case .kakaoLogin(let user):
+            let parameters: [String: Any] = [
+                "email": "\(String(describing: user.kakaoAccount))",
+                "thirdPartyAuthType": "Kakao",
+                "thirdPartyAuthUid": "\(String(describing: user.id))"
+            ]
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }
@@ -83,6 +93,8 @@ extension WhatfleAPI: TargetType {
             return URL(string: AppConfigs.API.BaseURL.Kakao.search)!
         case .uploadPlaceImage:
             return URL(string: AppConfigs.API.BaseURL.dev)!
+        case .kakaoLogin:
+            return URL(string: AppConfigs.API.BaseURL.dev)!
         }
     }
 
@@ -94,6 +106,8 @@ extension WhatfleAPI: TargetType {
             return "/image/place"
         case .getAllMyPlace:
             return "/places"
+        case .kakaoLogin:
+            return "/account/signin"
         default:
             return ""
         }

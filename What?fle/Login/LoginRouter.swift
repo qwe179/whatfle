@@ -7,13 +7,12 @@
 
 import RIBs
 
-protocol LoginInteractable: Interactable {
+protocol LoginInteractable: Interactable, TermsOfUseListener {
     var router: LoginRouting? { get set }
     var listener: LoginListener? { get set }
 }
 
 protocol LoginViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
 final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> {
@@ -33,5 +32,13 @@ final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> 
 }
 
 extension LoginRouter: LoginRouting {
-    
+    func routeToTermsOfUse() {
+        if self.currentChild == nil {
+            let router = self.component.termsOfUseBuilder.build(withListener: self.interactor)
+            router.viewControllable.setPresentationStyle(style: .overFullScreen)
+            viewController.present(router.viewControllable, animated: true)
+            self.attachChild(router)
+            self.currentChild = router
+        }
+    }
 }

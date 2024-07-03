@@ -8,17 +8,20 @@
 import RIBs
 
 protocol LoginDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var networkService: NetworkServiceDelegate { get }
 }
 
-final class LoginComponent: Component<EmptyComponent>, LoginDependency {
+final class LoginComponent: Component<EmptyComponent>, LoginDependency, TermsOfUseDependency {
     init() {
         super.init(dependency: EmptyComponent())
     }
 
     var builder: LoginBuildable {
         return LoginBuilder(dependency: self)
+    }
+
+    var termsOfUseBuilder: TermsOfUseBuildable {
+        return TermsOfUseBuilder(dependency: self)
     }
 
     var networkService: NetworkServiceDelegate {
@@ -41,7 +44,7 @@ final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
     func build() -> LaunchRouting {
         let component = LoginComponent()
         let viewController = LoginViewController()
-        let interactor = LoginInteractor(presenter: viewController)
+        let interactor = LoginInteractor(presenter: viewController, networkService: component.networkService)
         return LoginRouter(interactor: interactor, viewController: viewController, component: component)
     }
 }

@@ -7,9 +7,14 @@
 
 import RIBs
 import RxSwift
+import RxKakaoSDKCommon
+import KakaoSDKUser
+import RxKakaoSDKUser
+import KakaoSDKAuth
+import Foundation
 
 protocol LoginRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func routeToTermsOfUse()
 }
 
 protocol LoginPresentable: Presentable {
@@ -18,28 +23,59 @@ protocol LoginPresentable: Presentable {
 }
 
 protocol LoginListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func loginWithKakao()
 }
 
 final class LoginInteractor: PresentableInteractor<LoginPresentable>, LoginInteractable, LoginPresentableListener {
 
     weak var router: LoginRouting?
     weak var listener: LoginListener?
+    
+    private let networkService: NetworkServiceDelegate
+    private let disposeBag = DisposeBag()
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
-    override init(presenter: LoginPresentable) {
+    deinit {
+        print("\(self) is being deinit")
+    }
+
+    init(presenter: LoginPresentable, networkService: NetworkServiceDelegate) {
+        self.networkService = networkService
         super.init(presenter: presenter)
         presenter.listener = self
     }
 
-    override func didBecomeActive() {
-        super.didBecomeActive()
-        // TODO: Implement business logic here.
+    func loginWithKakao() {
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.rx.loginWithKakaoTalk()
+                .subscribe(onNext:{ [weak self] oauthToken in
+                    guard let self = self else { return }
+                    self.getKaKaoUserInfo(oauthToken: oauthToken)
+                }, onError: { error in
+                    print("loginWithKakaoTalk() error: \(error.localizedDescription)")
+                })
+                .disposed(by: disposeBag)
+        }
     }
 
-    override func willResignActive() {
-        super.willResignActive()
-        // TODO: Pause any business logic.
+    func getKaKaoUserInfo(oauthToken: OAuthToken) {
+        UserApi.shared.rx.me()
+            .subscribe (onSuccess:{ [weak self] user in
+                guard let self = self else { return }
+                self.loginServer(user: user)
+                    .subscribe(onSuccess: { _ in
+                        self.router?.routeToTermsOfUse()
+                    })
+            }, onFailure: {error in
+                // TODO: 로그인 실패 처리
+                print(error)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func loginServer(user: User) -> Single<LoginModel> {
+        networkService.request(WhatfleAPI.kakaoLogin(user))
+        .map { response -> LoginModel in
+            return try JSONDecoder().decode(LoginModel.self, from: response.data)
+        }
     }
 }

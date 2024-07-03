@@ -7,10 +7,16 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 import UIKit
+import Alamofire
+import RxKakaoSDKCommon
+import KakaoSDKUser
+import RxKakaoSDKUser
+import KakaoSDKAuth
 
 protocol LoginPresentableListener: AnyObject {
-
+    func loginWithKakao()
 }
 
 final class LoginViewController: UIViewController, LoginPresentable, LoginViewControllable {
@@ -69,12 +75,13 @@ final class LoginViewController: UIViewController, LoginPresentable, LoginViewCo
         }
         return control
     }()
-
+    private let disposeBag = DisposeBag()
     weak var listener: LoginPresentableListener?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUI()
+        self.setupActionBinding()
     }
 }
 
@@ -117,5 +124,14 @@ extension LoginViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(16)
         }
+    }
+
+    private func setupActionBinding() {
+        kakaoLoginButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                self.listener?.loginWithKakao()
+            })
+            .disposed(by: disposeBag)
     }
 }

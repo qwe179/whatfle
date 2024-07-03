@@ -6,8 +6,9 @@
 //
 
 import UIKit
-
 import RIBs
+import RxKakaoSDKAuth
+import KakaoSDKAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -28,6 +29,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let launchRouter = splashBuilder.build()
         self.launchRouter = launchRouter
         launchRouter.launch(from: window)
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                _ = AuthController.rx.handleOpenUrl(url: url)
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {}
