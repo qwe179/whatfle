@@ -11,6 +11,7 @@ import RxSwift
 
 protocol SplashRouting: ViewableRouting {
     func routeToRoot()
+    func routeToLogin()
 }
 
 protocol SplashPresentable: Presentable {
@@ -27,7 +28,8 @@ final class SplashInteractor: PresentableInteractor<SplashPresentable>, SplashIn
     override func didBecomeActive() {
         super.didBecomeActive()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.router?.routeToRoot()
+            // self?.router?.routeToRoot()
+            self?.router?.routeToLogin()
         }
     }
 }

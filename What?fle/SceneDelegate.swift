@@ -51,4 +51,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             rootRouter.launch(from: window)
         }
     }
+
+    func switchToLogin() {
+        let component = LoginComponent()
+        let builder = LoginBuilder(dependency: component)
+        let loginRouter = builder.build()
+
+        if let window = self.window {
+            self.launchRouter = nil
+            self.launchRouter = loginRouter
+            loginRouter.launch(from: window)
+        }
+    }
 }

@@ -16,11 +16,22 @@ protocol LoginViewControllable: ViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
-final class LoginRouter: ViewableRouter<LoginInteractable, LoginViewControllable>, LoginRouting {
+final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> {
+    private let component: LoginComponent
+    private weak var currentChild: ViewableRouting?
 
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: LoginInteractable, viewController: LoginViewControllable) {
+    init(
+        interactor: LoginInteractable,
+        viewController: LoginViewControllable,
+        component: LoginComponent
+    ) {
+        self.component = component
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
+
+}
+
+extension LoginRouter: LoginRouting {
+    
 }

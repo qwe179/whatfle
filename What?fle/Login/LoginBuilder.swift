@@ -12,15 +12,24 @@ protocol LoginDependency: Dependency {
     // created by this RIB.
 }
 
-final class LoginComponent: Component<LoginDependency> {
+final class LoginComponent: Component<EmptyComponent>, LoginDependency {
+    init() {
+        super.init(dependency: EmptyComponent())
+    }
 
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var builder: LoginBuildable {
+        return LoginBuilder(dependency: self)
+    }
+
+    var networkService: NetworkServiceDelegate {
+        return NetworkService()
+    }
 }
 
 // MARK: - Builder
 
 protocol LoginBuildable: Buildable {
-    func build(withListener listener: LoginListener) -> LoginRouting
+    func build() -> LaunchRouting
 }
 
 final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
@@ -29,11 +38,10 @@ final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: LoginListener) -> LoginRouting {
-        let component = LoginComponent(dependency: dependency)
+    func build() -> LaunchRouting {
+        let component = LoginComponent()
         let viewController = LoginViewController()
         let interactor = LoginInteractor(presenter: viewController)
-        interactor.listener = listener
-        return LoginRouter(interactor: interactor, viewController: viewController)
+        return LoginRouter(interactor: interactor, viewController: viewController, component: component)
     }
 }
