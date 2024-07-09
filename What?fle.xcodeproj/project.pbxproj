@@ -112,6 +112,8 @@
 		6C7859212C353C0C00C352CF /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591D2C353C0C00C352CF /* TermsOfUseViewController.swift */; };
 		6C7859222C353C0C00C352CF /* TermsOfUseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591E2C353C0C00C352CF /* TermsOfUseBuilder.swift */; };
 		6C7859232C353C0C00C352CF /* TermsOfUseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591F2C353C0C00C352CF /* TermsOfUseInteractor.swift */; };
+		6CDCC75F2C364CC7007D545D /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC75E2C364CC7007D545D /* Supabase */; };
+		6CEBF7122C3D078100D393C4 /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEBF7112C3D078100D393C4 /* SupabaseService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -215,6 +217,7 @@
 		6C78591D2C353C0C00C352CF /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		6C78591E2C353C0C00C352CF /* TermsOfUseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseBuilder.swift; sourceTree = "<group>"; };
 		6C78591F2C353C0C00C352CF /* TermsOfUseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseInteractor.swift; sourceTree = "<group>"; };
+		6CEBF7112C3D078100D393C4 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +232,7 @@
 				6C7859152C35047A00C352CF /* RxKakaoSDKAuth in Frameworks */,
 				39333CE52B86494C005F295A /* RxCocoa in Frameworks */,
 				6C7859132C35047A00C352CF /* RxKakaoSDK in Frameworks */,
+				6CDCC75F2C364CC7007D545D /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +274,7 @@
 				39CBE1112BC62869003CB3F0 /* Splash */,
 				6C7859062C34289200C352CF /* Login */,
 				3983477D2BC17C4700C25F63 /* View */,
+				6CEBF7102C3D076F00D393C4 /* SupabaseService */,
 				3939FFD02B8F6B91007E58F6 /* NetworkService */,
 				39333D042B865110005F295A /* Extension */,
 				39333CDA2B864787005F295A /* LaunchScreen.storyboard */,
@@ -659,6 +664,14 @@
 				6C78591F2C353C0C00C352CF /* TermsOfUseInteractor.swift */,
 			);
 			path = Terms;
+			sourceTree = "<group>";
+		};
+		6CEBF7102C3D076F00D393C4 /* SupabaseService */ = {
+			isa = PBXGroup;
+			children = (
+				6CEBF7112C3D078100D393C4 /* SupabaseService.swift */,
+			);
+			path = SupabaseService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
