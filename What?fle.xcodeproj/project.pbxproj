@@ -112,8 +112,14 @@
 		6C7859212C353C0C00C352CF /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591D2C353C0C00C352CF /* TermsOfUseViewController.swift */; };
 		6C7859222C353C0C00C352CF /* TermsOfUseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591E2C353C0C00C352CF /* TermsOfUseBuilder.swift */; };
 		6C7859232C353C0C00C352CF /* TermsOfUseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591F2C353C0C00C352CF /* TermsOfUseInteractor.swift */; };
+		6CDCC7552C364CC7007D545D /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC7542C364CC7007D545D /* Auth */; };
+		6CDCC7572C364CC7007D545D /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC7562C364CC7007D545D /* Functions */; };
+		6CDCC7592C364CC7007D545D /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC7582C364CC7007D545D /* PostgREST */; };
+		6CDCC75B2C364CC7007D545D /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC75A2C364CC7007D545D /* Realtime */; };
+		6CDCC75D2C364CC7007D545D /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC75C2C364CC7007D545D /* Storage */; };
 		6CDCC75F2C364CC7007D545D /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC75E2C364CC7007D545D /* Supabase */; };
 		6CEBF7122C3D078100D393C4 /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEBF7112C3D078100D393C4 /* SupabaseService.swift */; };
+		6CEBF7152C3D200000D393C4 /* AppleLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEBF7142C3D200000D393C4 /* AppleLoginHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -217,7 +223,10 @@
 		6C78591D2C353C0C00C352CF /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		6C78591E2C353C0C00C352CF /* TermsOfUseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseBuilder.swift; sourceTree = "<group>"; };
 		6C78591F2C353C0C00C352CF /* TermsOfUseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseInteractor.swift; sourceTree = "<group>"; };
+		6C7859242C35445100C352CF /* What?fle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "What?fle.entitlements"; sourceTree = "<group>"; };
+		6CDCC7462C358F7F007D545D /* What?fleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "What?fleRelease.entitlements"; sourceTree = "<group>"; };
 		6CEBF7112C3D078100D393C4 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
+		6CEBF7142C3D200000D393C4 /* AppleLoginHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,13 +234,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CDCC75D2C364CC7007D545D /* Storage in Frameworks */,
 				39333CEE2B864998005F295A /* RIBs in Frameworks */,
 				39333CEB2B864979005F295A /* SnapKit in Frameworks */,
 				39333CE82B86496C005F295A /* Moya in Frameworks */,
+				6CDCC7572C364CC7007D545D /* Functions in Frameworks */,
+				6CDCC7592C364CC7007D545D /* PostgREST in Frameworks */,
 				6C7859172C35047A00C352CF /* RxKakaoSDKCommon in Frameworks */,
 				6C7859152C35047A00C352CF /* RxKakaoSDKAuth in Frameworks */,
 				39333CE52B86494C005F295A /* RxCocoa in Frameworks */,
+				6CDCC7552C364CC7007D545D /* Auth in Frameworks */,
 				6C7859132C35047A00C352CF /* RxKakaoSDK in Frameworks */,
+				6CDCC75B2C364CC7007D545D /* Realtime in Frameworks */,
 				6CDCC75F2C364CC7007D545D /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +280,8 @@
 		39333CCE2B864786005F295A /* What?fle */ = {
 			isa = PBXGroup;
 			children = (
+				6CDCC7462C358F7F007D545D /* What?fleRelease.entitlements */,
+				6C7859242C35445100C352CF /* What?fle.entitlements */,
 				39333D722B89A3AA005F295A /* AppComponent.swift */,
 				39333CCF2B864786005F295A /* AppDelegate.swift */,
 				39333CD12B864786005F295A /* SceneDelegate.swift */,
@@ -638,6 +654,7 @@
 		6C7859062C34289200C352CF /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				6CEBF7132C3D1FF100D393C4 /* AppleLogin */,
 				6C7859182C3537F400C352CF /* Entity */,
 				6C7859072C3428C500C352CF /* LoginRouter.swift */,
 				6C7859082C3428C500C352CF /* LoginViewController.swift */,
@@ -674,6 +691,14 @@
 			path = SupabaseService;
 			sourceTree = "<group>";
 		};
+		6CEBF7132C3D1FF100D393C4 /* AppleLogin */ = {
+			isa = PBXGroup;
+			children = (
+				6CEBF7142C3D200000D393C4 /* AppleLoginHelper.swift */,
+			);
+			path = AppleLogin;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -699,6 +724,12 @@
 				6C7859122C35047A00C352CF /* RxKakaoSDK */,
 				6C7859142C35047A00C352CF /* RxKakaoSDKAuth */,
 				6C7859162C35047A00C352CF /* RxKakaoSDKCommon */,
+				6CDCC7542C364CC7007D545D /* Auth */,
+				6CDCC7562C364CC7007D545D /* Functions */,
+				6CDCC7582C364CC7007D545D /* PostgREST */,
+				6CDCC75A2C364CC7007D545D /* Realtime */,
+				6CDCC75C2C364CC7007D545D /* Storage */,
+				6CDCC75E2C364CC7007D545D /* Supabase */,
 			);
 			productName = "What?fle";
 			productReference = 39333CCC2B864786005F295A /* What?fle.app */;
@@ -734,6 +765,7 @@
 				39333CE92B864979005F295A /* XCRemoteSwiftPackageReference "SnapKit" */,
 				39333CEC2B864998005F295A /* XCRemoteSwiftPackageReference "RIBs" */,
 				6C7859112C35047A00C352CF /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
+				6CDCC7532C364CC7007D545D /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			productRefGroup = 39333CCD2B864786005F295A /* Products */;
 			projectDirPath = "";
@@ -796,6 +828,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C78590B2C3428C500C352CF /* LoginRouter.swift in Sources */,
+				6CEBF7122C3D078100D393C4 /* SupabaseService.swift in Sources */,
 				6C78590C2C3428C500C352CF /* LoginViewController.swift in Sources */,
 				6C78590D2C3428C500C352CF /* LoginBuilder.swift in Sources */,
 				6C78590E2C3428C500C352CF /* LoginInteractor.swift in Sources */,
@@ -869,6 +902,7 @@
 				6C7859202C353C0C00C352CF /* TermsOfUseRouter.swift in Sources */,
 				6C7859212C353C0C00C352CF /* TermsOfUseViewController.swift in Sources */,
 				6C7859222C353C0C00C352CF /* TermsOfUseBuilder.swift in Sources */,
+				6CEBF7152C3D200000D393C4 /* AppleLoginHelper.swift in Sources */,
 				6C7859232C353C0C00C352CF /* TermsOfUseInteractor.swift in Sources */,
 				399974172BCFFEDE009AF937 /* RegistCollectionBuilder.swift in Sources */,
 				39EEFD7F2BC22D2300A39833 /* SelectLocationResultCell.swift in Sources */,
@@ -1019,9 +1053,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "What?fle/What?fle.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WR274B83CM;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = CB95NTZJ5Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "What?fle/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1034,8 +1071,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Pane.What-fle";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Whatfle.What-fle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "What?fle";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1047,9 +1086,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "What?fle/What?fleRelease.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WR274B83CM;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = CB95NTZJ5Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "What?fle/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1062,8 +1104,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Pane.What-fle";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Whatfle.What-fle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "What?fle";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1134,6 +1178,14 @@
 				minimumVersion = 2.22.3;
 			};
 		};
+		6CDCC7532C364CC7007D545D /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1171,6 +1223,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6C7859112C35047A00C352CF /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */;
 			productName = RxKakaoSDKCommon;
+		};
+		6CDCC7542C364CC7007D545D /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CDCC7532C364CC7007D545D /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		6CDCC7562C364CC7007D545D /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CDCC7532C364CC7007D545D /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		6CDCC7582C364CC7007D545D /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CDCC7532C364CC7007D545D /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		6CDCC75A2C364CC7007D545D /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CDCC7532C364CC7007D545D /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		6CDCC75C2C364CC7007D545D /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CDCC7532C364CC7007D545D /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		6CDCC75E2C364CC7007D545D /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CDCC7532C364CC7007D545D /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

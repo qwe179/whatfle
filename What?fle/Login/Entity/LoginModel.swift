@@ -10,36 +10,39 @@ import Foundation
 // MARK: - LoginModel
 struct LoginModel: Codable {
     let id: Int
-    let thirdPartyAuthType, thirdPartyAuthUid: String
-    let nickname, profileImagePath: JSONNull?
-    let email, createdAt: String
-    let updatedAt, deletedAt: JSONNull?
+    let thirdPartyAuthType: String
+    let thirdPartyAuthUid: String
+    let nickname: String?
+    let profileImagePath: String?
+    let email: String?
+    let createdAt: String
+    let updatedAt: String?
+    let deletedAt: String?
     let isAgreement: Bool
 }
 
 // MARK: - Encode/decode helpers
 
-class JSONNull: Codable, Hashable {
-
+struct JSONNull: Codable, Hashable {
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-            return true
+        return true
     }
 
-    public var hashValue: Int {
-            return 0
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(0)
     }
 
     public init() {}
 
-    public required init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            if !container.decodeNil() {
-                    throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-            }
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if !container.decodeNil() {
+            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
+        }
     }
 
     public func encode(to encoder: Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encodeNil()
+        var container = encoder.singleValueContainer()
+        try container.encodeNil()
     }
 }

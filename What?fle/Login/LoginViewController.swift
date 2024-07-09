@@ -14,9 +14,11 @@ import RxKakaoSDKCommon
 import KakaoSDKUser
 import RxKakaoSDKUser
 import KakaoSDKAuth
+import Supabase
 
 protocol LoginPresentableListener: AnyObject {
     func loginWithKakao()
+    func loginWithApple()
 }
 
 final class LoginViewController: UIViewController, LoginPresentable, LoginViewControllable {
@@ -131,6 +133,13 @@ extension LoginViewController {
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 self.listener?.loginWithKakao()
+            })
+            .disposed(by: disposeBag)
+
+        appleLoginButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                self.listener?.loginWithApple()
             })
             .disposed(by: disposeBag)
     }

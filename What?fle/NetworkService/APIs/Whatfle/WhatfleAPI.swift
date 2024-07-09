@@ -14,7 +14,8 @@ enum WhatfleAPI {
     case registerPlace(PlaceRegistration)
     case retriveRegistLocation
     case getAllMyPlace
-    case kakaoLogin(User)
+    case kakaoLogin(String, String, OAuthToken)
+    case appleLogin(String, String, String)
 }
 
 extension WhatfleAPI: TargetType {
@@ -22,7 +23,8 @@ extension WhatfleAPI: TargetType {
         switch self {
         case .registerPlace,
              .uploadPlaceImage,
-             .kakaoLogin:
+             .kakaoLogin,
+             .appleLogin:
             return .post
         default:
             return .get
@@ -63,11 +65,18 @@ extension WhatfleAPI: TargetType {
                 }
             }
             return .uploadMultipart(multipartData)
-        case .kakaoLogin(let user):
+        case .kakaoLogin(let email, let uid, _):
             let parameters: [String: Any] = [
-                "email": "\(String(describing: user.kakaoAccount))",
-                "thirdPartyAuthType": "Kakao",
-                "thirdPartyAuthUid": "\(String(describing: user.id))"
+                "email": email,
+                "thirdPartyAuthType": "KAKAO",
+                "thirdPartyAuthUid": uid
+            ]
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        case .appleLogin(let email, let uid, _):
+            let parameters: [String: Any] = [
+                "email": email,
+                "thirdPartyAuthType": "APPLE",
+                "thirdPartyAuthUid": uid
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
@@ -79,6 +88,10 @@ extension WhatfleAPI: TargetType {
         switch self {
         case .retriveRegistLocation:
             return ["Authorization": ""]
+        case .kakaoLogin(_, _, let token):
+            return ["Authorization": "Bearer " + token.accessToken]
+        case .appleLogin(_, _, let token):
+            return ["Authorization": "Bearer " + token]
         default:
             return ["Authorization": "\(AppConfigs.API.Key.accessToken)"]
         }
@@ -93,7 +106,8 @@ extension WhatfleAPI: TargetType {
             return URL(string: AppConfigs.API.BaseURL.Kakao.search)!
         case .uploadPlaceImage:
             return URL(string: AppConfigs.API.BaseURL.dev)!
-        case .kakaoLogin:
+        case .kakaoLogin,
+             .appleLogin:
             return URL(string: AppConfigs.API.BaseURL.dev)!
         }
     }
@@ -106,7 +120,8 @@ extension WhatfleAPI: TargetType {
             return "/image/place"
         case .getAllMyPlace:
             return "/places"
-        case .kakaoLogin:
+        case .kakaoLogin,
+             .appleLogin:
             return "/account/signin"
         default:
             return ""

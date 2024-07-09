@@ -9,6 +9,7 @@ import RIBs
 
 protocol LoginDependency: Dependency {
     var networkService: NetworkServiceDelegate { get }
+    var supabaseService: SupabaseServiceDelegate { get }
 }
 
 final class LoginComponent: Component<EmptyComponent>, LoginDependency, TermsOfUseDependency {
@@ -27,6 +28,11 @@ final class LoginComponent: Component<EmptyComponent>, LoginDependency, TermsOfU
     var networkService: NetworkServiceDelegate {
         return NetworkService()
     }
+
+    var supabaseService: SupabaseServiceDelegate {
+        return SupabaseService()
+    }
+
 }
 
 // MARK: - Builder
@@ -44,7 +50,7 @@ final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
     func build() -> LaunchRouting {
         let component = LoginComponent()
         let viewController = LoginViewController()
-        let interactor = LoginInteractor(presenter: viewController, networkService: component.networkService)
+        let interactor = LoginInteractor(presenter: viewController, networkService: component.networkService, supabaseService: component.supabaseService)
         return LoginRouter(interactor: interactor, viewController: viewController, component: component)
     }
 }
