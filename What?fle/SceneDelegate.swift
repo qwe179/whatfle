@@ -69,7 +69,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let window = self.window {
             self.launchRouter = nil
             self.launchRouter = loginRouter
-            loginRouter.launch(from: window)
         }
     }
 }

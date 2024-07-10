@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import UIKit
 
 protocol LoginInteractable: Interactable, ProfileSettingListener {
     var router: LoginRouting? { get set }
@@ -18,13 +19,16 @@ protocol LoginViewControllable: ViewControllable {
 final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> {
     private let component: LoginComponent
     private weak var currentChild: ViewableRouting?
+    private let navigationController: UINavigationController
 
     init(
         interactor: LoginInteractable,
         viewController: LoginViewControllable,
+        navigationController: UINavigationController,
         component: LoginComponent
     ) {
         self.component = component
+        self.navigationController = navigationController
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
@@ -33,12 +37,10 @@ final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> 
 
 extension LoginRouter: LoginRouting {
     func routeToProfileSetting() {
-        if self.currentChild == nil {
-            let router = self.component.profileSetting.build(withListener: self.interactor)
-            router.viewControllable.setPresentationStyle(style: .overFullScreen)
-            viewController.present(router.viewControllable, animated: true)
-            self.attachChild(router)
-            self.currentChild = router
-        }
+        let router = self.component.profileSettingBuilder.build(withListener: self.interactor)
+        self.navigationController.setNavigationBarHidden(true, animated: false)
+        self.navigationController.pushViewController(router.viewControllable.uiviewController, animated: true)
+        self.attachChild(router)
+        self.currentChild = router
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import UIKit
 
 protocol LoginDependency: Dependency {
     var networkService: NetworkServiceDelegate { get }
@@ -21,7 +22,7 @@ final class LoginComponent: Component<EmptyComponent>, LoginDependency, ProfileS
         return LoginBuilder(dependency: self)
     }
 
-    var profileSetting: ProfileSettingBuildable {
+    var profileSettingBuilder: ProfileSettingBuildable {
         return ProfileSettingBuilder(dependency: self)
     }
 
@@ -50,7 +51,18 @@ final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
     func build() -> LaunchRouting {
         let component = LoginComponent()
         let viewController = LoginViewController()
+        let navigationController = UINavigationController(root: viewController)
+        navigationController.modalPresentationStyle = .overFullScreen
         let interactor = LoginInteractor(presenter: viewController, networkService: component.networkService, supabaseService: component.supabaseService)
-        return LoginRouter(interactor: interactor, viewController: viewController, component: component)
+        let window: UIWindow? = UIApplication.shared.keyWindow
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+        interactor.activate()
+        return LoginRouter(
+            interactor: interactor,
+            viewController: viewController,
+            navigationController: navigationController,
+            component: component
+        )
     }
 }

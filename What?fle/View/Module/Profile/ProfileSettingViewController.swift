@@ -18,7 +18,7 @@ protocol ProfileSettingPresentableListener: AnyObject {
 final class ProfileSettingViewController: UIViewController, ProfileSettingPresentable, ProfileSettingViewControllable {
 
     weak var listener: ProfileSettingPresentableListener?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white

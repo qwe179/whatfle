@@ -8,6 +8,8 @@
 import RIBs
 
 protocol ProfileSettingDependency: Dependency {
+    var networkService: NetworkServiceDelegate { get }
+    var supabaseService: SupabaseServiceDelegate { get }
 }
 
 final class ProfileSettingComponent: Component<ProfileSettingDependency> {
