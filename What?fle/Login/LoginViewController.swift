@@ -38,7 +38,7 @@ final class LoginViewController: UIViewController, LoginPresentable, LoginViewCo
     }()
     private let appleLoginButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.image = .apple.withRenderingMode(.alwaysTemplate)
+        config.image = UIImage(systemName: "apple.logo")?.withRenderingMode(.alwaysTemplate)
         config.imagePadding = 8
         config.title = "애플로 로그인하기"
         config.baseForegroundColor = .white
