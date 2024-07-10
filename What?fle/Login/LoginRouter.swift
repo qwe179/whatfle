@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol LoginInteractable: Interactable, TermsOfUseListener {
+protocol LoginInteractable: Interactable, ProfileSettingListener {
     var router: LoginRouting? { get set }
     var listener: LoginListener? { get set }
 }
@@ -32,9 +32,9 @@ final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> 
 }
 
 extension LoginRouter: LoginRouting {
-    func routeToTermsOfUse() {
+    func routeToProfileSetting() {
         if self.currentChild == nil {
-            let router = self.component.termsOfUseBuilder.build(withListener: self.interactor)
+            let router = self.component.profileSetting.build(withListener: self.interactor)
             router.viewControllable.setPresentationStyle(style: .overFullScreen)
             viewController.present(router.viewControllable, animated: true)
             self.attachChild(router)

@@ -16,7 +16,7 @@ import AuthenticationServices
 import Supabase
 
 protocol LoginRouting: ViewableRouting {
-    func routeToTermsOfUse()
+    func routeToProfileSetting()
 }
 
 protocol LoginPresentable: Presentable {
@@ -70,7 +70,7 @@ final class LoginInteractor: PresentableInteractor<LoginPresentable>, LoginInter
                 guard let self = self else { return }
                 self.signinWhatfle(loginInfo: WhatfleAPI.kakaoLogin(user.kakaoAccount?.email ?? "", "", oauthToken))
                     .subscribe(onSuccess: { _ in
-                        self.router?.routeToTermsOfUse()
+                        self.router?.routeToProfileSetting()
                     })
                     .disposed(by: self.disposeBag)
             }, onFailure: { _ in
@@ -106,7 +106,7 @@ extension LoginInteractor: AppleLoginHelperDelegate {
             // SignIn API
             self.signinWhatfle(loginInfo: .appleLogin(email, response.user.id.uuidString.lowercased(), response.accessToken))
                 .subscribe(onSuccess: { _ in
-                    self.router?.routeToTermsOfUse()
+                    self.router?.routeToProfileSetting()
                 }).disposed(by: disposeBag)
         }
     }

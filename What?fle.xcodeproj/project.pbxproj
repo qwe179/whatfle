@@ -108,10 +108,10 @@
 		6C7859152C35047A00C352CF /* RxKakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6C7859142C35047A00C352CF /* RxKakaoSDKAuth */; };
 		6C7859172C35047A00C352CF /* RxKakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 6C7859162C35047A00C352CF /* RxKakaoSDKCommon */; };
 		6C78591A2C35380700C352CF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7859192C35380700C352CF /* LoginModel.swift */; };
-		6C7859202C353C0C00C352CF /* TermsOfUseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591C2C353C0C00C352CF /* TermsOfUseRouter.swift */; };
-		6C7859212C353C0C00C352CF /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591D2C353C0C00C352CF /* TermsOfUseViewController.swift */; };
-		6C7859222C353C0C00C352CF /* TermsOfUseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591E2C353C0C00C352CF /* TermsOfUseBuilder.swift */; };
-		6C7859232C353C0C00C352CF /* TermsOfUseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591F2C353C0C00C352CF /* TermsOfUseInteractor.swift */; };
+		6C7859202C353C0C00C352CF /* ProfileSettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591C2C353C0C00C352CF /* ProfileSettingRouter.swift */; };
+		6C7859212C353C0C00C352CF /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591D2C353C0C00C352CF /* ProfileSettingViewController.swift */; };
+		6C7859222C353C0C00C352CF /* ProfileSettingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591E2C353C0C00C352CF /* ProfileSettingBuilder.swift */; };
+		6C7859232C353C0C00C352CF /* ProfileSettingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78591F2C353C0C00C352CF /* ProfileSettingInteractor.swift */; };
 		6CDCC7552C364CC7007D545D /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC7542C364CC7007D545D /* Auth */; };
 		6CDCC7572C364CC7007D545D /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC7562C364CC7007D545D /* Functions */; };
 		6CDCC7592C364CC7007D545D /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 6CDCC7582C364CC7007D545D /* PostgREST */; };
@@ -219,10 +219,10 @@
 		6C7859092C3428C500C352CF /* LoginBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBuilder.swift; sourceTree = "<group>"; };
 		6C78590A2C3428C500C352CF /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		6C7859192C35380700C352CF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		6C78591C2C353C0C00C352CF /* TermsOfUseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseRouter.swift; sourceTree = "<group>"; };
-		6C78591D2C353C0C00C352CF /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
-		6C78591E2C353C0C00C352CF /* TermsOfUseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseBuilder.swift; sourceTree = "<group>"; };
-		6C78591F2C353C0C00C352CF /* TermsOfUseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseInteractor.swift; sourceTree = "<group>"; };
+		6C78591C2C353C0C00C352CF /* ProfileSettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingRouter.swift; sourceTree = "<group>"; };
+		6C78591D2C353C0C00C352CF /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
+		6C78591E2C353C0C00C352CF /* ProfileSettingBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingBuilder.swift; sourceTree = "<group>"; };
+		6C78591F2C353C0C00C352CF /* ProfileSettingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingInteractor.swift; sourceTree = "<group>"; };
 		6C7859242C35445100C352CF /* What?fle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "What?fle.entitlements"; sourceTree = "<group>"; };
 		6CDCC7462C358F7F007D545D /* What?fleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "What?fleRelease.entitlements"; sourceTree = "<group>"; };
 		6CEBF7112C3D078100D393C4 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 			children = (
 				39D562B82BD69EC600111E9C /* Common */,
 				3939FFDF2B943612007E58F6 /* HelperModuld */,
-				6C78591B2C353BE300C352CF /* Terms */,
+				6C78591B2C353BE300C352CF /* Profile */,
 				39333D0E2B88AD81005F295A /* Root */,
 				39333D692B899395005F295A /* Home */,
 				39EBCDF12B8A268B00599D58 /* Add */,
@@ -672,15 +672,15 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		6C78591B2C353BE300C352CF /* Terms */ = {
+		6C78591B2C353BE300C352CF /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				6C78591C2C353C0C00C352CF /* TermsOfUseRouter.swift */,
-				6C78591D2C353C0C00C352CF /* TermsOfUseViewController.swift */,
-				6C78591E2C353C0C00C352CF /* TermsOfUseBuilder.swift */,
-				6C78591F2C353C0C00C352CF /* TermsOfUseInteractor.swift */,
+				6C78591C2C353C0C00C352CF /* ProfileSettingRouter.swift */,
+				6C78591D2C353C0C00C352CF /* ProfileSettingViewController.swift */,
+				6C78591E2C353C0C00C352CF /* ProfileSettingBuilder.swift */,
+				6C78591F2C353C0C00C352CF /* ProfileSettingInteractor.swift */,
 			);
-			path = Terms;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		6CEBF7102C3D076F00D393C4 /* SupabaseService */ = {
@@ -899,11 +899,11 @@
 				39CBE1192BC6289D003CB3F0 /* SplashInteractor.swift in Sources */,
 				39CF56AF2BC0FD8D00E718C8 /* CustomNavigationBar.swift in Sources */,
 				39195FFD2BAB40D900CC7A2E /* SelectLocationCell.swift in Sources */,
-				6C7859202C353C0C00C352CF /* TermsOfUseRouter.swift in Sources */,
-				6C7859212C353C0C00C352CF /* TermsOfUseViewController.swift in Sources */,
-				6C7859222C353C0C00C352CF /* TermsOfUseBuilder.swift in Sources */,
+				6C7859202C353C0C00C352CF /* ProfileSettingRouter.swift in Sources */,
+				6C7859212C353C0C00C352CF /* ProfileSettingViewController.swift in Sources */,
+				6C7859222C353C0C00C352CF /* ProfileSettingBuilder.swift in Sources */,
 				6CEBF7152C3D200000D393C4 /* AppleLoginHelper.swift in Sources */,
-				6C7859232C353C0C00C352CF /* TermsOfUseInteractor.swift in Sources */,
+				6C7859232C353C0C00C352CF /* ProfileSettingInteractor.swift in Sources */,
 				399974172BCFFEDE009AF937 /* RegistCollectionBuilder.swift in Sources */,
 				39EEFD7F2BC22D2300A39833 /* SelectLocationResultCell.swift in Sources */,
 				39D562BA2BD69ED900111E9C /* UIVCWithKeyboard.swift in Sources */,

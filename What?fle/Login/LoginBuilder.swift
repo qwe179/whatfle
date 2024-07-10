@@ -12,7 +12,7 @@ protocol LoginDependency: Dependency {
     var supabaseService: SupabaseServiceDelegate { get }
 }
 
-final class LoginComponent: Component<EmptyComponent>, LoginDependency, TermsOfUseDependency {
+final class LoginComponent: Component<EmptyComponent>, LoginDependency, ProfileSettingDependency {
     init() {
         super.init(dependency: EmptyComponent())
     }
@@ -21,8 +21,8 @@ final class LoginComponent: Component<EmptyComponent>, LoginDependency, TermsOfU
         return LoginBuilder(dependency: self)
     }
 
-    var termsOfUseBuilder: TermsOfUseBuildable {
-        return TermsOfUseBuilder(dependency: self)
+    var profileSetting: ProfileSettingBuildable {
+        return ProfileSettingBuilder(dependency: self)
     }
 
     var networkService: NetworkServiceDelegate {
