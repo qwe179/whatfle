@@ -101,15 +101,13 @@ extension WhatfleAPI: TargetType {
     var baseURL: URL {
         switch self {
         case .registerPlace,
-             .getAllMyPlace:
+            .getAllMyPlace,
+            .uploadPlaceImage,
+            .kakaoLogin,
+            .appleLogin:
             return URL(string: AppConfigs.API.BaseURL.dev)!
         case .retriveRegistLocation:
             return URL(string: AppConfigs.API.BaseURL.Kakao.search)!
-        case .uploadPlaceImage:
-            return URL(string: AppConfigs.API.BaseURL.dev)!
-        case .kakaoLogin,
-             .appleLogin:
-            return URL(string: AppConfigs.API.BaseURL.dev)!
         }
     }
 
