@@ -90,16 +90,13 @@ final class LoginViewController: UIViewController, LoginPresentable, LoginViewCo
 extension LoginViewController {
     private func setUI() {
         view.backgroundColor = .white
+
         view.addSubview(tutleView)
-        view.addSubview(appleLoginButton)
-        view.addSubview(kakaoLoginButton)
-        view.addSubview(nonMemberControl)
+        tutleView.addSubview(label)
+        tutleView.addSubview(imageView)
         tutleView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(138)
-        }
-        [label, imageView].forEach {
-            tutleView.addSubview($0)
         }
         label.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
@@ -110,18 +107,24 @@ extension LoginViewController {
             $0.width.equalTo(186)
             $0.height.equalTo(145)
         }
+
+        view.addSubview(appleLoginButton)
         appleLoginButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(label.snp.bottom).offset(83)
             $0.height.equalTo(56)
             $0.width.equalTo(327)
         }
+
+        view.addSubview(kakaoLoginButton)
         kakaoLoginButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(appleLoginButton.snp.bottom).offset(8)
             $0.height.equalTo(56)
             $0.width.equalTo(327)
         }
+
+        view.addSubview(nonMemberControl)
         nonMemberControl.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(16)
