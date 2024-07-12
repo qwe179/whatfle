@@ -5,10 +5,11 @@
 //  Created by 이정환 on 4/6/24.
 //
 
-import UIKit
-import Moya
 import KakaoSDKUser
 import KakaoSDKAuth
+import Moya
+import UIKit
+
 enum WhatfleAPI {
     case uploadPlaceImage(images: [UIImage])
     case registerPlace(PlaceRegistration)
