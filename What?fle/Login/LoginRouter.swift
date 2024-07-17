@@ -18,17 +18,15 @@ protocol LoginViewControllable: ViewControllable {
 
 final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> {
     private let component: LoginComponent
-    private weak var currentChild: ViewableRouting?
-    private let navigationController: UINavigationController
+    private weak var loginRouter: LoginRouting?
+    private weak var profileSettingRouter: ProfileSettingRouting?
 
     init(
         interactor: LoginInteractable,
         viewController: LoginViewControllable,
-        navigationController: UINavigationController,
         component: LoginComponent
     ) {
         self.component = component
-        self.navigationController = navigationController
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
@@ -41,10 +39,14 @@ final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> 
 
 extension LoginRouter: LoginRouting {
     func routeToProfileSetting() {
-        let router = self.component.profileSettingBuilder.build(withListener: self.interactor)
-        self.navigationController.setNavigationBarHidden(true, animated: false)
-        self.navigationController.pushViewController(router.viewControllable.uiviewController, animated: true)
-        self.attachChild(router)
-        self.currentChild = router
+        if self.profileSettingRouter == nil {
+            self.viewController.uiviewController.dismiss(animated: true) {
+                let router = self.component.profileSettingBuilder.build(withListener: self.interactor)
+                router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
+                self.viewControllable.uiviewController.present(router.viewControllable.uiviewController, animated: true)
+                self.attachChild(router)
+                self.profileSettingRouter = router
+            }
+        }
     }
 }

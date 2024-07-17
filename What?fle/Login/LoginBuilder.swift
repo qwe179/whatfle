@@ -51,17 +51,11 @@ final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
     func build() -> LaunchRouting {
         let component = LoginComponent(dependency: dependency)
         let viewController = LoginViewController()
-        let navigationController = UINavigationController(root: viewController)
-        navigationController.modalPresentationStyle = .overFullScreen
         let interactor = LoginInteractor(presenter: viewController, networkService: component.networkService, supabaseService: component.supabaseService)
-        let window: UIWindow? = UIApplication.shared.keyWindow
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
         interactor.activate()
         return LoginRouter(
             interactor: interactor,
             viewController: viewController,
-            navigationController: navigationController,
             component: component
         )
     }
