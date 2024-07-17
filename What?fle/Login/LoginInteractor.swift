@@ -4,16 +4,14 @@
 //
 //  Created by 23 09 on 7/2/24.
 //
-
+import AuthenticationServices
+import Foundation
+import KakaoSDKAuth
+import KakaoSDKUser
 import RIBs
 import RxSwift
 import RxKakaoSDKCommon
-import KakaoSDKUser
 import RxKakaoSDKUser
-import KakaoSDKAuth
-import Foundation
-import AuthenticationServices
-import Supabase
 
 protocol LoginRouting: ViewableRouting {
     func routeToProfileSetting()
