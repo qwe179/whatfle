@@ -21,10 +21,7 @@ protocol LoginPresentable: Presentable {
     var listener: LoginPresentableListener? { get set }
 }
 
-protocol LoginListener: AnyObject {
-    func loginWithKakao()
-    func loginWithApple()
-}
+protocol LoginListener: AnyObject { }
 
 final class LoginInteractor: PresentableInteractor<LoginPresentable>, LoginInteractable, LoginPresentableListener {
 
