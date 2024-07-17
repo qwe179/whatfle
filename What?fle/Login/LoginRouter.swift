@@ -33,6 +33,10 @@ final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> 
         interactor.router = self
     }
 
+    deinit {
+        print("\(self) is being deinit")
+    }
+
 }
 
 extension LoginRouter: LoginRouting {

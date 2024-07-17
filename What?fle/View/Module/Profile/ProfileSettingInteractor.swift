@@ -8,15 +8,13 @@
 import RIBs
 import RxSwift
 
-protocol ProfileSettingRouting: ViewableRouting {
-}
+protocol ProfileSettingRouting: ViewableRouting {}
 
 protocol ProfileSettingPresentable: Presentable {
     var listener: ProfileSettingPresentableListener? { get set }
 }
 
-protocol ProfileSettingListener: AnyObject {
-}
+protocol ProfileSettingListener: AnyObject {}
 
 final class ProfileSettingInteractor: PresentableInteractor<ProfileSettingPresentable>, ProfileSettingInteractable, ProfileSettingPresentableListener {
 

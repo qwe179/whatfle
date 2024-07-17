@@ -76,6 +76,10 @@ final class LoginViewController: UIViewController, LoginPresentable, LoginViewCo
     private let disposeBag = DisposeBag()
     weak var listener: LoginPresentableListener?
 
+    deinit {
+        print("\(self) is being deinit")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUI()

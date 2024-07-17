@@ -13,8 +13,12 @@ protocol AppleLoginHelperDelegate: AnyObject {
     func didCompleteWithError(error: Error)
 }
 
-class AppleLoginHelper: NSObject {
+final class AppleLoginHelper: NSObject {
     weak var delegate: AppleLoginHelperDelegate?
+
+    deinit {
+        print("\(self) is being deinit")
+    }
 
     func startAppleLogin() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()

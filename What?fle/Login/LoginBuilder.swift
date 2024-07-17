@@ -44,6 +44,10 @@ final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
         super.init(dependency: dependency)
     }
 
+    deinit {
+        print("\(self) is being deinit")
+    }
+
     func build() -> LaunchRouting {
         let component = LoginComponent(dependency: dependency)
         let viewController = LoginViewController()
