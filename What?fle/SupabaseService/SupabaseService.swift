@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import RxSwift
 import Supabase
 
 protocol SupabaseServiceDelegate: AnyObject {
-    func signInWithIdToken(provider: OpenIDConnectCredentials.Provider, idToken: String) async throws -> Session
+    func signInWithIdToken(provider: OpenIDConnectCredentials.Provider, idToken: String) -> Single<Session>
 }
 
 final class SupabaseService: SupabaseServiceDelegate {
@@ -19,17 +20,22 @@ final class SupabaseService: SupabaseServiceDelegate {
         print("\(self) is being deinit")
     }
 
-    func signInWithIdToken(provider: OpenIDConnectCredentials.Provider, idToken: String) async throws -> Session {
-        do {
-            let response = try await client.auth.signInWithIdToken(
-                credentials: .init(
-                    provider: provider,
-                    idToken: idToken
-                )
-            )
-            return response
-        } catch {
-            throw error
+    func signInWithIdToken(provider: OpenIDConnectCredentials.Provider, idToken: String) -> Single<Session> {
+        return Single.create { single in
+            Task {
+                do {
+                    let response = try await self.client.auth.signInWithIdToken(
+                        credentials: .init(
+                            provider: provider,
+                            idToken: idToken
+                        )
+                    )
+                    single(.success(response))
+                } catch {
+                    single(.failure(error))
+                }
+            }
+            return Disposables.create()
         }
     }
 }

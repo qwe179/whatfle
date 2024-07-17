@@ -99,16 +99,17 @@ extension LoginInteractor: AppleLoginHelperDelegate {
             return
         }
 
-        Task {
-            // Supabase 토큰 교환
-            let response = try await supabaseService.signInWithIdToken(provider: .apple, idToken: idTokenString)
-            guard let email = response.user.email else { return }
-            // SignIn API
-            self.signinWhatfle(loginInfo: .appleLogin(email, response.user.id.uuidString.lowercased(), response.accessToken))
-                .subscribe(onSuccess: { _ in
-                    self.router?.routeToProfileSetting()
-                }).disposed(by: disposeBag)
-        }
+        supabaseService.signInWithIdToken(provider: .apple, idToken: idTokenString)
+            .flatMap { response -> Single<LoginModel> in
+                guard let email = response.user.email else {
+                    return Single.error(NSError(domain: "No email found", code: -1, userInfo: nil))
+                }
+                return self.signinWhatfle(loginInfo: .appleLogin(email, response.user.id.uuidString.lowercased(), response.accessToken))
+            }
+            .subscribe(onSuccess: { _ in
+                self.router?.routeToProfileSetting()
+            })
+            .disposed(by: disposeBag)
     }
 
     func didCompleteWithError(error: Error) {
