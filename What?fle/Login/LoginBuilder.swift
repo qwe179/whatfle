@@ -13,11 +13,7 @@ protocol LoginDependency: Dependency {
     var supabaseService: SupabaseServiceDelegate { get }
 }
 
-final class LoginComponent: Component<EmptyComponent>, LoginDependency, ProfileSettingDependency {
-    init() {
-        super.init(dependency: EmptyComponent())
-    }
-
+final class LoginComponent: Component<LoginDependency>, LoginDependency, ProfileSettingDependency {
     var builder: LoginBuildable {
         return LoginBuilder(dependency: self)
     }
@@ -27,7 +23,7 @@ final class LoginComponent: Component<EmptyComponent>, LoginDependency, ProfileS
     }
 
     var networkService: NetworkServiceDelegate {
-        return NetworkService()
+        return dependency.networkService
     }
 
     var supabaseService: SupabaseServiceDelegate {
@@ -49,7 +45,7 @@ final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
     }
 
     func build() -> LaunchRouting {
-        let component = LoginComponent()
+        let component = LoginComponent(dependency: dependency)
         let viewController = LoginViewController()
         let navigationController = UINavigationController(root: viewController)
         navigationController.modalPresentationStyle = .overFullScreen
