@@ -30,7 +30,7 @@ final class SplashRouter: LaunchRouter<SplashInteractable, SplashViewControllabl
 
     func routeToLogin() {
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.switchToLogin()
+            sceneDelegate.switchToRoot()
         }
     }
 }
