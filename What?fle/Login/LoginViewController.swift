@@ -61,21 +61,17 @@ final class LoginViewController: UIViewController, LoginPresentable, LoginViewCo
         button.titleLabel?.font = .title16MD
         return button
     }()
-    private let nonMemberControl: UIControl = {
-        let control: UIControl = .init()
-        let nonMemberButton: UILabel = {
-            let label: UILabel = .init()
-            label.text = "비회원으로 둘러보기"
-            label.textColor = .textExtralight
-            label.font = .body14MD
-            return label
-        }()
-        control.addSubview(nonMemberButton)
-        nonMemberButton.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(8)
-            $0.leading.trailing.equalToSuperview().inset(24)
-        }
-        return control
+    private let nonMemberButton: UIButton = {
+        let button: UIButton = .init()
+        button.setTitle("비회원으로 둘러보기", for: .normal)
+        button.titleLabel?.attributedText = .makeAttributedString(
+            text: "비회원으로 둘러보기",
+            font: .body14MD,
+            textColor: .textExtralight,
+            lineHeight: 20,
+            alignment: .center
+        )
+        return button
     }()
     private let disposeBag = DisposeBag()
     weak var listener: LoginPresentableListener?
@@ -124,8 +120,8 @@ extension LoginViewController {
             $0.width.equalTo(327)
         }
 
-        view.addSubview(nonMemberControl)
-        nonMemberControl.snp.makeConstraints {
+        view.addSubview(nonMemberButton)
+        nonMemberButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(16)
         }
