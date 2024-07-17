@@ -42,6 +42,10 @@ extension AppConfigs {
             }
 
             enum Kakao {
+                static var kakaoLoginAPIKey: String {
+                    (secrets?.value(forKey: "Kakao_LOGIN_API_KEY") as? String) ?? ""
+                }
+
                 static var kakaoRESTAPIKey: String {
                     (secrets?.value(forKey: "Kakao_REST_API_KEY") as? String) ?? ""
                 }
