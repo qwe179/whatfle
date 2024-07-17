@@ -66,13 +66,15 @@ final class LoginInteractor: PresentableInteractor<LoginPresentable>, LoginInter
 
     private func getKaKaoUserInfo(oauthToken: OAuthToken) {
         UserApi.shared.rx.me()
-            .subscribe(onSuccess: { [weak self] user in
-                guard let self = self else { return }
-                self.signinWhatfle(loginInfo: WhatfleAPI.kakaoLogin(user.kakaoAccount?.email ?? "", "", oauthToken))
-                    .subscribe(onSuccess: { _ in
-                        self.router?.routeToProfileSetting()
-                    })
-                    .disposed(by: self.disposeBag)
+            .flatMap { [weak self] user -> Single<LoginModel> in
+                guard let self = self else {
+                    return Single.error(NSError(domain: "Self is Missing", code: -1, userInfo: nil))
+                }
+                let email = user.kakaoAccount?.email ?? ""
+                return self.signinWhatfle(loginInfo: WhatfleAPI.kakaoLogin(email, "", oauthToken))
+            }
+            .subscribe(onSuccess: { [weak self] _ in
+                self?.router?.routeToProfileSetting()
             }, onFailure: { _ in
                 // TODO: 카카오 로그인 실패 처리
             })
