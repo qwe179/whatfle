@@ -17,6 +17,13 @@ protocol HomeViewControllable: ViewControllable {}
 final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, HomeRouting {
 
     override init(interactor: HomeInteractable, viewController: HomeViewControllable) {
+
+    func dismissLogin() {
+        if let loginRouter = self.loginRouter {
+            self.detachChild(loginRouter)
+            self.loginRouter = nil
+        }
+    }
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }

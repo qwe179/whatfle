@@ -8,7 +8,9 @@
 import RIBs
 import RxSwift
 
-protocol HomeRouting: ViewableRouting {}
+protocol HomeRouting: ViewableRouting {
+    func dismissLogin()
+}
 
 protocol HomePresentable: Presentable {
     var listener: HomePresentableListener? { get set }
@@ -24,5 +26,10 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteract
     override init(presenter: HomePresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
+    }
+
+extension HomeInteractor: LoginListener {
+    func dismissLogin() {
+        router?.dismissLogin()
     }
 }
