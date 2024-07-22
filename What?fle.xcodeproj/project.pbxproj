@@ -818,7 +818,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n# Paths to plist files\nINFO_PLIST=\"${PROJECT_DIR}/${INFOPLIST_FILE}\"\nSECRETS_PLIST=\"${PROJECT_DIR}/Extension/Resources/Secrets.plist\"\n\n# Read value from Secrets.plist\nKakao_URL_SCHEME=$(/usr/libexec/PlistBuddy -c \"Print :Kakao_URL_SCHEME\" \"$SECRETS_PLIST\")\n\n# Check if CLIENT_ID was successfully retrieved\nif [ -z \"$Kakao_URL_SCHEME\" ]; then\n  echo \"warning: CLIENT_ID not found in Secrets.plist\"\nelse\n  # Replace placeholder in Info.plist\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleURLTypes:0:CFBundleURLSchemes:0 $Kakao_URL_SCHEME\" \"$INFO_PLIST\"\n  echo \"Updated CFBundleURLSchemes in Info.plist with CLIENT_ID from Secrets.plist\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
