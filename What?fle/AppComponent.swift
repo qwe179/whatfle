@@ -19,4 +19,8 @@ class AppComponent: Component<EmptyComponent>, RootDependency {
     var networkService: NetworkServiceDelegate {
         return NetworkService()
     }
+
+    var supabaseService: SupabaseServiceDelegate {
+        return SupabaseService()
+    }
 }

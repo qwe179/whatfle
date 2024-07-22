@@ -11,13 +11,18 @@ import RIBs
 
 protocol RootDependency: Dependency {
     var networkService: NetworkServiceDelegate { get }
+    var supabaseService: SupabaseServiceDelegate { get }
 }
 
 final class RootComponent: Component<RootDependency> {}
 
-extension RootComponent: HomeDependency, AddDependency, MapDependency {
+extension RootComponent: HomeDependency, AddDependency, MapDependency, LoginDependency {
     var networkService: NetworkServiceDelegate {
         return dependency.networkService
+    }
+
+    var supabaseService: SupabaseServiceDelegate {
+        return dependency.supabaseService
     }
 
     var homeBuilder: HomeBuildable {
@@ -30,6 +35,10 @@ extension RootComponent: HomeDependency, AddDependency, MapDependency {
 
     var mapBuilder: MapBuildable {
         return MapBuilder(dependency: self)
+    }
+    
+    var loginBuilder: LoginBuildable {
+        return LoginBuilder(dependency: self)
     }
 }
 
