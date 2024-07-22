@@ -14,17 +14,18 @@ import RxKakaoSDKCommon
 import RxKakaoSDKUser
 
 protocol LoginRouting: ViewableRouting {
-    func routeToProfileSetting()
+    func closeLogin()
 }
 
 protocol LoginPresentable: Presentable {
     var listener: LoginPresentableListener? { get set }
 }
 
-protocol LoginListener: AnyObject { }
+protocol LoginListener: AnyObject {
+    func dismissLogin()
+}
 
 final class LoginInteractor: PresentableInteractor<LoginPresentable>, LoginInteractable, LoginPresentableListener {
-
     weak var router: LoginRouting?
     weak var listener: LoginListener?
 
@@ -62,14 +63,13 @@ final class LoginInteractor: PresentableInteractor<LoginPresentable>, LoginInter
     private func getKaKaoUserInfo(oauthToken: OAuthToken) {
         UserApi.shared.rx.me()
             .flatMap { [weak self] user -> Single<LoginModel> in
-                guard let self = self else {
-                    return Single.error(NSError(domain: "Self is Missing", code: -1, userInfo: nil))
-                }
+                guard let self = self else { return Single.error(RxError.unknown) }
                 let email = user.kakaoAccount?.email ?? ""
                 return self.signinWhatfle(loginInfo: WhatfleAPI.kakaoLogin(email, "", oauthToken))
             }
             .subscribe(onSuccess: { [weak self] _ in
-                self?.router?.routeToProfileSetting()
+                guard let self = self else { return }
+                self.router?.closeLogin()
             }, onFailure: { _ in
                 // TODO: 카카오 로그인 실패 처리
             })
@@ -97,14 +97,14 @@ extension LoginInteractor: AppleLoginHelperDelegate {
         }
 
         supabaseService.signInWithIdToken(provider: .apple, idToken: idTokenString)
-            .flatMap { response -> Single<LoginModel> in
-                guard let email = response.user.email else {
-                    return Single.error(NSError(domain: "No email found", code: -1, userInfo: nil))
-                }
+            .flatMap { [weak self] response -> Single<LoginModel> in
+                guard let email = response.user.email else { return Single.error(RxError.noElements) }
+                guard let self = self else { return Single.error(RxError.unknown) }
                 return self.signinWhatfle(loginInfo: .appleLogin(email, response.user.id.uuidString.lowercased(), response.accessToken))
             }
-            .subscribe(onSuccess: { _ in
-                self.router?.routeToProfileSetting()
+            .subscribe(onSuccess: { [weak self] _ in
+                guard let self = self else { return }
+                self.router?.closeLogin()
             })
             .disposed(by: disposeBag)
     }

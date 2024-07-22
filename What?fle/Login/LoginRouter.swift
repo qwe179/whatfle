@@ -8,7 +8,7 @@
 import RIBs
 import UIKit
 
-protocol LoginInteractable: Interactable, ProfileSettingListener {
+protocol LoginInteractable: Interactable, ProfileSettingListener, HomeListener {
     var router: LoginRouting? { get set }
     var listener: LoginListener? { get set }
 }
@@ -17,7 +17,8 @@ protocol LoginViewControllable: ViewControllable {
 }
 
 final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> {
-    private let component: LoginComponent
+    private weak var listener: LoginListener?
+    private weak var component: LoginComponent?
     private weak var loginRouter: LoginRouting?
     private weak var profileSettingRouter: ProfileSettingRouting?
 
@@ -38,15 +39,10 @@ final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> 
 }
 
 extension LoginRouter: LoginRouting {
-    func routeToProfileSetting() {
-        if self.profileSettingRouter == nil {
-            self.viewController.uiviewController.dismiss(animated: true) {
-                let router = self.component.profileSettingBuilder.build(withListener: self.interactor)
-                router.viewControllable.uiviewController.modalPresentationStyle = .overFullScreen
-                self.viewControllable.uiviewController.present(router.viewControllable.uiviewController, animated: true)
-                self.attachChild(router)
-                self.profileSettingRouter = router
-            }
+    func closeLogin() {
+        self.viewController.uiviewController.dismiss(animated: true) {
+            self.listener?.dismissLogin()
+
         }
     }
 }

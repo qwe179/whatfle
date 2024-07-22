@@ -14,7 +14,7 @@ protocol LoginDependency: Dependency {
 }
 
 final class LoginComponent: Component<LoginDependency>, LoginDependency, ProfileSettingDependency {
-    var builder: LoginBuildable {
+    var loginBuilder: LoginBuildable {
         return LoginBuilder(dependency: self)
     }
 
@@ -35,7 +35,7 @@ final class LoginComponent: Component<LoginDependency>, LoginDependency, Profile
 // MARK: - Builder
 
 protocol LoginBuildable: Buildable {
-    func build() -> LaunchRouting
+    func build(withListener listener: LoginListener) -> LoginRouting
 }
 
 final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
@@ -48,11 +48,12 @@ final class LoginBuilder: Builder<LoginDependency>, LoginBuildable {
         print("\(self) is being deinit")
     }
 
-    func build() -> LaunchRouting {
+    func build(withListener listener: LoginListener) -> LoginRouting {
         let component = LoginComponent(dependency: dependency)
         let viewController = LoginViewController()
         let interactor = LoginInteractor(presenter: viewController, networkService: component.networkService, supabaseService: component.supabaseService)
-        interactor.activate()
+        interactor.listener = listener
+        viewController.listener = interactor
         return LoginRouter(
             interactor: interactor,
             viewController: viewController,
