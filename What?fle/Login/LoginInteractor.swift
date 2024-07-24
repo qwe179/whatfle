@@ -102,7 +102,7 @@ extension LoginInteractor: AppleLoginHelperDelegate {
                 guard let self = self else { return Single.error(RxError.unknown) }
                 return self.signinWhatfle(loginInfo: .appleLogin(email, response.user.id.uuidString.lowercased(), response.accessToken))
             }
-            .subscribe(onSuccess: { [weak self] _ in
+            .subscribe(onSuccess: { [weak self] response in
                 guard let self = self else { return }
                 self.router?.closeLogin()
             })

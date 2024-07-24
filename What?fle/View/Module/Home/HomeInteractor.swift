@@ -10,6 +10,7 @@ import RxSwift
 
 protocol HomeRouting: ViewableRouting {
     func dismissLogin()
+    func routeToLogin()
 }
 
 protocol HomePresentable: Presentable {
@@ -19,14 +20,23 @@ protocol HomePresentable: Presentable {
 protocol HomeListener: AnyObject {}
 
 final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteractable, HomePresentableListener {
+    var router: (any HomeRouting)?
+    var listener: (any HomeListener)?
 
-    weak var router: HomeRouting?
-    weak var listener: HomeListener?
+    private let networkService: NetworkServiceDelegate
+    private let supabaseService: SupabaseServiceDelegate
 
-    override init(presenter: HomePresentable) {
+    init(presenter: HomePresentable, networkService: NetworkServiceDelegate, supabaseService: SupabaseServiceDelegate) {
+        self.networkService = networkService
+        self.supabaseService = supabaseService
         super.init(presenter: presenter)
         presenter.listener = self
     }
+
+    func goToLogin() {
+        router?.routeToLogin()
+    }
+}
 
 extension HomeInteractor: LoginListener {
     func dismissLogin() {

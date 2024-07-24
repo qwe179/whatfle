@@ -8,7 +8,7 @@
 import RIBs
 import UIKit
 
-protocol LoginInteractable: Interactable, ProfileSettingListener, HomeListener {
+protocol LoginInteractable: Interactable {
     var router: LoginRouting? { get set }
     var listener: LoginListener? { get set }
 }
@@ -20,7 +20,6 @@ final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> 
     private weak var listener: LoginListener?
     private weak var component: LoginComponent?
     private weak var loginRouter: LoginRouting?
-    private weak var profileSettingRouter: ProfileSettingRouting?
 
     init(
         interactor: LoginInteractable,
@@ -28,6 +27,7 @@ final class LoginRouter: LaunchRouter<LoginInteractable, LoginViewControllable> 
         component: LoginComponent
     ) {
         self.component = component
+        self.listener = interactor.listener
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
@@ -42,7 +42,6 @@ extension LoginRouter: LoginRouting {
     func closeLogin() {
         self.viewController.uiviewController.dismiss(animated: true) {
             self.listener?.dismissLogin()
-
         }
     }
 }
