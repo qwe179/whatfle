@@ -7,9 +7,24 @@
 
 import RIBs
 
-protocol HomeDependency: Dependency {}
+protocol HomeDependency: Dependency {
+    var networkService: NetworkServiceDelegate { get }
+    var supabaseService: SupabaseServiceDelegate { get }
+}
 
-final class HomeComponent: Component<HomeDependency> {}
+final class HomeComponent: Component<HomeDependency>, LoginDependency {
+    var loginBuilder: LoginBuildable {
+        return LoginBuilder(dependency: self)
+    }
+    
+    var networkService: NetworkServiceDelegate {
+        return dependency.networkService
+    }
+
+    var supabaseService: SupabaseServiceDelegate {
+        return SupabaseService()
+    }
+}
 
 // MARK: - Builder
 
@@ -26,8 +41,8 @@ final class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
     func build(withListener listener: HomeListener) -> HomeRouting {
         let component = HomeComponent(dependency: dependency)
         let viewController = HomeViewController()
-        let interactor = HomeInteractor(presenter: viewController)
+        let interactor = HomeInteractor(presenter: viewController, networkService: component.networkService, supabaseService: component.supabaseService)
         interactor.listener = listener
-        return HomeRouter(interactor: interactor, viewController: viewController)
+        return HomeRouter(interactor: interactor, viewController: viewController, component: component)
     }
 }
