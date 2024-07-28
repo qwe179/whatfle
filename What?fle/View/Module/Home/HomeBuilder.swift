@@ -22,7 +22,7 @@ final class HomeComponent: Component<HomeDependency>, LoginDependency {
     }
 
     var supabaseService: SupabaseServiceDelegate {
-        return SupabaseService()
+        return dependency.supabaseService
     }
 }
 

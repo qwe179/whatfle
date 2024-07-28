@@ -27,7 +27,7 @@ final class LoginComponent: Component<LoginDependency>, LoginDependency, Profile
     }
 
     var supabaseService: SupabaseServiceDelegate {
-        return SupabaseService()
+        return dependency.supabaseService
     }
 
 }
